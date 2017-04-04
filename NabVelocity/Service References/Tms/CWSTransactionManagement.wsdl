@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/DataServices" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:i1="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CWSTransactionManagement" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="BasicHttpBinding_ITMSOperations_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="BasicHttpBinding_IDataServicesBilling_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS" location="https://api.cert.nabcommerce.com/2.0.18/DataServices?wsdl=wsdl0" />
+  <wsdl:import namespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing" location="https://api.cert.nabcommerce.com/2.0.18/DataServices?wsdl=wsdl1" />
+  <wsdl:types />
+  <wsdl:binding name="BasicHttpBinding_ITMSOperations" type="i0:ITMSOperations">
+    <wsp:PolicyReference URI="#BasicHttpBinding_ITMSOperations_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/IExternallyFacingStandardOperations/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBatch">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryBatch" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="TMSUnavailableFaultFault">
+        <soap:fault use="literal" name="TMSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataServicesUnavailableFaultFault">
+        <soap:fault use="literal" name="DataServicesUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSValidationResultFaultFault">
+        <soap:fault use="literal" name="TMSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSTransactionFailedFaultFault">
+        <soap:fault use="literal" name="TMSTransactionFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSOperationNotSupportedFaultFault">
+        <soap:fault use="literal" name="TMSOperationNotSupportedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+        <soap:fault use="literal" name="TMSUnknownServiceKeyFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionFamilies">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryTransactionFamilies" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="TMSValidationResultFaultFault">
+        <soap:fault use="literal" name="TMSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataServicesUnavailableFaultFault">
+        <soap:fault use="literal" name="DataServicesUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+        <soap:fault use="literal" name="TMSUnknownServiceKeyFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSTransactionFailedFaultFault">
+        <soap:fault use="literal" name="TMSTransactionFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnavailableFaultFault">
+        <soap:fault use="literal" name="TMSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionsDetail">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryTransactionsDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataServicesUnavailableFaultFault">
+        <soap:fault use="literal" name="DataServicesUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSValidationResultFaultFault">
+        <soap:fault use="literal" name="TMSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSTransactionFailedFaultFault">
+        <soap:fault use="literal" name="TMSTransactionFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnavailableFaultFault">
+        <soap:fault use="literal" name="TMSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+        <soap:fault use="literal" name="TMSUnknownServiceKeyFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryTransactionsSummary">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryTransactionsSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="TMSValidationResultFaultFault">
+        <soap:fault use="literal" name="TMSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataServicesUnavailableFaultFault">
+        <soap:fault use="literal" name="DataServicesUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+        <soap:fault use="literal" name="TMSUnknownServiceKeyFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnavailableFaultFault">
+        <soap:fault use="literal" name="TMSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSTransactionFailedFaultFault">
+        <soap:fault use="literal" name="TMSTransactionFailedFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryRejectedSummary">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryRejectedSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="TMSUnavailableFaultFault">
+        <soap:fault use="literal" name="TMSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSTransactionFailedFaultFault">
+        <soap:fault use="literal" name="TMSTransactionFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataServicesUnavailableFaultFault">
+        <soap:fault use="literal" name="DataServicesUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSOperationNotSupportedFaultFault">
+        <soap:fault use="literal" name="TMSOperationNotSupportedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+        <soap:fault use="literal" name="TMSUnknownServiceKeyFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSValidationResultFaultFault">
+        <soap:fault use="literal" name="TMSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryRejectedDetail">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS/ITMSOperations/QueryRejectedDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="TMSOperationNotSupportedFaultFault">
+        <soap:fault use="literal" name="TMSOperationNotSupportedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnavailableFaultFault">
+        <soap:fault use="literal" name="TMSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSUnknownServiceKeyFaultFault">
+        <soap:fault use="literal" name="TMSUnknownServiceKeyFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSValidationResultFaultFault">
+        <soap:fault use="literal" name="TMSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="TMSTransactionFailedFaultFault">
+        <soap:fault use="literal" name="TMSTransactionFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataServicesUnavailableFaultFault">
+        <soap:fault use="literal" name="DataServicesUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IDataServicesBilling" type="i1:IDataServicesBilling">
+    <wsp:PolicyReference URI="#BasicHttpBinding_IDataServicesBilling_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/IExternallyFacingStandardOperations/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBillingEventSummary">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummary" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="DataServicesUnavailableFaultFault">
+        <soap:fault use="literal" name="DataServicesUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="BillingTransactionFailedFaultFault">
+        <soap:fault use="literal" name="BillingTransactionFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="QueryBillingEventDetail">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="BillingTransactionFailedFaultFault">
+        <soap:fault use="literal" name="BillingTransactionFailedFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="DataServicesUnavailableFaultFault">
+        <soap:fault use="literal" name="DataServicesUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CWSTransactionManagement">
+    <wsdl:port name="BasicHttpBinding_ITMSOperations" binding="tns:BasicHttpBinding_ITMSOperations">
+      <soap:address location="https://api.cert.nabcommerce.com/2.0.18/DataServices/TMS" />
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IDataServicesBilling" binding="tns:BasicHttpBinding_IDataServicesBilling">
+      <soap:address location="https://api.cert.nabcommerce.com/2.0.18/DataServices/Billing" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

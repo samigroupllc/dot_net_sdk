@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d6dc3f48-289c-4952-9171-13ce53277df1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="SvcInfo.xsd" MetadataType="Schema" ID="7b7cf43f-0a40-497b-80f1-454fa919ca6e" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd3" />
+    <MetadataFile FileName="CWSServiceInformation.wsdl" MetadataType="Wsdl" ID="dec58c9f-e3ca-4eeb-b2d3-b7273d5f5cc8" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?wsdl" />
+    <MetadataFile FileName="SvcInfo1.xsd" MetadataType="Schema" ID="510764ed-d1c3-4d97-8c18-6ab65f7ed4d7" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd1" />
+    <MetadataFile FileName="SvcInfo2.xsd" MetadataType="Schema" ID="1c2fa6fd-70ec-4035-ad5f-649325f00a97" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd2" />
+    <MetadataFile FileName="SvcInfo3.xsd" MetadataType="Schema" ID="b59e17e5-802c-4a3b-bfcc-3638e7ef9449" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd5" />
+    <MetadataFile FileName="SvcInfo4.xsd" MetadataType="Schema" ID="9d68d420-b828-44a7-9487-26505e9c87c0" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd0" />
+    <MetadataFile FileName="SvcInfo5.xsd" MetadataType="Schema" ID="3643f463-7f26-4ec5-83a3-b3829832d571" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd6" />
+    <MetadataFile FileName="SvcInfo6.xsd" MetadataType="Schema" ID="0b9a2d2d-c12b-407e-8551-8be114dab72f" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd4" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

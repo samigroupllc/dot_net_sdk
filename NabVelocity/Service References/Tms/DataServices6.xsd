@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/DataServices" elementFormDefault="qualified" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="DateRange">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Provides a contract for a date range for both the Transaction Management Service and Billing Service. Optional.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EndDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The end date (inclusive) of the batch to query in UTC format. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="StartDateTime" type="xs:dateTime">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The start date (inclusive) of the batch to query in UTC format. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DateRange" nillable="true" type="tns:DateRange" />
+  <xs:complexType name="PagingParameters">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Defines the parameters for the service to use for paging large datasets.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Page" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The results page number. Zero-based. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PageSize" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The results page size. Maximum size of 50. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PagingParameters" nillable="true" type="tns:PagingParameters" />
+  <xs:complexType name="DataServicesUnavailableFault">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates that the Transaction Processing Service is temporarily unavailable. The client application should Undo the transaction and try again.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DSBaseFault">
+        <xs:sequence />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="DataServicesUnavailableFault" nillable="true" type="tns:DataServicesUnavailableFault" />
+  <xs:complexType name="DSBaseFault">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorID" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The error code of the fault.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="HelpURL" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The web URL that will display more information about the fault.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Operation" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The CWS operation name that originated the fault.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ProblemType" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Lists the specific error message for the associated fault.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DSBaseFault" nillable="true" type="tns:DSBaseFault" />
+</xs:schema>

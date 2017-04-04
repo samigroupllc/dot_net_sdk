@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/Imports">
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd1" namespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd2" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd4" namespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd5" namespace="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd6" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd7" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard/Pro" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd8" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd9" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd10" namespace="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd11" namespace="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/External" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd12" namespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS/Faults" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd13" namespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS/Fault" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd14" namespace="http://schemas.ipcommerce.com/Identity/1.0/" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/DataServices?xsd=xsd15" namespace="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryBillingEventSummary" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryBillingEventSummaryResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_DataServicesUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.ipcommerce.com/CWS/v2.0/DataServices" name="detail" element="q1:DataServicesUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_BillingTransactionFailedFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:BillingTransactionFailedFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q2:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q3:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventSummary_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q4:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_InputMessage">
+    <wsdl:part name="parameters" element="tns:QueryBillingEventDetail" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:QueryBillingEventDetailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q5:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_BillingTransactionFailedFaultFault_FaultMessage">
+    <wsdl:part name="detail" element="tns:BillingTransactionFailedFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q6:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_DataServicesUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/DataServices" name="detail" element="q7:DataServicesUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="IDataServicesBilling_QueryBillingEventDetail_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q8:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:portType name="IDataServicesBilling">
+    <wsdl:documentation>&lt;summary&gt;
+            Operations for querying billing event data
+            &lt;/summary&gt;</wsdl:documentation>
+    <wsdl:operation name="Ping">
+      <wsdl:input xmlns:q9="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS" wsaw:Action="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/IExternallyFacingStandardOperations/Ping" message="q9:ITMSOperations_Ping_InputMessage" />
+      <wsdl:output xmlns:q10="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/TMS" wsaw:Action="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/IExternallyFacingStandardOperations/PingResponse" message="q10:ITMSOperations_Ping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBillingEventSummary">
+      <wsdl:documentation>&lt;summary&gt;
+            Queries for summary billing event data.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;The short-lived token used to authenticate to the Billing Web Service.&lt;/param&gt;
+            &lt;param name="queryBillingEventParameters"&gt;Query parameters for querying billing event data.&lt;/param&gt;
+            &lt;param name="pagingParameters"&gt;Defines the parameters for the service to use for paging large datasets.&lt;/param&gt;
+            &lt;returns&gt;A list of all defined billing event summary data.&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummary" message="tns:IDataServicesBilling_QueryBillingEventSummary_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryResponse" message="tns:IDataServicesBilling_QueryBillingEventSummary_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryDataServicesUnavailableFaultFault" name="DataServicesUnavailableFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_DataServicesUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryBillingTransactionFailedFaultFault" name="BillingTransactionFailedFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_BillingTransactionFailedFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventSummaryAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:IDataServicesBilling_QueryBillingEventSummary_AuthenticationFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="QueryBillingEventDetail">
+      <wsdl:documentation>&lt;summary&gt;
+            Queries for detailed billing event data.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;The short-lived token used to authenticate to the Billing Web Service.&lt;/param&gt;
+            &lt;param name="queryBillingEventParameters"&gt;Query parameters for querying billing event data.&lt;/param&gt;
+            &lt;param name="pagingParameters"&gt;Defines the parameters for the service to use for paging large datasets.&lt;/param&gt;
+            &lt;returns&gt;A list of all defined billing event detail data.&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetail" message="tns:IDataServicesBilling_QueryBillingEventDetail_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailResponse" message="tns:IDataServicesBilling_QueryBillingEventDetail_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailBillingTransactionFailedFaultFault" name="BillingTransactionFailedFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_BillingTransactionFailedFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailDataServicesUnavailableFaultFault" name="DataServicesUnavailableFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_DataServicesUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/DataServices/Billing/IDataServicesBilling/QueryBillingEventDetailAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:IDataServicesBilling_QueryBillingEventDetail_AuthenticationFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing" elementFormDefault="qualified" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="QueryAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q1="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="transaction" nillable="true" type="q1:Transaction" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="QueryAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="QueryAccountResult" nillable="true" type="q2:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Verify">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q3="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="transaction" nillable="true" type="q3:Transaction" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerifyResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="VerifyResult" nillable="true" type="q4:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Authorize">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q5="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="transaction" nillable="true" type="q5:Transaction" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthorizeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q6="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="AuthorizeResult" nillable="true" type="q6:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Adjust">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q7:Adjust" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AdjustResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q8="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="AdjustResult" nillable="true" type="q8:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthorizeAndCapture">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q9="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="transaction" nillable="true" type="q9:Transaction" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AuthorizeAndCaptureResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q10="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="AuthorizeAndCaptureResult" nillable="true" type="q10:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReturnUnlinked">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q11="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="transaction" nillable="true" type="q11:Transaction" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReturnUnlinkedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q12="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="ReturnUnlinkedResult" nillable="true" type="q12:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReturnById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q13="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q13:Return" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ReturnByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q14="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="ReturnByIdResult" nillable="true" type="q14:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Undo">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q15="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q15:Undo" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="UndoResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q16="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="UndoResult" nillable="true" type="q16:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Capture">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q17="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q17:Capture" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q18="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="CaptureResult" nillable="true" type="q18:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureAll">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q19="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q19:ArrayOfCapture" />
+        <xs:element xmlns:q20="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="batchIds" nillable="true" type="q20:ArrayOfstring" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q21="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="CaptureAllResult" nillable="true" type="q21:ArrayOfResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureAllAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q22="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q22:ArrayOfCapture" />
+        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="batchIds" nillable="true" type="q23:ArrayOfstring" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureAllAsyncResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="CaptureAllAsyncResult" nillable="true" type="q24:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureSelective">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="transactionIds" nillable="true" type="q25:ArrayOfstring" />
+        <xs:element xmlns:q26="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q26:ArrayOfCapture" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureSelectiveResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="CaptureSelectiveResult" nillable="true" type="q27:ArrayOfResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureSelectiveAsync">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="transactionIds" nillable="true" type="q28:ArrayOfstring" />
+        <xs:element xmlns:q29="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q29:ArrayOfCapture" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CaptureSelectiveAsyncResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="CaptureSelectiveAsyncResult" nillable="true" type="q30:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Acknowledge">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="transactionId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AcknowledgeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="AcknowledgeResult" nillable="true" type="q31:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestTransaction">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element xmlns:q32="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="tenderData" nillable="true" type="q32:TransactionTenderData" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RequestTransactionResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="RequestTransactionResult" nillable="true" type="q33:ArrayOfResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ManageAccount">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q34="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="transaction" nillable="true" type="q34:Transaction" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ManageAccountResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="ManageAccountResult" nillable="true" type="q35:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ManageAccountById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q36="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="differenceData" nillable="true" type="q36:Manage" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ManageAccountByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="ManageAccountByIdResult" nillable="true" type="q37:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Disburse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionToken" nillable="true" type="xs:string" />
+        <xs:element xmlns:q38="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="transaction" nillable="true" type="q38:Transaction" />
+        <xs:element minOccurs="0" name="applicationProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="merchantProfileId" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="workflowId" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DisburseResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="DisburseResult" nillable="true" type="q39:Response" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

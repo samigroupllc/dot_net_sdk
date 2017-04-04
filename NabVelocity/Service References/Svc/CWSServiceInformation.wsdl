@@ -1,0 +1,1791 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CWSServiceInformation" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="ServiceInfoProcessing_ICWSServiceInformation_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Imports">
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd0" namespace="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd2" namespace="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/External" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd4" namespace="http://schemas.ipcommerce.com/Identity/1.0/" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd5" namespace="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" />
+      <xsd:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/SvcInfo?xsd=xsd6" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ICWSServiceInformation_Ping_InputMessage">
+    <wsdl:part xmlns:q1="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common" name="parameters" element="q1:Ping" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Ping_OutputMessage">
+    <wsdl:part xmlns:q2="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common" name="parameters" element="q2:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithToken_InputMessage">
+    <wsdl:part name="parameters" element="tns:SignOnWithToken" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithToken_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SignOnWithTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithToken_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q3:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithToken_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q4:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithToken_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q5:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithToken_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q6:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithToken_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q7:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetServiceInformation_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceInformation" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetServiceInformation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetServiceInformationResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetServiceInformation_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q8:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetServiceInformation_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q9="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q9:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetServiceInformation_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q10="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q10:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetServiceInformation_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q11="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q11:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetServiceInformation_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q12="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q12:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveApplicationData_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveApplicationData" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveApplicationData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveApplicationDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveApplicationData_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q13="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q13:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveApplicationData_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q14="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q14:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveApplicationData_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q15="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q15:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveApplicationData_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q16="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q16:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveApplicationData_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q17="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q17:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveApplicationData_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q18="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q18:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetApplicationData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetApplicationData" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetApplicationData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetApplicationDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetApplicationData_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q19="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q19:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetApplicationData_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q20="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q20:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetApplicationData_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q21="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q21:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetApplicationData_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q22="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q22:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetApplicationData_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q23="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q23:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetApplicationData_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q24="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q24:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteApplicationData_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteApplicationData" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteApplicationData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteApplicationDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteApplicationData_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q25="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q25:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteApplicationData_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q26="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q26:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteApplicationData_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q27="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q27:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteApplicationData_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q28="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q28:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteApplicationData_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q29="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q29:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteApplicationData_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q30="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q30:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_IsMerchantProfileInitialized_InputMessage">
+    <wsdl:part name="parameters" element="tns:IsMerchantProfileInitialized" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_IsMerchantProfileInitialized_OutputMessage">
+    <wsdl:part name="parameters" element="tns:IsMerchantProfileInitializedResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_IsMerchantProfileInitialized_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q31="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q31:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_IsMerchantProfileInitialized_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q32="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q32:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_IsMerchantProfileInitialized_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q33="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q33:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_IsMerchantProfileInitialized_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q34="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q34:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_IsMerchantProfileInitialized_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q35="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q35:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_IsMerchantProfileInitialized_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q36="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q36:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMerchantProfiles" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMerchantProfilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfiles_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q37="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q37:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfiles_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q38="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q38:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfiles_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q39="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q39:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfiles_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q40="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q40:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfiles_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q41="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q41:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfiles_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q42="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q42:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfileIds_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMerchantProfileIds" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfileIds_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMerchantProfileIdsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfileIds_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q43="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q43:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfileIds_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q44="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q44:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfileIds_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q45="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q45:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfileIds_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q46="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q46:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfileIds_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q47="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q47:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfileIds_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q48="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q48:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfilesByProfileId_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMerchantProfilesByProfileId" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfilesByProfileId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMerchantProfilesByProfileIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfilesByProfileId_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q49="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q49:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfilesByProfileId_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q50="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q50:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfilesByProfileId_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q51="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q51:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfilesByProfileId_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q52="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q52:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfilesByProfileId_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q53="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q53:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfilesByProfileId_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q54="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q54:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetMerchantProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetMerchantProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfile_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q55="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q55:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfile_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q56="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q56:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfile_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q57="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q57:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfile_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q58="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q58:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfile_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q59="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q59:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetMerchantProfile_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q60="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q60:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteMerchantProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMerchantProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteMerchantProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteMerchantProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteMerchantProfile_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q61="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q61:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteMerchantProfile_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q62="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q62:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteMerchantProfile_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q63="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q63:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteMerchantProfile_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q64="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q64:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteMerchantProfile_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q65="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q65:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DeleteMerchantProfile_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q66="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q66:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveMerchantProfiles_InputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMerchantProfiles" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveMerchantProfiles_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SaveMerchantProfilesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveMerchantProfiles_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q67="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q67:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveMerchantProfiles_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q68="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q68:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveMerchantProfiles_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q69="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q69:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveMerchantProfiles_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q70="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q70:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveMerchantProfiles_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q71="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q71:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SaveMerchantProfiles_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q72="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q72:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:SignOnWithUsernamePasswordForServiceKey" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SignOnWithUsernamePasswordForServiceKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q73="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q73:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_PasswordExpiredFaultFault_FaultMessage">
+    <wsdl:part xmlns:q74="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q74:PasswordExpiredFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q75="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q75:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_LockedByAdminFaultFault_FaultMessage">
+    <wsdl:part xmlns:q76="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q76:LockedByAdminFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_OneTimePasswordFaultFault_FaultMessage">
+    <wsdl:part xmlns:q77="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q77:OneTimePasswordFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_BadAttemptThresholdExceededFaultFault_FaultMessage">
+    <wsdl:part xmlns:q78="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q78:BadAttemptThresholdExceededFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ResetPasswordForServiceKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPasswordForServiceKey" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ResetPasswordForServiceKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ResetPasswordForServiceKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ResetPasswordForServiceKey_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q79="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q79:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ResetPasswordForServiceKey_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q80="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q80:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ResetPasswordForServiceKey_SendEmailFaultFault_FaultMessage">
+    <wsdl:part xmlns:q81="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q81:SendEmailFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ResetPasswordForServiceKey_GeneratePasswordFaultFault_FaultMessage">
+    <wsdl:part xmlns:q82="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q82:GeneratePasswordFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangePasswordForServiceKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePasswordForServiceKey" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangePasswordForServiceKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangePasswordForServiceKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangePasswordForServiceKey_SendEmailFaultFault_FaultMessage">
+    <wsdl:part xmlns:q83="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q83:SendEmailFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangePasswordForServiceKey_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q84="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q84:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangePasswordForServiceKey_PasswordInvalidFaultFault_FaultMessage">
+    <wsdl:part xmlns:q85="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q85:PasswordInvalidFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangePasswordForServiceKey_UserNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q86="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q86:UserNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangePasswordForServiceKey_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q87="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q87:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeUsernameForServiceKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeUsernameForServiceKey" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeUsernameForServiceKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeUsernameForServiceKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeUsernameForServiceKey_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q88="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q88:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeUsernameForServiceKey_UserNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q89="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q89:UserNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeUsernameForServiceKey_SendEmailFaultFault_FaultMessage">
+    <wsdl:part xmlns:q90="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q90:SendEmailFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeUsernameForServiceKey_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q91="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q91:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeEmailForServiceKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeEmailForServiceKey" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeEmailForServiceKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ChangeEmailForServiceKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeEmailForServiceKey_SendEmailFaultFault_FaultMessage">
+    <wsdl:part xmlns:q92="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q92:SendEmailFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeEmailForServiceKey_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q93="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q93:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeEmailForServiceKey_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q94="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q94:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeEmailForServiceKey_UserNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q95="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q95:UserNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ChangeEmailForServiceKey_InvalidEmailFaultFault_FaultMessage">
+    <wsdl:part xmlns:q96="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q96:InvalidEmailFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetPasswordExpirationForServiceKey_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPasswordExpirationForServiceKey" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetPasswordExpirationForServiceKey_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPasswordExpirationForServiceKeyResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetPasswordExpirationForServiceKey_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q97="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q97:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetPasswordExpirationForServiceKey_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q98="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q98:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetPasswordExpirationForServiceKey_UserNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q99="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q99:UserNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ValidateMerchantProfile_InputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateMerchantProfile" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ValidateMerchantProfile_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ValidateMerchantProfileResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ValidateMerchantProfile_CWSServiceInformationUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q100="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q100:CWSServiceInformationUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ValidateMerchantProfile_CWSFaultFault_FaultMessage">
+    <wsdl:part xmlns:q101="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q101:CWSFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ValidateMerchantProfile_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q102="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q102:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ValidateMerchantProfile_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q103="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q103:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ValidateMerchantProfile_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q104="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q104:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_ValidateMerchantProfile_CWSValidationResultFaultFault_FaultMessage">
+    <wsdl:part xmlns:q105="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/Faults" name="detail" element="q105:CWSValidationResultFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllClaims" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllClaimsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q106="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q106:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q107="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q107:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q108="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q108:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_ClaimNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q109="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q109:ClaimNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_AuthorizationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q110="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q110:AuthorizationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q111="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q111:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_RelyingPartyNotAssociatedToSecurityDomainFaultFault_FaultMessage">
+    <wsdl:part xmlns:q112="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q112:RelyingPartyNotAssociatedToSecurityDomainFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetAllClaims_SystemFaultFault_FaultMessage">
+    <wsdl:part xmlns:q113="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q113:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetClaims" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetClaimsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q114="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q114:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_ClaimNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q115="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q115:ClaimNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_AuthorizationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q116="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q116:AuthorizationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q117="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q117:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_RelyingPartyNotAssociatedToSecurityDomainFaultFault_FaultMessage">
+    <wsdl:part xmlns:q118="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q118:RelyingPartyNotAssociatedToSecurityDomainFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_SystemFaultFault_FaultMessage">
+    <wsdl:part xmlns:q119="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q119:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q120="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q120:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_GetClaims_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q121="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q121:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_InputMessage">
+    <wsdl:part name="parameters" element="tns:Renew" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RenewResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_AuthorizationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q122="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q122:AuthorizationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_NonRenewableTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q123="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q123:NonRenewableTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q124="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q124:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_SystemFaultFault_FaultMessage">
+    <wsdl:part xmlns:q125="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q125:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q126="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q126:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q127="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q127:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_Renew_STSUnavailableFaultFault_FaultMessage">
+    <wsdl:part xmlns:q128="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q128:STSUnavailableFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnAndAddClaims_InputMessage">
+    <wsdl:part name="parameters" element="tns:SignOnAndAddClaims" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnAndAddClaims_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SignOnAndAddClaimsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnAndAddClaims_ClaimMappingsNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q129="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q129:ClaimMappingsNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnAndAddClaims_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q130="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q130:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnAndAddClaims_SystemFaultFault_FaultMessage">
+    <wsdl:part xmlns:q131="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q131:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnAndAddClaims_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q132="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q132:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnAndAddClaims_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q133="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q133:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_SignOnAndAddClaims_AuthorizationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q134="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q134:AuthorizationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DelegatedSignOn_InputMessage">
+    <wsdl:part name="parameters" element="tns:DelegatedSignOn" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DelegatedSignOn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DelegatedSignOnResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DelegatedSignOn_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q135="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q135:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DelegatedSignOn_ClaimMappingsNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q136="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q136:ClaimMappingsNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DelegatedSignOn_SystemFaultFault_FaultMessage">
+    <wsdl:part xmlns:q137="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q137:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DelegatedSignOn_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q138="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q138:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DelegatedSignOn_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q139="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q139:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_DelegatedSignOn_AuthorizationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q140="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q140:AuthorizationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOn_InputMessage">
+    <wsdl:part name="parameters" element="tns:FederatedSignOn" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOn_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FederatedSignOnResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOn_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q141="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q141:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOn_AuthorizationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q142="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q142:AuthorizationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOn_SystemFaultFault_FaultMessage">
+    <wsdl:part xmlns:q143="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q143:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOn_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q144="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q144:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOn_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q145="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q145:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOn_ClaimMappingsNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q146="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q146:ClaimMappingsNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOnAndAddClaims_InputMessage">
+    <wsdl:part name="parameters" element="tns:FederatedSignOnAndAddClaims" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOnAndAddClaims_OutputMessage">
+    <wsdl:part name="parameters" element="tns:FederatedSignOnAndAddClaimsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOnAndAddClaims_ClaimMappingsNotFoundFaultFault_FaultMessage">
+    <wsdl:part xmlns:q147="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q147:ClaimMappingsNotFoundFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOnAndAddClaims_AuthenticationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q148="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q148:AuthenticationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOnAndAddClaims_SystemFaultFault_FaultMessage">
+    <wsdl:part xmlns:q149="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q149:SystemFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOnAndAddClaims_AuthorizationFaultFault_FaultMessage">
+    <wsdl:part xmlns:q150="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q150:AuthorizationFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOnAndAddClaims_InvalidTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q151="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q151:InvalidTokenFault" />
+  </wsdl:message>
+  <wsdl:message name="ICWSServiceInformation_FederatedSignOnAndAddClaims_ExpiredTokenFaultFault_FaultMessage">
+    <wsdl:part xmlns:q152="http://schemas.ipcommerce.com/Identity/1.0/" name="detail" element="q152:ExpiredTokenFault" />
+  </wsdl:message>
+  <wsdl:portType name="ICWSServiceInformation">
+    <wsdl:documentation>&lt;summary&gt;
+            SIS public interface
+            &lt;/summary&gt;</wsdl:documentation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/IExternallyFacingStandardOperations/Ping" message="tns:ICWSServiceInformation_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/IExternallyFacingStandardOperations/PingResponse" message="tns:ICWSServiceInformation_Ping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SignOnWithToken">
+      <wsdl:documentation>&lt;summary&gt;
+            Sign on using an identity token.
+            &lt;/summary&gt;
+            &lt;param name="identityToken"&gt;Identity token associated with your service key&lt;/param&gt;
+            &lt;returns&gt;Session token&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithToken" message="tns:ICWSServiceInformation_SignOnWithToken_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithTokenResponse" message="tns:ICWSServiceInformation_SignOnWithToken_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithTokenSTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_SignOnWithToken_STSUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithTokenCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_SignOnWithToken_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithTokenExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_SignOnWithToken_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithTokenInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_SignOnWithToken_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithTokenAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_SignOnWithToken_AuthenticationFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceInformation">
+      <wsdl:documentation>&lt;summary&gt;
+            Retrieve service information.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;returns&gt;Service information associated with the session token&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetServiceInformation" message="tns:ICWSServiceInformation_GetServiceInformation_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetServiceInformationResponse" message="tns:ICWSServiceInformation_GetServiceInformation_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetServiceInformationInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_GetServiceInformation_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetServiceInformationExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_GetServiceInformation_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetServiceInformationAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetServiceInformation_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetServiceInformationCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_GetServiceInformation_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetServiceInformationCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_GetServiceInformation_CWSFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveApplicationData">
+      <wsdl:documentation>&lt;summary&gt;
+            Save application configuration data.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="applicationData"&gt;Application common configuration data&lt;/param&gt;
+            &lt;returns&gt;Application profile ID&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationData" message="tns:ICWSServiceInformation_SaveApplicationData_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationDataResponse" message="tns:ICWSServiceInformation_SaveApplicationData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationDataAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_SaveApplicationData_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationDataInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_SaveApplicationData_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationDataCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_SaveApplicationData_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationDataCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_SaveApplicationData_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationDataExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_SaveApplicationData_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationDataCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_SaveApplicationData_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationData">
+      <wsdl:documentation>&lt;summary&gt;
+            Retrieves all current application configuration data associated with the Service Key.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="applicationProfileId"&gt;Application profile ID returned from SaveApplicationData()&lt;/param&gt;
+            &lt;returns&gt;Application common configuration data associated with the session token&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationData" message="tns:ICWSServiceInformation_GetApplicationData_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationDataResponse" message="tns:ICWSServiceInformation_GetApplicationData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationDataAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetApplicationData_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationDataCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_GetApplicationData_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationDataCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_GetApplicationData_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationDataInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_GetApplicationData_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationDataCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_GetApplicationData_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationDataExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_GetApplicationData_ExpiredTokenFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteApplicationData">
+      <wsdl:documentation>&lt;summary&gt;
+            Deletes application configuration data.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="applicationProfileId"&gt;Application profile ID&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationData" message="tns:ICWSServiceInformation_DeleteApplicationData_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationDataResponse" message="tns:ICWSServiceInformation_DeleteApplicationData_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationDataExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_DeleteApplicationData_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationDataCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_DeleteApplicationData_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationDataCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_DeleteApplicationData_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationDataInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_DeleteApplicationData_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationDataAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_DeleteApplicationData_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationDataCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_DeleteApplicationData_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="IsMerchantProfileInitialized">
+      <wsdl:documentation>&lt;summary&gt;
+            Tests whether merchant profile is initialized for a specific Tender Type.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="serviceId"&gt;Service ID&lt;/param&gt;
+            &lt;param name="merchantProfileId"&gt;Merchant profile ID&lt;/param&gt;
+            &lt;param name="tenderType"&gt;Tender type&lt;/param&gt;
+            &lt;returns&gt;&lt;c&gt;true&lt;/c&gt; if the merchant profile has been initialized&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitialized" message="tns:ICWSServiceInformation_IsMerchantProfileInitialized_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitializedResponse" message="tns:ICWSServiceInformation_IsMerchantProfileInitialized_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitializedAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_IsMerchantProfileInitialized_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitializedCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_IsMerchantProfileInitialized_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitializedInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_IsMerchantProfileInitialized_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitializedCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_IsMerchantProfileInitialized_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitializedExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_IsMerchantProfileInitialized_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitializedCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_IsMerchantProfileInitialized_CWSFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMerchantProfiles">
+      <wsdl:documentation>&lt;summary&gt;
+            Retrieves all merchant profiles associated with a specific Service ID and Tender Type.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="serviceId"&gt;Service ID&lt;/param&gt;
+            &lt;param name="tenderType"&gt;Tender type&lt;/param&gt;
+            &lt;returns&gt;Collection of merchant profiles&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfiles" message="tns:ICWSServiceInformation_GetMerchantProfiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesResponse" message="tns:ICWSServiceInformation_GetMerchantProfiles_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfiles_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfiles_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfiles_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfiles_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfiles_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfiles_InvalidTokenFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMerchantProfileIds">
+      <wsdl:documentation>&lt;summary&gt;
+            Retrieves all merchant profile IDs associated with a specific Service ID and Tender Type.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="serviceId"&gt;Service ID&lt;/param&gt;
+            &lt;param name="tenderType"&gt;Tender type&lt;/param&gt;
+            &lt;returns&gt;Collection of merchant profile IDs&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIds" message="tns:ICWSServiceInformation_GetMerchantProfileIds_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIdsResponse" message="tns:ICWSServiceInformation_GetMerchantProfileIds_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIdsCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfileIds_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIdsCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfileIds_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIdsExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfileIds_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIdsInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfileIds_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIdsAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfileIds_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIdsCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfileIds_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMerchantProfilesByProfileId">
+      <wsdl:documentation>&lt;summary&gt;
+            Retrieves a specific merchant's merchant profiles for all Service IDs and Tender Types.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="merchantProfileId"&gt;Merchant profile ID&lt;/param&gt;
+            &lt;returns&gt;Collection of merchant profiles&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileId" message="tns:ICWSServiceInformation_GetMerchantProfilesByProfileId_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileIdResponse" message="tns:ICWSServiceInformation_GetMerchantProfilesByProfileId_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileIdAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfilesByProfileId_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileIdCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfilesByProfileId_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileIdCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfilesByProfileId_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileIdCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfilesByProfileId_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileIdExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfilesByProfileId_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileIdInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfilesByProfileId_InvalidTokenFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMerchantProfile">
+      <wsdl:documentation>&lt;summary&gt;
+            Retrieves the merchant profile associated with a specific Service ID and Tender Type.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="merchantProfileId"&gt;Merchant profile ID&lt;/param&gt;
+            &lt;param name="serviceId"&gt;Service ID&lt;/param&gt;
+            &lt;param name="tenderType"&gt;Tender type&lt;/param&gt;
+            &lt;returns&gt;The requested merchant profile&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfile" message="tns:ICWSServiceInformation_GetMerchantProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileResponse" message="tns:ICWSServiceInformation_GetMerchantProfile_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfile_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfile_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfile_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfile_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfile_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_GetMerchantProfile_InvalidTokenFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMerchantProfile">
+      <wsdl:documentation>&lt;summary&gt;
+            Deletes a specific merchant profile for a Tender Type.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="merchantProfileId"&gt;Merchant profile ID&lt;/param&gt;
+            &lt;param name="serviceId"&gt;Service ID&lt;/param&gt;
+            &lt;param name="tenderType"&gt;Tender type&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfile" message="tns:ICWSServiceInformation_DeleteMerchantProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfileResponse" message="tns:ICWSServiceInformation_DeleteMerchantProfile_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfileExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_DeleteMerchantProfile_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfileAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_DeleteMerchantProfile_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfileCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_DeleteMerchantProfile_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfileCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_DeleteMerchantProfile_CWSValidationResultFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfileCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_DeleteMerchantProfile_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfileInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_DeleteMerchantProfile_InvalidTokenFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveMerchantProfiles">
+      <wsdl:documentation>&lt;summary&gt;
+            Saves one or more merchant profiles for a Tender Type.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;Session token&lt;/param&gt;
+            &lt;param name="serviceId"&gt;Service ID&lt;/param&gt;
+            &lt;param name="tenderType"&gt;Tender type&lt;/param&gt;
+            &lt;param name="merchantProfiles"&gt;Merchant profiles&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfiles" message="tns:ICWSServiceInformation_SaveMerchantProfiles_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfilesResponse" message="tns:ICWSServiceInformation_SaveMerchantProfiles_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfilesExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_SaveMerchantProfiles_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfilesInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_SaveMerchantProfiles_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfilesCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_SaveMerchantProfiles_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfilesCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_SaveMerchantProfiles_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfilesAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_SaveMerchantProfiles_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfilesCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_SaveMerchantProfiles_CWSValidationResultFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SignOnWithUsernamePasswordForServiceKey">
+      <wsdl:documentation>&lt;summary&gt;
+            Sign on using a username and password.
+            &lt;/summary&gt;
+            &lt;param name="serviceKey"&gt;Service key to sign on&lt;/param&gt;
+            &lt;param name="username"&gt;Username associated with the specified service key&lt;/param&gt;
+            &lt;param name="password"&gt;Password associated with the specified service key and username&lt;/param&gt;
+            &lt;returns&gt;Session token&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKey" message="tns:ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKeyResponse" message="tns:ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKeyAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKeyPasswordExpiredFaultFault" name="PasswordExpiredFaultFault" message="tns:ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_PasswordExpiredFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKeySTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_STSUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKeyLockedByAdminFaultFault" name="LockedByAdminFaultFault" message="tns:ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_LockedByAdminFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKeyOneTimePasswordFaultFault" name="OneTimePasswordFaultFault" message="tns:ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_OneTimePasswordFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKeyBadAttemptThresholdExceededFaultFault" name="BadAttemptThresholdExceededFaultFault" message="tns:ICWSServiceInformation_SignOnWithUsernamePasswordForServiceKey_BadAttemptThresholdExceededFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ResetPasswordForServiceKey">
+      <wsdl:documentation>&lt;summary&gt;
+            Reset the password for the specified service key and username.
+            &lt;/summary&gt;
+            &lt;param name="serviceKey"&gt;Service key&lt;/param&gt;
+            &lt;param name="userName"&gt;User name associated with specified service key&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ResetPasswordForServiceKey" message="tns:ICWSServiceInformation_ResetPasswordForServiceKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ResetPasswordForServiceKeyResponse" message="tns:ICWSServiceInformation_ResetPasswordForServiceKey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ResetPasswordForServiceKeyAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_ResetPasswordForServiceKey_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ResetPasswordForServiceKeySTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_ResetPasswordForServiceKey_STSUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ResetPasswordForServiceKeySendEmailFaultFault" name="SendEmailFaultFault" message="tns:ICWSServiceInformation_ResetPasswordForServiceKey_SendEmailFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ResetPasswordForServiceKeyGeneratePasswordFaultFault" name="GeneratePasswordFaultFault" message="tns:ICWSServiceInformation_ResetPasswordForServiceKey_GeneratePasswordFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordForServiceKey">
+      <wsdl:documentation>&lt;summary&gt;
+            Change the password for the specified service key and username.
+            &lt;/summary&gt;
+            &lt;param name="serviceKey"&gt;Service key&lt;/param&gt;
+            &lt;param name="userName"&gt;Username associated with specified service key&lt;/param&gt;
+            &lt;param name="password"&gt;Password currently associated with specified service key and username&lt;/param&gt;
+            &lt;param name="newPassword"&gt;New password to associate with specified service key and username&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangePasswordForServiceKey" message="tns:ICWSServiceInformation_ChangePasswordForServiceKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangePasswordForServiceKeyResponse" message="tns:ICWSServiceInformation_ChangePasswordForServiceKey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangePasswordForServiceKeySendEmailFaultFault" name="SendEmailFaultFault" message="tns:ICWSServiceInformation_ChangePasswordForServiceKey_SendEmailFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangePasswordForServiceKeySTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_ChangePasswordForServiceKey_STSUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangePasswordForServiceKeyPasswordInvalidFaultFault" name="PasswordInvalidFaultFault" message="tns:ICWSServiceInformation_ChangePasswordForServiceKey_PasswordInvalidFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangePasswordForServiceKeyUserNotFoundFaultFault" name="UserNotFoundFaultFault" message="tns:ICWSServiceInformation_ChangePasswordForServiceKey_UserNotFoundFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangePasswordForServiceKeyAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_ChangePasswordForServiceKey_AuthenticationFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUsernameForServiceKey">
+      <wsdl:documentation>&lt;summary&gt;
+            Change the username for the specified service key and username.
+            &lt;/summary&gt;
+            &lt;param name="serviceKey"&gt;Service key&lt;/param&gt;
+            &lt;param name="userName"&gt;Username associated with specified service key&lt;/param&gt;
+            &lt;param name="password"&gt;Password associated with specified service key and username&lt;/param&gt;
+            &lt;param name="newUsername"&gt;New username to associate with specified service key&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeUsernameForServiceKey" message="tns:ICWSServiceInformation_ChangeUsernameForServiceKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeUsernameForServiceKeyResponse" message="tns:ICWSServiceInformation_ChangeUsernameForServiceKey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeUsernameForServiceKeyAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_ChangeUsernameForServiceKey_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeUsernameForServiceKeyUserNotFoundFaultFault" name="UserNotFoundFaultFault" message="tns:ICWSServiceInformation_ChangeUsernameForServiceKey_UserNotFoundFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeUsernameForServiceKeySendEmailFaultFault" name="SendEmailFaultFault" message="tns:ICWSServiceInformation_ChangeUsernameForServiceKey_SendEmailFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeUsernameForServiceKeySTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_ChangeUsernameForServiceKey_STSUnavailableFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangeEmailForServiceKey">
+      <wsdl:documentation>&lt;summary&gt;
+            Change the email address for the specified service key and username.
+            &lt;/summary&gt;
+            &lt;param name="serviceKey"&gt;Service key&lt;/param&gt;
+            &lt;param name="userName"&gt;Username associated with specified service key&lt;/param&gt;
+            &lt;param name="password"&gt;Password associated with specified service key and username&lt;/param&gt;
+            &lt;param name="newEmail"&gt;New email to associate with specified service key and username&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeEmailForServiceKey" message="tns:ICWSServiceInformation_ChangeEmailForServiceKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeEmailForServiceKeyResponse" message="tns:ICWSServiceInformation_ChangeEmailForServiceKey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeEmailForServiceKeySendEmailFaultFault" name="SendEmailFaultFault" message="tns:ICWSServiceInformation_ChangeEmailForServiceKey_SendEmailFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeEmailForServiceKeySTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_ChangeEmailForServiceKey_STSUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeEmailForServiceKeyAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_ChangeEmailForServiceKey_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeEmailForServiceKeyUserNotFoundFaultFault" name="UserNotFoundFaultFault" message="tns:ICWSServiceInformation_ChangeEmailForServiceKey_UserNotFoundFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeEmailForServiceKeyInvalidEmailFaultFault" name="InvalidEmailFaultFault" message="tns:ICWSServiceInformation_ChangeEmailForServiceKey_InvalidEmailFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPasswordExpirationForServiceKey">
+      <wsdl:documentation>&lt;summary&gt;
+            Change the username for the specified service key and username.
+            &lt;/summary&gt;
+            &lt;param name="serviceKey"&gt;Service key&lt;/param&gt;
+            &lt;param name="userName"&gt;Username associated with specified service key&lt;/param&gt;
+            &lt;param name="password"&gt;Password associated with specified service key and username&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetPasswordExpirationForServiceKey" message="tns:ICWSServiceInformation_GetPasswordExpirationForServiceKey_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetPasswordExpirationForServiceKeyResponse" message="tns:ICWSServiceInformation_GetPasswordExpirationForServiceKey_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetPasswordExpirationForServiceKeySTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_GetPasswordExpirationForServiceKey_STSUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetPasswordExpirationForServiceKeyAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetPasswordExpirationForServiceKey_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetPasswordExpirationForServiceKeyUserNotFoundFaultFault" name="UserNotFoundFaultFault" message="tns:ICWSServiceInformation_GetPasswordExpirationForServiceKey_UserNotFoundFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidateMerchantProfile">
+      <wsdl:documentation>&lt;summary&gt;
+            Validates a provided merchant proifile. If the profile is invalid, the operation will throw a 
+            CWSValidationResultFault containing the details of the exception. If your application does not implement 
+            unmanaged merchant profiles – you do not need to call this method.  Your merchant profile will automatically 
+            be validated when you call SaveMerchantProfiles.
+            &lt;/summary&gt;
+            &lt;param name="sessionToken"&gt;The session token associated with this call.&lt;/param&gt;
+            &lt;param name="serviceId"&gt;The service id of record for the profile.&lt;/param&gt;
+            &lt;param name="tenderType"&gt;The tender type of record for the profile.&lt;/param&gt;
+            &lt;param name="merchantProfile"&gt;The merchant profile.&lt;/param&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfile" message="tns:ICWSServiceInformation_ValidateMerchantProfile_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfileResponse" message="tns:ICWSServiceInformation_ValidateMerchantProfile_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfileCWSServiceInformationUnavailableFaultFault" name="CWSServiceInformationUnavailableFaultFault" message="tns:ICWSServiceInformation_ValidateMerchantProfile_CWSServiceInformationUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfileCWSFaultFault" name="CWSFaultFault" message="tns:ICWSServiceInformation_ValidateMerchantProfile_CWSFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfileExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_ValidateMerchantProfile_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfileInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_ValidateMerchantProfile_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfileAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_ValidateMerchantProfile_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfileCWSValidationResultFaultFault" name="CWSValidationResultFaultFault" message="tns:ICWSServiceInformation_ValidateMerchantProfile_CWSValidationResultFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClaims">
+      <wsdl:documentation>&lt;summary&gt;
+            Get a list of claims given a pair of security tokens. The claims returned are presented as a list of ClaimMetaData objects which is a pairing of the claim namespace and the claim value.
+            &lt;/summary&gt;
+            &lt;param name="authenticatingToken"&gt;This security token is used to authorize the request by verifying the 'verifiedToken' and extract claims data from it.&lt;/param&gt;
+            &lt;param name="verifiedToken"&gt;The security token that will yield the claims data.&lt;/param&gt;
+            &lt;returns&gt;A list of claim namespace and value pairs.&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/Identity/1.0/GetAllClaims" message="tns:ICWSServiceInformation_GetAllClaims_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsResponse" message="tns:ICWSServiceInformation_GetAllClaims_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_GetAllClaims_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsSTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_GetAllClaims_STSUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_GetAllClaims_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsClaimNotFoundFaultFault" name="ClaimNotFoundFaultFault" message="tns:ICWSServiceInformation_GetAllClaims_ClaimNotFoundFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsAuthorizationFaultFault" name="AuthorizationFaultFault" message="tns:ICWSServiceInformation_GetAllClaims_AuthorizationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetAllClaims_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsRelyingPartyNotAssociatedToSecurityDomainFaultFault" name="RelyingPartyNotAssociatedToSecurityDomainFaultFault" message="tns:ICWSServiceInformation_GetAllClaims_RelyingPartyNotAssociatedToSecurityDomainFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetAllClaimsSystemFaultFault" name="SystemFaultFault" message="tns:ICWSServiceInformation_GetAllClaims_SystemFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClaims">
+      <wsdl:documentation>&lt;summary&gt;
+            Get a list of claims, within a specific list of claim namespaces, given a pair of security tokens. The claims returned are presented as a list of values that are sequenced to collate with the order of the 
+            list of namespaces passed in.
+            &lt;/summary&gt;
+            &lt;param name="authenticatingToken"&gt;This security token is used to authorize the request by verifying the 'verifiedToken' and extract claims data from it.&lt;/param&gt;
+            &lt;param name="verifiedToken"&gt;The security token that will yield the claims data.&lt;/param&gt;
+            &lt;param name="claimNSs"&gt;A list of claims namespaces to limit the list of claims returned. The returned list if claim values will be in the same order as specified in this list.&lt;/param&gt;
+            &lt;returns&gt;A list of claims values.&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/Identity/1.0/GetClaims" message="tns:ICWSServiceInformation_GetClaims_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsResponse" message="tns:ICWSServiceInformation_GetClaims_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_GetClaims_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsClaimNotFoundFaultFault" name="ClaimNotFoundFaultFault" message="tns:ICWSServiceInformation_GetClaims_ClaimNotFoundFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsAuthorizationFaultFault" name="AuthorizationFaultFault" message="tns:ICWSServiceInformation_GetClaims_AuthorizationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_GetClaims_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsRelyingPartyNotAssociatedToSecurityDomainFaultFault" name="RelyingPartyNotAssociatedToSecurityDomainFaultFault" message="tns:ICWSServiceInformation_GetClaims_RelyingPartyNotAssociatedToSecurityDomainFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsSystemFaultFault" name="SystemFaultFault" message="tns:ICWSServiceInformation_GetClaims_SystemFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsSTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_GetClaims_STSUnavailableFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetClaimsInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_GetClaims_InvalidTokenFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Renew">
+      <wsdl:documentation>&lt;summary&gt;
+            Uses an identity token to authorize the renewal of a another, lower-level security token.
+            &lt;/summary&gt;
+            &lt;param name="authenticatingToken"&gt;An identity token that is used to authorize the renewal of the 'toRenewToken' parameter.&lt;/param&gt;
+            &lt;param name="toRenewToken"&gt;A security token that is to be renewed.&lt;/param&gt;
+            &lt;returns&gt;A renewed token.&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/Identity/1.0/Renew" message="tns:ICWSServiceInformation_Renew_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/RenewResponse" message="tns:ICWSServiceInformation_Renew_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/RenewAuthorizationFaultFault" name="AuthorizationFaultFault" message="tns:ICWSServiceInformation_Renew_AuthorizationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/RenewNonRenewableTokenFaultFault" name="NonRenewableTokenFaultFault" message="tns:ICWSServiceInformation_Renew_NonRenewableTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/RenewAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_Renew_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/RenewSystemFaultFault" name="SystemFaultFault" message="tns:ICWSServiceInformation_Renew_SystemFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/RenewInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_Renew_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/RenewExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_Renew_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/RenewSTSUnavailableFaultFault" name="STSUnavailableFaultFault" message="tns:ICWSServiceInformation_Renew_STSUnavailableFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SignOnAndAddClaims">
+      <wsdl:documentation>&lt;summary&gt;
+             Allows a service key identity token holder to add dynamic claims as allowed for their service key
+             to the resultant session token
+            &lt;/summary&gt;
+             &lt;param name="identityToken"&gt;Identity token associated with your service key&lt;/param&gt;
+            &lt;param name="claims"&gt;claims to add to the generated session token&lt;/param&gt;
+            &lt;returns&gt;session token&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/Identity/2.0/TokenCred/SignOnAndAddClaims" message="tns:ICWSServiceInformation_SignOnAndAddClaims_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnAndAddClaimsResponse" message="tns:ICWSServiceInformation_SignOnAndAddClaims_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnAndAddClaimsClaimMappingsNotFoundFaultFault" name="ClaimMappingsNotFoundFaultFault" message="tns:ICWSServiceInformation_SignOnAndAddClaims_ClaimMappingsNotFoundFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnAndAddClaimsAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_SignOnAndAddClaims_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnAndAddClaimsSystemFaultFault" name="SystemFaultFault" message="tns:ICWSServiceInformation_SignOnAndAddClaims_SystemFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnAndAddClaimsInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_SignOnAndAddClaims_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnAndAddClaimsExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_SignOnAndAddClaims_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnAndAddClaimsAuthorizationFaultFault" name="AuthorizationFaultFault" message="tns:ICWSServiceInformation_SignOnAndAddClaims_AuthorizationFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DelegatedSignOn">
+      <wsdl:documentation>&lt;summary&gt;
+             Allows an initiator (IDT) to receive a session token for onBehalf SK and add dynamic claims as 
+             allowed for their service key
+            &lt;/summary&gt;
+             &lt;param name="identityToken"&gt;Identity token associated with your service key&lt;/param&gt;
+            &lt;param name="onBehalfOfSk"&gt;service key to generate session token for.&lt;/param&gt;
+            &lt;param name="claims"&gt;claims to add to the generated session token&lt;/param&gt;
+            &lt;returns&gt;session token&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/Identity/2.0/TokenCred/DelegatedSignOn" message="tns:ICWSServiceInformation_DelegatedSignOn_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DelegatedSignOnResponse" message="tns:ICWSServiceInformation_DelegatedSignOn_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DelegatedSignOnAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_DelegatedSignOn_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DelegatedSignOnClaimMappingsNotFoundFaultFault" name="ClaimMappingsNotFoundFaultFault" message="tns:ICWSServiceInformation_DelegatedSignOn_ClaimMappingsNotFoundFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DelegatedSignOnSystemFaultFault" name="SystemFaultFault" message="tns:ICWSServiceInformation_DelegatedSignOn_SystemFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DelegatedSignOnInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_DelegatedSignOn_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DelegatedSignOnExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_DelegatedSignOn_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DelegatedSignOnAuthorizationFaultFault" name="AuthorizationFaultFault" message="tns:ICWSServiceInformation_DelegatedSignOn_AuthorizationFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FederatedSignOn">
+      <wsdl:documentation>&lt;summary&gt;
+             Allow a service key identity token holder to receive a session token with some claims sourced from an external domain token
+            &lt;/summary&gt;
+             &lt;param name="identityToken"&gt;Identity token associated with your service key&lt;/param&gt;
+            &lt;param name="externalDomainToken"&gt;external domain token containing claims to add to session token&lt;/param&gt;
+            &lt;returns&gt;session token&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/Identity/2.0/MultiTokenCred/FederatedSignOn" message="tns:ICWSServiceInformation_FederatedSignOn_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnResponse" message="tns:ICWSServiceInformation_FederatedSignOn_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_FederatedSignOn_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAuthorizationFaultFault" name="AuthorizationFaultFault" message="tns:ICWSServiceInformation_FederatedSignOn_AuthorizationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnSystemFaultFault" name="SystemFaultFault" message="tns:ICWSServiceInformation_FederatedSignOn_SystemFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_FederatedSignOn_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_FederatedSignOn_ExpiredTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnClaimMappingsNotFoundFaultFault" name="ClaimMappingsNotFoundFaultFault" message="tns:ICWSServiceInformation_FederatedSignOn_ClaimMappingsNotFoundFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="FederatedSignOnAndAddClaims">
+      <wsdl:documentation>&lt;summary&gt;
+             Allow a service key identity token holder to receive a session token with some claims sourced from an 
+             external domain token and add dynamic claims as allowed for their service key
+            &lt;/summary&gt;
+             &lt;param name="identityToken"&gt;Identity token associated with your service key&lt;/param&gt;
+            &lt;param name="externalDomainToken"&gt;external domain token containing claims to add to session token&lt;/param&gt;
+            &lt;param name="claims"&gt;claims to add to the generated session token&lt;/param&gt;
+            &lt;returns&gt;session token&lt;/returns&gt;</wsdl:documentation>
+      <wsdl:input wsaw:Action="http://schemas.ipcommerce.com/Identity/2.0/MultiTokenCred/FederatedSignOnAndAddClaims" message="tns:ICWSServiceInformation_FederatedSignOnAndAddClaims_InputMessage" />
+      <wsdl:output wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAndAddClaimsResponse" message="tns:ICWSServiceInformation_FederatedSignOnAndAddClaims_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAndAddClaimsClaimMappingsNotFoundFaultFault" name="ClaimMappingsNotFoundFaultFault" message="tns:ICWSServiceInformation_FederatedSignOnAndAddClaims_ClaimMappingsNotFoundFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAndAddClaimsAuthenticationFaultFault" name="AuthenticationFaultFault" message="tns:ICWSServiceInformation_FederatedSignOnAndAddClaims_AuthenticationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAndAddClaimsSystemFaultFault" name="SystemFaultFault" message="tns:ICWSServiceInformation_FederatedSignOnAndAddClaims_SystemFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAndAddClaimsAuthorizationFaultFault" name="AuthorizationFaultFault" message="tns:ICWSServiceInformation_FederatedSignOnAndAddClaims_AuthorizationFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAndAddClaimsInvalidTokenFaultFault" name="InvalidTokenFaultFault" message="tns:ICWSServiceInformation_FederatedSignOnAndAddClaims_InvalidTokenFaultFault_FaultMessage" />
+      <wsdl:fault wsaw:Action="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/FederatedSignOnAndAddClaimsExpiredTokenFaultFault" name="ExpiredTokenFaultFault" message="tns:ICWSServiceInformation_FederatedSignOnAndAddClaims_ExpiredTokenFaultFault_FaultMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceInfoProcessing_ICWSServiceInformation" type="tns:ICWSServiceInformation">
+    <wsp:PolicyReference URI="#ServiceInfoProcessing_ICWSServiceInformation_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/IExternallyFacingStandardOperations/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SignOnWithToken">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetServiceInformation">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetServiceInformation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SaveApplicationData">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveApplicationData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetApplicationData">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetApplicationData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteApplicationData">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteApplicationData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="IsMerchantProfileInitialized">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/IsMerchantProfileInitialized" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetMerchantProfiles">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetMerchantProfileIds">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfileIds" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetMerchantProfilesByProfileId">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfilesByProfileId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetMerchantProfile">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetMerchantProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteMerchantProfile">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/DeleteMerchantProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SaveMerchantProfiles">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SaveMerchantProfiles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SignOnWithUsernamePasswordForServiceKey">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/SignOnWithUsernamePasswordForServiceKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="PasswordExpiredFaultFault">
+        <soap:fault use="literal" name="PasswordExpiredFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="LockedByAdminFaultFault">
+        <soap:fault use="literal" name="LockedByAdminFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="OneTimePasswordFaultFault">
+        <soap:fault use="literal" name="OneTimePasswordFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="BadAttemptThresholdExceededFaultFault">
+        <soap:fault use="literal" name="BadAttemptThresholdExceededFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ResetPasswordForServiceKey">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ResetPasswordForServiceKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SendEmailFaultFault">
+        <soap:fault use="literal" name="SendEmailFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="GeneratePasswordFaultFault">
+        <soap:fault use="literal" name="GeneratePasswordFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePasswordForServiceKey">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangePasswordForServiceKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SendEmailFaultFault">
+        <soap:fault use="literal" name="SendEmailFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="PasswordInvalidFaultFault">
+        <soap:fault use="literal" name="PasswordInvalidFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="UserNotFoundFaultFault">
+        <soap:fault use="literal" name="UserNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeUsernameForServiceKey">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeUsernameForServiceKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="UserNotFoundFaultFault">
+        <soap:fault use="literal" name="UserNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SendEmailFaultFault">
+        <soap:fault use="literal" name="SendEmailFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ChangeEmailForServiceKey">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ChangeEmailForServiceKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="SendEmailFaultFault">
+        <soap:fault use="literal" name="SendEmailFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="UserNotFoundFaultFault">
+        <soap:fault use="literal" name="UserNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidEmailFaultFault">
+        <soap:fault use="literal" name="InvalidEmailFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetPasswordExpirationForServiceKey">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/GetPasswordExpirationForServiceKey" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="UserNotFoundFaultFault">
+        <soap:fault use="literal" name="UserNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="ValidateMerchantProfile">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/CWS/v2.0/ServiceInformation/ICWSServiceInformation/ValidateMerchantProfile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="CWSServiceInformationUnavailableFaultFault">
+        <soap:fault use="literal" name="CWSServiceInformationUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSFaultFault">
+        <soap:fault use="literal" name="CWSFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="CWSValidationResultFaultFault">
+        <soap:fault use="literal" name="CWSValidationResultFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllClaims">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Identity/1.0/GetAllClaims" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ClaimNotFoundFaultFault">
+        <soap:fault use="literal" name="ClaimNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthorizationFaultFault">
+        <soap:fault use="literal" name="AuthorizationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="RelyingPartyNotAssociatedToSecurityDomainFaultFault">
+        <soap:fault use="literal" name="RelyingPartyNotAssociatedToSecurityDomainFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SystemFaultFault">
+        <soap:fault use="literal" name="SystemFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetClaims">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Identity/1.0/GetClaims" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ClaimNotFoundFaultFault">
+        <soap:fault use="literal" name="ClaimNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthorizationFaultFault">
+        <soap:fault use="literal" name="AuthorizationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="RelyingPartyNotAssociatedToSecurityDomainFaultFault">
+        <soap:fault use="literal" name="RelyingPartyNotAssociatedToSecurityDomainFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SystemFaultFault">
+        <soap:fault use="literal" name="SystemFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Renew">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Identity/1.0/Renew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthorizationFaultFault">
+        <soap:fault use="literal" name="AuthorizationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="NonRenewableTokenFaultFault">
+        <soap:fault use="literal" name="NonRenewableTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SystemFaultFault">
+        <soap:fault use="literal" name="SystemFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="STSUnavailableFaultFault">
+        <soap:fault use="literal" name="STSUnavailableFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="SignOnAndAddClaims">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Identity/2.0/TokenCred/SignOnAndAddClaims" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ClaimMappingsNotFoundFaultFault">
+        <soap:fault use="literal" name="ClaimMappingsNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SystemFaultFault">
+        <soap:fault use="literal" name="SystemFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthorizationFaultFault">
+        <soap:fault use="literal" name="AuthorizationFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="DelegatedSignOn">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Identity/2.0/TokenCred/DelegatedSignOn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ClaimMappingsNotFoundFaultFault">
+        <soap:fault use="literal" name="ClaimMappingsNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SystemFaultFault">
+        <soap:fault use="literal" name="SystemFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthorizationFaultFault">
+        <soap:fault use="literal" name="AuthorizationFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FederatedSignOn">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Identity/2.0/MultiTokenCred/FederatedSignOn" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthorizationFaultFault">
+        <soap:fault use="literal" name="AuthorizationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SystemFaultFault">
+        <soap:fault use="literal" name="SystemFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ClaimMappingsNotFoundFaultFault">
+        <soap:fault use="literal" name="ClaimMappingsNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="FederatedSignOnAndAddClaims">
+      <soap:operation soapAction="http://schemas.ipcommerce.com/Identity/2.0/MultiTokenCred/FederatedSignOnAndAddClaims" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="ClaimMappingsNotFoundFaultFault">
+        <soap:fault use="literal" name="ClaimMappingsNotFoundFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthenticationFaultFault">
+        <soap:fault use="literal" name="AuthenticationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="SystemFaultFault">
+        <soap:fault use="literal" name="SystemFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="AuthorizationFaultFault">
+        <soap:fault use="literal" name="AuthorizationFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="InvalidTokenFaultFault">
+        <soap:fault use="literal" name="InvalidTokenFaultFault" namespace="" />
+      </wsdl:fault>
+      <wsdl:fault name="ExpiredTokenFaultFault">
+        <soap:fault use="literal" name="ExpiredTokenFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CWSServiceInformation">
+    <wsdl:port name="ServiceInfoProcessing_ICWSServiceInformation" binding="tns:ServiceInfoProcessing_ICWSServiceInformation">
+      <soap:address location="https://api.cert.nabcommerce.com/2.0.18/SvcInfo" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
