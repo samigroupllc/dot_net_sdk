@@ -78,14 +78,17 @@ namespace NabVelocity.Txn {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Transaction", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingTransaction))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueTransaction))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransaction))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionPro))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueTransaction))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingTransaction))]
     public partial class Transaction : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RelayResponseUrlField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private NabVelocity.Txn.TransactionCustomerData CustomerDataField;
@@ -106,7 +109,20 @@ namespace NabVelocity.Txn {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string RelayResponseUrl {
+            get {
+                return this.RelayResponseUrlField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RelayResponseUrlField, value) != true)) {
+                    this.RelayResponseUrlField = value;
+                    this.RaisePropertyChanged("RelayResponseUrl");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
         public NabVelocity.Txn.TransactionCustomerData CustomerData {
             get {
                 return this.CustomerDataField;
@@ -119,7 +135,7 @@ namespace NabVelocity.Txn {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
         public NabVelocity.Txn.TransactionReportingData ReportingData {
             get {
                 return this.ReportingDataField;
@@ -132,7 +148,7 @@ namespace NabVelocity.Txn {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
         public NabVelocity.Txn.Addendum Addendum {
             get {
                 return this.AddendumField;
@@ -373,6 +389,84 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingTransaction", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class ElectronicCheckingTransaction : NabVelocity.Txn.Transaction {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ElectronicCheckingTenderData TenderDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ElectronicCheckingTransactionData TransactionDataField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ElectronicCheckingTenderData TenderData {
+            get {
+                return this.TenderDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TenderDataField, value) != true)) {
+                    this.TenderDataField = value;
+                    this.RaisePropertyChanged("TenderData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ElectronicCheckingTransactionData TransactionData {
+            get {
+                return this.TransactionDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TransactionDataField, value) != true)) {
+                    this.TransactionDataField = value;
+                    this.RaisePropertyChanged("TransactionData");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueTransaction", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class StoredValueTransaction : NabVelocity.Txn.Transaction {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.StoredValueTenderData TenderDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.StoredValueTransactionData TransactionDataField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.StoredValueTenderData TenderData {
+            get {
+                return this.TenderDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TenderDataField, value) != true)) {
+                    this.TenderDataField = value;
+                    this.RaisePropertyChanged("TenderData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.StoredValueTransactionData TransactionData {
+            get {
+                return this.TransactionDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TransactionDataField, value) != true)) {
+                    this.TransactionDataField = value;
+                    this.RaisePropertyChanged("TransactionData");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BankcardTransaction", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionPro))]
@@ -445,84 +539,6 @@ namespace NabVelocity.Txn {
                 if ((object.ReferenceEquals(this.InterchangeDataField, value) != true)) {
                     this.InterchangeDataField = value;
                     this.RaisePropertyChanged("InterchangeData");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueTransaction", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class StoredValueTransaction : NabVelocity.Txn.Transaction {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.StoredValueTenderData TenderDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.StoredValueTransactionData TransactionDataField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.StoredValueTenderData TenderData {
-            get {
-                return this.TenderDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TenderDataField, value) != true)) {
-                    this.TenderDataField = value;
-                    this.RaisePropertyChanged("TenderData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.StoredValueTransactionData TransactionData {
-            get {
-                return this.TransactionDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TransactionDataField, value) != true)) {
-                    this.TransactionDataField = value;
-                    this.RaisePropertyChanged("TransactionData");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingTransaction", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    [System.SerializableAttribute()]
-    public partial class ElectronicCheckingTransaction : NabVelocity.Txn.Transaction {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.ElectronicCheckingTenderData TenderDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.ElectronicCheckingTransactionData TransactionDataField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.ElectronicCheckingTenderData TenderData {
-            get {
-                return this.TenderDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TenderDataField, value) != true)) {
-                    this.TenderDataField = value;
-                    this.RaisePropertyChanged("TenderData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.ElectronicCheckingTransactionData TransactionData {
-            get {
-                return this.TransactionDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TransactionDataField, value) != true)) {
-                    this.TransactionDataField = value;
-                    this.RaisePropertyChanged("TransactionData");
                 }
             }
         }
@@ -2208,27 +2224,251 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BankcardApplicationConfigurationData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
     [System.SerializableAttribute()]
-    public partial class BankcardApplicationConfigurationData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ElectronicCheckingTenderData : NabVelocity.Txn.TransactionTenderData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CheckImage BackCheckImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CheckData CheckDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CheckImage FrontCheckImageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SocketLocation SocketLocationField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CheckImage BackCheckImage {
+            get {
+                return this.BackCheckImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BackCheckImageField, value) != true)) {
+                    this.BackCheckImageField = value;
+                    this.RaisePropertyChanged("BackCheckImage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CheckData CheckData {
+            get {
+                return this.CheckDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CheckDataField, value) != true)) {
+                    this.CheckDataField = value;
+                    this.RaisePropertyChanged("CheckData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CheckImage FrontCheckImage {
+            get {
+                return this.FrontCheckImageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FrontCheckImageField, value) != true)) {
+                    this.FrontCheckImageField = value;
+                    this.RaisePropertyChanged("FrontCheckImage");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SocketLocation SocketLocation {
+            get {
+                return this.SocketLocationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SocketLocationField, value) != true)) {
+                    this.SocketLocationField = value;
+                    this.RaisePropertyChanged("SocketLocation");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingTransactionData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class ElectronicCheckingTransactionData : NabVelocity.Txn.TransactionData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.AlternativeMerchantData AlternativeMerchantDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime EffectiveDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsRecurringField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PayeeEmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PayeeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SECCode SECCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ServiceType ServiceTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.TransactionType TransactionTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.TxnCodeType TxnCodeTypeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.AlternativeMerchantData AlternativeMerchantData {
+            get {
+                return this.AlternativeMerchantDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AlternativeMerchantDataField, value) != true)) {
+                    this.AlternativeMerchantDataField = value;
+                    this.RaisePropertyChanged("AlternativeMerchantData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime EffectiveDate {
+            get {
+                return this.EffectiveDateField;
+            }
+            set {
+                if ((this.EffectiveDateField.Equals(value) != true)) {
+                    this.EffectiveDateField = value;
+                    this.RaisePropertyChanged("EffectiveDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsRecurring {
+            get {
+                return this.IsRecurringField;
+            }
+            set {
+                if ((this.IsRecurringField.Equals(value) != true)) {
+                    this.IsRecurringField = value;
+                    this.RaisePropertyChanged("IsRecurring");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PayeeEmail {
+            get {
+                return this.PayeeEmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PayeeEmailField, value) != true)) {
+                    this.PayeeEmailField = value;
+                    this.RaisePropertyChanged("PayeeEmail");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PayeeId {
+            get {
+                return this.PayeeIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PayeeIdField, value) != true)) {
+                    this.PayeeIdField = value;
+                    this.RaisePropertyChanged("PayeeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SECCode SECCode {
+            get {
+                return this.SECCodeField;
+            }
+            set {
+                if ((this.SECCodeField.Equals(value) != true)) {
+                    this.SECCodeField = value;
+                    this.RaisePropertyChanged("SECCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ServiceType ServiceType {
+            get {
+                return this.ServiceTypeField;
+            }
+            set {
+                if ((this.ServiceTypeField.Equals(value) != true)) {
+                    this.ServiceTypeField = value;
+                    this.RaisePropertyChanged("ServiceType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.TransactionType TransactionType {
+            get {
+                return this.TransactionTypeField;
+            }
+            set {
+                if ((this.TransactionTypeField.Equals(value) != true)) {
+                    this.TransactionTypeField = value;
+                    this.RaisePropertyChanged("TransactionType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.TxnCodeType TxnCodeType {
+            get {
+                return this.TxnCodeTypeField;
+            }
+            set {
+                if ((this.TxnCodeTypeField.Equals(value) != true)) {
+                    this.TxnCodeTypeField = value;
+                    this.RaisePropertyChanged("TxnCodeType");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TransactionTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueTenderData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueActivateTenderData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueBalanceTransferTenderData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTenderData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingTenderData))]
+    public partial class TransactionTenderData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool ApplicationAttendedField;
+        private string PaymentAccountDataTokenField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.ApplicationLocation ApplicationLocationField;
+        private string SecurePaymentAccountDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.HardwareType HardwareTypeField;
+        private string EncryptionKeyIdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.PINCapability PINCapabilityField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.ReadCapability ReadCapabilityField;
+        private string SwipeStatusField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -2241,66 +2481,53 @@ namespace NabVelocity.Txn {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ApplicationAttended {
+        public string PaymentAccountDataToken {
             get {
-                return this.ApplicationAttendedField;
+                return this.PaymentAccountDataTokenField;
             }
             set {
-                if ((this.ApplicationAttendedField.Equals(value) != true)) {
-                    this.ApplicationAttendedField = value;
-                    this.RaisePropertyChanged("ApplicationAttended");
+                if ((object.ReferenceEquals(this.PaymentAccountDataTokenField, value) != true)) {
+                    this.PaymentAccountDataTokenField = value;
+                    this.RaisePropertyChanged("PaymentAccountDataToken");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.ApplicationLocation ApplicationLocation {
+        public string SecurePaymentAccountData {
             get {
-                return this.ApplicationLocationField;
+                return this.SecurePaymentAccountDataField;
             }
             set {
-                if ((this.ApplicationLocationField.Equals(value) != true)) {
-                    this.ApplicationLocationField = value;
-                    this.RaisePropertyChanged("ApplicationLocation");
+                if ((object.ReferenceEquals(this.SecurePaymentAccountDataField, value) != true)) {
+                    this.SecurePaymentAccountDataField = value;
+                    this.RaisePropertyChanged("SecurePaymentAccountData");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.HardwareType HardwareType {
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public string EncryptionKeyId {
             get {
-                return this.HardwareTypeField;
+                return this.EncryptionKeyIdField;
             }
             set {
-                if ((this.HardwareTypeField.Equals(value) != true)) {
-                    this.HardwareTypeField = value;
-                    this.RaisePropertyChanged("HardwareType");
+                if ((object.ReferenceEquals(this.EncryptionKeyIdField, value) != true)) {
+                    this.EncryptionKeyIdField = value;
+                    this.RaisePropertyChanged("EncryptionKeyId");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.PINCapability PINCapability {
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string SwipeStatus {
             get {
-                return this.PINCapabilityField;
+                return this.SwipeStatusField;
             }
             set {
-                if ((this.PINCapabilityField.Equals(value) != true)) {
-                    this.PINCapabilityField = value;
-                    this.RaisePropertyChanged("PINCapability");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.ReadCapability ReadCapability {
-            get {
-                return this.ReadCapabilityField;
-            }
-            set {
-                if ((this.ReadCapabilityField.Equals(value) != true)) {
-                    this.ReadCapabilityField = value;
-                    this.RaisePropertyChanged("ReadCapability");
+                if ((object.ReferenceEquals(this.SwipeStatusField, value) != true)) {
+                    this.SwipeStatusField = value;
+                    this.RaisePropertyChanged("SwipeStatus");
                 }
             }
         }
@@ -2317,9 +2544,14 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BankcardTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
     [System.SerializableAttribute()]
-    public partial class BankcardTenderData : NabVelocity.Txn.TransactionTenderData {
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueActivateTenderData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueBalanceTransferTenderData))]
+    public partial class StoredValueTenderData : NabVelocity.Txn.TransactionTenderData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.AcctType AcctTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private NabVelocity.Txn.CardData CardDataField;
@@ -2328,7 +2560,23 @@ namespace NabVelocity.Txn {
         private NabVelocity.Txn.CardSecurityData CardSecurityDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.EcommerceSecurityData EcommerceSecurityDataField;
+        private string CardholderIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ConsumerIdentification[] ConsumerIdentificationsField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.AcctType AcctType {
+            get {
+                return this.AcctTypeField;
+            }
+            set {
+                if ((this.AcctTypeField.Equals(value) != true)) {
+                    this.AcctTypeField = value;
+                    this.RaisePropertyChanged("AcctType");
+                }
+            }
+        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public NabVelocity.Txn.CardData CardData {
@@ -2357,6 +2605,142 @@ namespace NabVelocity.Txn {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CardholderId {
+            get {
+                return this.CardholderIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardholderIdField, value) != true)) {
+                    this.CardholderIdField = value;
+                    this.RaisePropertyChanged("CardholderId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ConsumerIdentification[] ConsumerIdentifications {
+            get {
+                return this.ConsumerIdentificationsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ConsumerIdentificationsField, value) != true)) {
+                    this.ConsumerIdentificationsField = value;
+                    this.RaisePropertyChanged("ConsumerIdentifications");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueActivateTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class StoredValueActivateTenderData : NabVelocity.Txn.StoredValueTenderData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.VirtualCardData VirtualCardDataField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.VirtualCardData VirtualCardData {
+            get {
+                return this.VirtualCardDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VirtualCardDataField, value) != true)) {
+                    this.VirtualCardDataField = value;
+                    this.RaisePropertyChanged("VirtualCardData");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueBalanceTransferTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class StoredValueBalanceTransferTenderData : NabVelocity.Txn.StoredValueTenderData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CardData SourceCardDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ConsumerIdentification ConsumerIdentificationField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CardData SourceCardData {
+            get {
+                return this.SourceCardDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SourceCardDataField, value) != true)) {
+                    this.SourceCardDataField = value;
+                    this.RaisePropertyChanged("SourceCardData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public NabVelocity.Txn.ConsumerIdentification ConsumerIdentification {
+            get {
+                return this.ConsumerIdentificationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ConsumerIdentificationField, value) != true)) {
+                    this.ConsumerIdentificationField = value;
+                    this.RaisePropertyChanged("ConsumerIdentification");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BankcardTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    [System.SerializableAttribute()]
+    public partial class BankcardTenderData : NabVelocity.Txn.TransactionTenderData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CardData1 CardDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CardSecurityData1 CardSecurityDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.EcommerceSecurityData EcommerceSecurityDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EBTVoucherApprovalCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EBTVoucherNumberField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CardData1 CardData {
+            get {
+                return this.CardDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardDataField, value) != true)) {
+                    this.CardDataField = value;
+                    this.RaisePropertyChanged("CardData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CardSecurityData1 CardSecurityData {
+            get {
+                return this.CardSecurityDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardSecurityDataField, value) != true)) {
+                    this.CardSecurityDataField = value;
+                    this.RaisePropertyChanged("CardSecurityData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public NabVelocity.Txn.EcommerceSecurityData EcommerceSecurityData {
             get {
                 return this.EcommerceSecurityDataField;
@@ -2365,6 +2749,1850 @@ namespace NabVelocity.Txn {
                 if ((object.ReferenceEquals(this.EcommerceSecurityDataField, value) != true)) {
                     this.EcommerceSecurityDataField = value;
                     this.RaisePropertyChanged("EcommerceSecurityData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string EBTVoucherApprovalCode {
+            get {
+                return this.EBTVoucherApprovalCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EBTVoucherApprovalCodeField, value) != true)) {
+                    this.EBTVoucherApprovalCodeField = value;
+                    this.RaisePropertyChanged("EBTVoucherApprovalCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string EBTVoucherNumber {
+            get {
+                return this.EBTVoucherNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EBTVoucherNumberField, value) != true)) {
+                    this.EBTVoucherNumberField = value;
+                    this.RaisePropertyChanged("EBTVoucherNumber");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckImage", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class CheckImage : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ImgCompressionType CompressionTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.DocType DocTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ImgFormatType FormatTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private byte[] ImgDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ImgSizeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string UserFieldField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ImgCompressionType CompressionType {
+            get {
+                return this.CompressionTypeField;
+            }
+            set {
+                if ((this.CompressionTypeField.Equals(value) != true)) {
+                    this.CompressionTypeField = value;
+                    this.RaisePropertyChanged("CompressionType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.DocType DocType {
+            get {
+                return this.DocTypeField;
+            }
+            set {
+                if ((this.DocTypeField.Equals(value) != true)) {
+                    this.DocTypeField = value;
+                    this.RaisePropertyChanged("DocType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ImgFormatType FormatType {
+            get {
+                return this.FormatTypeField;
+            }
+            set {
+                if ((this.FormatTypeField.Equals(value) != true)) {
+                    this.FormatTypeField = value;
+                    this.RaisePropertyChanged("FormatType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public byte[] ImgData {
+            get {
+                return this.ImgDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ImgDataField, value) != true)) {
+                    this.ImgDataField = value;
+                    this.RaisePropertyChanged("ImgData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ImgSize {
+            get {
+                return this.ImgSizeField;
+            }
+            set {
+                if ((this.ImgSizeField.Equals(value) != true)) {
+                    this.ImgSizeField = value;
+                    this.RaisePropertyChanged("ImgSize");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string UserField {
+            get {
+                return this.UserFieldField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.UserFieldField, value) != true)) {
+                    this.UserFieldField = value;
+                    this.RaisePropertyChanged("UserField");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class CheckData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AccountNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CheckCountryCode CheckCountryCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CheckNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.OwnerType OwnerTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RawMICRLineField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RoutingNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.UseType UseTypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string AccountNumber {
+            get {
+                return this.AccountNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
+                    this.AccountNumberField = value;
+                    this.RaisePropertyChanged("AccountNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CheckCountryCode CheckCountryCode {
+            get {
+                return this.CheckCountryCodeField;
+            }
+            set {
+                if ((this.CheckCountryCodeField.Equals(value) != true)) {
+                    this.CheckCountryCodeField = value;
+                    this.RaisePropertyChanged("CheckCountryCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CheckNumber {
+            get {
+                return this.CheckNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CheckNumberField, value) != true)) {
+                    this.CheckNumberField = value;
+                    this.RaisePropertyChanged("CheckNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.OwnerType OwnerType {
+            get {
+                return this.OwnerTypeField;
+            }
+            set {
+                if ((this.OwnerTypeField.Equals(value) != true)) {
+                    this.OwnerTypeField = value;
+                    this.RaisePropertyChanged("OwnerType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RawMICRLine {
+            get {
+                return this.RawMICRLineField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RawMICRLineField, value) != true)) {
+                    this.RawMICRLineField = value;
+                    this.RaisePropertyChanged("RawMICRLine");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RoutingNumber {
+            get {
+                return this.RoutingNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RoutingNumberField, value) != true)) {
+                    this.RoutingNumberField = value;
+                    this.RaisePropertyChanged("RoutingNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.UseType UseType {
+            get {
+                return this.UseTypeField;
+            }
+            set {
+                if ((this.UseTypeField.Equals(value) != true)) {
+                    this.UseTypeField = value;
+                    this.RaisePropertyChanged("UseType");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SocketLocation", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class SocketLocation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SocketCityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SocketStateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SocketCity {
+            get {
+                return this.SocketCityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SocketCityField, value) != true)) {
+                    this.SocketCityField = value;
+                    this.RaisePropertyChanged("SocketCity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string SocketState {
+            get {
+                return this.SocketStateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SocketStateField, value) != true)) {
+                    this.SocketStateField = value;
+                    this.RaisePropertyChanged("SocketState");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CardData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class CardData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TrackDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AccountNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExpireField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Track1DataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Track2DataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TrackData {
+            get {
+                return this.TrackDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TrackDataField, value) != true)) {
+                    this.TrackDataField = value;
+                    this.RaisePropertyChanged("TrackData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public string AccountNumber {
+            get {
+                return this.AccountNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
+                    this.AccountNumberField = value;
+                    this.RaisePropertyChanged("AccountNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public string Expire {
+            get {
+                return this.ExpireField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExpireField, value) != true)) {
+                    this.ExpireField = value;
+                    this.RaisePropertyChanged("Expire");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string Track1Data {
+            get {
+                return this.Track1DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Track1DataField, value) != true)) {
+                    this.Track1DataField = value;
+                    this.RaisePropertyChanged("Track1Data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public string Track2Data {
+            get {
+                return this.Track2DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Track2DataField, value) != true)) {
+                    this.Track2DataField = value;
+                    this.RaisePropertyChanged("Track2Data");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CardSecurityData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class CardSecurityData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CVDataProvided CVDataProvidedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CVDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CVDataProvided CVDataProvided {
+            get {
+                return this.CVDataProvidedField;
+            }
+            set {
+                if ((this.CVDataProvidedField.Equals(value) != true)) {
+                    this.CVDataProvidedField = value;
+                    this.RaisePropertyChanged("CVDataProvided");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public string CVData {
+            get {
+                return this.CVDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CVDataField, value) != true)) {
+                    this.CVDataField = value;
+                    this.RaisePropertyChanged("CVData");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AcctType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    public enum AcctType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Gift = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Loyalty = 2,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ConsumerIdentification", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class ConsumerIdentification : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.IdType IdTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.IdEntryMode IdEntryModeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.IdType IdType {
+            get {
+                return this.IdTypeField;
+            }
+            set {
+                if ((this.IdTypeField.Equals(value) != true)) {
+                    this.IdTypeField = value;
+                    this.RaisePropertyChanged("IdType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public string IdData {
+            get {
+                return this.IdDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdDataField, value) != true)) {
+                    this.IdDataField = value;
+                    this.RaisePropertyChanged("IdData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public NabVelocity.Txn.IdEntryMode IdEntryMode {
+            get {
+                return this.IdEntryModeField;
+            }
+            set {
+                if ((this.IdEntryModeField.Equals(value) != true)) {
+                    this.IdEntryModeField = value;
+                    this.RaisePropertyChanged("IdEntryMode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CVDataProvided", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    public enum CVDataProvided : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DeliberatelyBypass = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Provided = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ValueIllegible = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CardholderStatesNotAvailable = 4,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="IdType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    public enum IdType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PIN = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PINEncrypted = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PINEncryptedKeySerialNumber = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PhoneNumber = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DriversLicenseNumber = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        EmailAddress = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BiometricAlgorithm = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BiometricMap = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        X509Certificate = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Passphrase = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Hash = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PublicKey = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RetinaAlg = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RetinaMap = 14,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BarCode = 15,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="IdEntryMode", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    public enum IdEntryMode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TrackData = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Keyed = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Internet = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BlueTooth = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RFID = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Wireless = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Biometric = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NFC = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Transponder = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ContactlessDevice = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ChipCapableDevice = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ProviderIssued = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BarCodeReader = 13,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="VirtualCardData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class VirtualCardData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int AccountNumberLengthField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BINField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int AccountNumberLength {
+            get {
+                return this.AccountNumberLengthField;
+            }
+            set {
+                if ((this.AccountNumberLengthField.Equals(value) != true)) {
+                    this.AccountNumberLengthField = value;
+                    this.RaisePropertyChanged("AccountNumberLength");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BIN {
+            get {
+                return this.BINField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BINField, value) != true)) {
+                    this.BINField = value;
+                    this.RaisePropertyChanged("BIN");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CardData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    [System.SerializableAttribute()]
+    public partial class CardData1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.TypeCardType CardTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardholderNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PANField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExpireField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Track1DataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Track2DataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.TypeCardType CardType {
+            get {
+                return this.CardTypeField;
+            }
+            set {
+                if ((this.CardTypeField.Equals(value) != true)) {
+                    this.CardTypeField = value;
+                    this.RaisePropertyChanged("CardType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CardholderName {
+            get {
+                return this.CardholderNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardholderNameField, value) != true)) {
+                    this.CardholderNameField = value;
+                    this.RaisePropertyChanged("CardholderName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PAN {
+            get {
+                return this.PANField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PANField, value) != true)) {
+                    this.PANField = value;
+                    this.RaisePropertyChanged("PAN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string Expire {
+            get {
+                return this.ExpireField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExpireField, value) != true)) {
+                    this.ExpireField = value;
+                    this.RaisePropertyChanged("Expire");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public string Track1Data {
+            get {
+                return this.Track1DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Track1DataField, value) != true)) {
+                    this.Track1DataField = value;
+                    this.RaisePropertyChanged("Track1Data");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public string Track2Data {
+            get {
+                return this.Track2DataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Track2DataField, value) != true)) {
+                    this.Track2DataField = value;
+                    this.RaisePropertyChanged("Track2Data");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CardSecurityData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    [System.SerializableAttribute()]
+    public partial class CardSecurityData1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.AVSData AVSDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CVDataProvided CVDataProvidedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CVDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string KeySerialNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PINField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdentificationInformationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.EMVChipCondition EMVChipConditionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EMVDataField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.AVSData AVSData {
+            get {
+                return this.AVSDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AVSDataField, value) != true)) {
+                    this.AVSDataField = value;
+                    this.RaisePropertyChanged("AVSData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.CVDataProvided CVDataProvided {
+            get {
+                return this.CVDataProvidedField;
+            }
+            set {
+                if ((this.CVDataProvidedField.Equals(value) != true)) {
+                    this.CVDataProvidedField = value;
+                    this.RaisePropertyChanged("CVDataProvided");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public string CVData {
+            get {
+                return this.CVDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CVDataField, value) != true)) {
+                    this.CVDataField = value;
+                    this.RaisePropertyChanged("CVData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string KeySerialNumber {
+            get {
+                return this.KeySerialNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KeySerialNumberField, value) != true)) {
+                    this.KeySerialNumberField = value;
+                    this.RaisePropertyChanged("KeySerialNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public string PIN {
+            get {
+                return this.PINField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PINField, value) != true)) {
+                    this.PINField = value;
+                    this.RaisePropertyChanged("PIN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public string IdentificationInformation {
+            get {
+                return this.IdentificationInformationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdentificationInformationField, value) != true)) {
+                    this.IdentificationInformationField = value;
+                    this.RaisePropertyChanged("IdentificationInformation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public NabVelocity.Txn.EMVChipCondition EMVChipCondition {
+            get {
+                return this.EMVChipConditionField;
+            }
+            set {
+                if ((this.EMVChipConditionField.Equals(value) != true)) {
+                    this.EMVChipConditionField = value;
+                    this.RaisePropertyChanged("EMVChipCondition");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string EMVData {
+            get {
+                return this.EMVDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EMVDataField, value) != true)) {
+                    this.EMVDataField = value;
+                    this.RaisePropertyChanged("EMVData");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EcommerceSecurityData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    [System.SerializableAttribute()]
+    public partial class EcommerceSecurityData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TokenDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.TokenIndicator TokenIndicatorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string XIDField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TokenData {
+            get {
+                return this.TokenDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TokenDataField, value) != true)) {
+                    this.TokenDataField = value;
+                    this.RaisePropertyChanged("TokenData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.TokenIndicator TokenIndicator {
+            get {
+                return this.TokenIndicatorField;
+            }
+            set {
+                if ((this.TokenIndicatorField.Equals(value) != true)) {
+                    this.TokenIndicatorField = value;
+                    this.RaisePropertyChanged("TokenIndicator");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string XID {
+            get {
+                return this.XIDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.XIDField, value) != true)) {
+                    this.XIDField = value;
+                    this.RaisePropertyChanged("XID");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TypeCardType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    public enum TypeCardType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PrivateLabel = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Visa = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MasterCard = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AmericanExpress = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DinersCartBlanche = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Discover = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JCB = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CitibankFinancial = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RevolutionCard = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UnbrandedATM = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Dankort = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Solo = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Maestro = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        LaserCard = 14,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Electron = 15,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Finax = 16,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Kopkort = 17,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CarteAurore = 18,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CartesBancaires = 19,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DinersClub = 20,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AVSData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    [System.SerializableAttribute()]
+    public partial class AVSData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardholderNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StreetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StateProvinceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PostalCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.TypeISOCountryCodeA3 CountryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CardholderName {
+            get {
+                return this.CardholderNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardholderNameField, value) != true)) {
+                    this.CardholderNameField = value;
+                    this.RaisePropertyChanged("CardholderName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Street {
+            get {
+                return this.StreetField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StreetField, value) != true)) {
+                    this.StreetField = value;
+                    this.RaisePropertyChanged("Street");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public string City {
+            get {
+                return this.CityField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CityField, value) != true)) {
+                    this.CityField = value;
+                    this.RaisePropertyChanged("City");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string StateProvince {
+            get {
+                return this.StateProvinceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StateProvinceField, value) != true)) {
+                    this.StateProvinceField = value;
+                    this.RaisePropertyChanged("StateProvince");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public string PostalCode {
+            get {
+                return this.PostalCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PostalCodeField, value) != true)) {
+                    this.PostalCodeField = value;
+                    this.RaisePropertyChanged("PostalCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public NabVelocity.Txn.TypeISOCountryCodeA3 Country {
+            get {
+                return this.CountryField;
+            }
+            set {
+                if ((this.CountryField.Equals(value) != true)) {
+                    this.CountryField = value;
+                    this.RaisePropertyChanged("Country");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=6)]
+        public string Phone {
+            get {
+                return this.PhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
+                    this.PhoneField = value;
+                    this.RaisePropertyChanged("Phone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=7)]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EMVChipCondition", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    public enum EMVChipCondition : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        FirstFailure = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MultipleFailures = 2,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TokenIndicator", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    public enum TokenIndicator : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        VPAS = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UCAFWithData = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UCAFWithoutData = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AttemptedCardUnsupported = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        AttemptedServiceUnavailable = 5,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ImgCompressionType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum ImgCompressionType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Group_4 = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JPEG_Baseline = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ABIC = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PNG = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JBIG = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JPEG_2000 = 6,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DocType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum DocType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Check = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Other = 2,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ImgFormatType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum ImgFormatType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TIFF_6 = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        IOCA_FS_11 = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PNG = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JFIF = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SPIFF = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JBIG = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        JPEG_2000 = 7,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CheckCountryCode", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum CheckCountryCode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        US = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MX = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CA = 3,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OwnerType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum OwnerType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Personal = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Business = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 3,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UseType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum UseType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Savings = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Checking = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Travelers = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Payroll = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Cash = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TwoParty = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Government = 7,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TransactionData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueTransactionData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionData))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionDataPro))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingTransactionData))]
+    public partial class TransactionData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal AmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.TypeISOCurrencyCodeA3 CurrencyCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TransactionDateTimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CampaignIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReferenceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IgnoreDuplicateCheckField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.TypeISOCurrencyCodeA3 CurrencyCode {
+            get {
+                return this.CurrencyCodeField;
+            }
+            set {
+                if ((this.CurrencyCodeField.Equals(value) != true)) {
+                    this.CurrencyCodeField = value;
+                    this.RaisePropertyChanged("CurrencyCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TransactionDateTime {
+            get {
+                return this.TransactionDateTimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TransactionDateTimeField, value) != true)) {
+                    this.TransactionDateTimeField = value;
+                    this.RaisePropertyChanged("TransactionDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public string CampaignId {
+            get {
+                return this.CampaignIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CampaignIdField, value) != true)) {
+                    this.CampaignIdField = value;
+                    this.RaisePropertyChanged("CampaignId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public string Reference {
+            get {
+                return this.ReferenceField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReferenceField, value) != true)) {
+                    this.ReferenceField = value;
+                    this.RaisePropertyChanged("Reference");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public bool IgnoreDuplicateCheck {
+            get {
+                return this.IgnoreDuplicateCheckField;
+            }
+            set {
+                if ((this.IgnoreDuplicateCheckField.Equals(value) != true)) {
+                    this.IgnoreDuplicateCheckField = value;
+                    this.RaisePropertyChanged("IgnoreDuplicateCheck");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueTransactionData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class StoredValueTransactionData : NabVelocity.Txn.TransactionData {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmployeeIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.IndustryType IndustryTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal TipAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.TypeISOCurrencyCodeA3 TenderCurrencyCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardRestrictionValueField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.EntryMode EntryModeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool UnloadField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CardStatus CardStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.OperationType OperationTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OrderNumberField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string EmployeeId {
+            get {
+                return this.EmployeeIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmployeeIdField, value) != true)) {
+                    this.EmployeeIdField = value;
+                    this.RaisePropertyChanged("EmployeeId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.IndustryType IndustryType {
+            get {
+                return this.IndustryTypeField;
+            }
+            set {
+                if ((this.IndustryTypeField.Equals(value) != true)) {
+                    this.IndustryTypeField = value;
+                    this.RaisePropertyChanged("IndustryType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal TipAmount {
+            get {
+                return this.TipAmountField;
+            }
+            set {
+                if ((this.TipAmountField.Equals(value) != true)) {
+                    this.TipAmountField = value;
+                    this.RaisePropertyChanged("TipAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public NabVelocity.Txn.TypeISOCurrencyCodeA3 TenderCurrencyCode {
+            get {
+                return this.TenderCurrencyCodeField;
+            }
+            set {
+                if ((this.TenderCurrencyCodeField.Equals(value) != true)) {
+                    this.TenderCurrencyCodeField = value;
+                    this.RaisePropertyChanged("TenderCurrencyCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public string CardRestrictionValue {
+            get {
+                return this.CardRestrictionValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardRestrictionValueField, value) != true)) {
+                    this.CardRestrictionValueField = value;
+                    this.RaisePropertyChanged("CardRestrictionValue");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public NabVelocity.Txn.EntryMode EntryMode {
+            get {
+                return this.EntryModeField;
+            }
+            set {
+                if ((this.EntryModeField.Equals(value) != true)) {
+                    this.EntryModeField = value;
+                    this.RaisePropertyChanged("EntryMode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=6)]
+        public bool Unload {
+            get {
+                return this.UnloadField;
+            }
+            set {
+                if ((this.UnloadField.Equals(value) != true)) {
+                    this.UnloadField = value;
+                    this.RaisePropertyChanged("Unload");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=7)]
+        public NabVelocity.Txn.CardStatus CardStatus {
+            get {
+                return this.CardStatusField;
+            }
+            set {
+                if ((this.CardStatusField.Equals(value) != true)) {
+                    this.CardStatusField = value;
+                    this.RaisePropertyChanged("CardStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=8)]
+        public NabVelocity.Txn.OperationType OperationType {
+            get {
+                return this.OperationTypeField;
+            }
+            set {
+                if ((this.OperationTypeField.Equals(value) != true)) {
+                    this.OperationTypeField = value;
+                    this.RaisePropertyChanged("OperationType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=9)]
+        public string OrderNumber {
+            get {
+                return this.OrderNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderNumberField, value) != true)) {
+                    this.OrderNumberField = value;
+                    this.RaisePropertyChanged("OrderNumber");
                 }
             }
         }
@@ -2381,7 +4609,7 @@ namespace NabVelocity.Txn {
         private NabVelocity.Txn.AccountType AccountTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.AlternativeMerchantData AlternativeMerchantDataField;
+        private NabVelocity.Txn.AlternativeMerchantData1 AlternativeMerchantDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ApprovalCodeField;
@@ -2443,6 +4671,9 @@ namespace NabVelocity.Txn {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsQuasiCashField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.TypeEBTType EBTTypeField;
+        
         [System.Runtime.Serialization.DataMemberAttribute()]
         public NabVelocity.Txn.AccountType AccountType {
             get {
@@ -2457,7 +4688,7 @@ namespace NabVelocity.Txn {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.AlternativeMerchantData AlternativeMerchantData {
+        public NabVelocity.Txn.AlternativeMerchantData1 AlternativeMerchantData {
             get {
                 return this.AlternativeMerchantDataField;
             }
@@ -2728,2010 +4959,16 @@ namespace NabVelocity.Txn {
                 }
             }
         }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ApplicationLocation", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    public enum ApplicationLocation : int {
         
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unknown = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OnPremises = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OffPremises = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        HomeInternet = 4,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="HardwareType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    public enum HardwareType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unknown = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PC = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        DialTerminal = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ElectronicCashRegister = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        InStoreController = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Mainframe = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ThirdPartyDeveloper = 7,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        POSPort = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        POSPartner = 9,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        TicketMachine = 10,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ATM = 11,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ScripDevice = 12,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Telephone = 13,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        InitiatedCAT = 14,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        VirtualTerminal = 15,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MobileBanking = 16,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PINCapability", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    public enum PINCapability : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unknown = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PINSupported = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PINNotSupported = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PINVerifiedByDevice = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PINPadInoperative = 5,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ReadCapability", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    public enum ReadCapability : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        HasMSR = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NoMSR = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        KeyOnly = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Chip = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ContactlessChip = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ContactlessMSR = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ECR = 7,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        VSCCapable = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RFIDCapable = 9,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmvICC = 10,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MSREMVICC = 11,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unknown = 12,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OCRReader = 13,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BarCodeReader = 14,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSpecified = 15,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ARUIVR = 16,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NoTerminal = 17,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NFCCapable = 18,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TransactionTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueTenderData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueBalanceTransferTenderData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueActivateTenderData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingTenderData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTenderData))]
-    public partial class TransactionTenderData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PaymentAccountDataTokenField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SecurePaymentAccountDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EncryptionKeyIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SwipeStatusField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PaymentAccountDataToken {
-            get {
-                return this.PaymentAccountDataTokenField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PaymentAccountDataTokenField, value) != true)) {
-                    this.PaymentAccountDataTokenField = value;
-                    this.RaisePropertyChanged("PaymentAccountDataToken");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string SecurePaymentAccountData {
-            get {
-                return this.SecurePaymentAccountDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SecurePaymentAccountDataField, value) != true)) {
-                    this.SecurePaymentAccountDataField = value;
-                    this.RaisePropertyChanged("SecurePaymentAccountData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string EncryptionKeyId {
-            get {
-                return this.EncryptionKeyIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EncryptionKeyIdField, value) != true)) {
-                    this.EncryptionKeyIdField = value;
-                    this.RaisePropertyChanged("EncryptionKeyId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string SwipeStatus {
-            get {
-                return this.SwipeStatusField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SwipeStatusField, value) != true)) {
-                    this.SwipeStatusField = value;
-                    this.RaisePropertyChanged("SwipeStatus");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueBalanceTransferTenderData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueActivateTenderData))]
-    public partial class StoredValueTenderData : NabVelocity.Txn.TransactionTenderData {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CardData1 CardDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CardSecurityData1 CardSecurityDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CardholderIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.ConsumerIdentification[] ConsumerIdentificationsField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.CardData1 CardData {
-            get {
-                return this.CardDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardDataField, value) != true)) {
-                    this.CardDataField = value;
-                    this.RaisePropertyChanged("CardData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.CardSecurityData1 CardSecurityData {
-            get {
-                return this.CardSecurityDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardSecurityDataField, value) != true)) {
-                    this.CardSecurityDataField = value;
-                    this.RaisePropertyChanged("CardSecurityData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CardholderId {
-            get {
-                return this.CardholderIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardholderIdField, value) != true)) {
-                    this.CardholderIdField = value;
-                    this.RaisePropertyChanged("CardholderId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.ConsumerIdentification[] ConsumerIdentifications {
-            get {
-                return this.ConsumerIdentificationsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ConsumerIdentificationsField, value) != true)) {
-                    this.ConsumerIdentificationsField = value;
-                    this.RaisePropertyChanged("ConsumerIdentifications");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueBalanceTransferTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class StoredValueBalanceTransferTenderData : NabVelocity.Txn.StoredValueTenderData {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CardData1 SourceCardDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.ConsumerIdentification ConsumerIdentificationField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.CardData1 SourceCardData {
-            get {
-                return this.SourceCardDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SourceCardDataField, value) != true)) {
-                    this.SourceCardDataField = value;
-                    this.RaisePropertyChanged("SourceCardData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public NabVelocity.Txn.ConsumerIdentification ConsumerIdentification {
-            get {
-                return this.ConsumerIdentificationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ConsumerIdentificationField, value) != true)) {
-                    this.ConsumerIdentificationField = value;
-                    this.RaisePropertyChanged("ConsumerIdentification");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueActivateTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class StoredValueActivateTenderData : NabVelocity.Txn.StoredValueTenderData {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.VirtualCardData VirtualCardDataField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.VirtualCardData VirtualCardData {
-            get {
-                return this.VirtualCardDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.VirtualCardDataField, value) != true)) {
-                    this.VirtualCardDataField = value;
-                    this.RaisePropertyChanged("VirtualCardData");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingTenderData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    [System.SerializableAttribute()]
-    public partial class ElectronicCheckingTenderData : NabVelocity.Txn.TransactionTenderData {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CheckData CheckDataField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.CheckData CheckData {
-            get {
-                return this.CheckDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CheckDataField, value) != true)) {
-                    this.CheckDataField = value;
-                    this.RaisePropertyChanged("CheckData");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CardData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    [System.SerializableAttribute()]
-    public partial class CardData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.TypeCardType CardTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CardholderNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PANField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ExpireField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Track1DataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Track2DataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.TypeCardType CardType {
-            get {
-                return this.CardTypeField;
-            }
-            set {
-                if ((this.CardTypeField.Equals(value) != true)) {
-                    this.CardTypeField = value;
-                    this.RaisePropertyChanged("CardType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CardholderName {
-            get {
-                return this.CardholderNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardholderNameField, value) != true)) {
-                    this.CardholderNameField = value;
-                    this.RaisePropertyChanged("CardholderName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PAN {
-            get {
-                return this.PANField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PANField, value) != true)) {
-                    this.PANField = value;
-                    this.RaisePropertyChanged("PAN");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string Expire {
-            get {
-                return this.ExpireField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ExpireField, value) != true)) {
-                    this.ExpireField = value;
-                    this.RaisePropertyChanged("Expire");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public string Track1Data {
-            get {
-                return this.Track1DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Track1DataField, value) != true)) {
-                    this.Track1DataField = value;
-                    this.RaisePropertyChanged("Track1Data");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-        public string Track2Data {
-            get {
-                return this.Track2DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Track2DataField, value) != true)) {
-                    this.Track2DataField = value;
-                    this.RaisePropertyChanged("Track2Data");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CardSecurityData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    [System.SerializableAttribute()]
-    public partial class CardSecurityData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.AVSData AVSDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CVDataProvided CVDataProvidedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CVDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string KeySerialNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PINField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IdentificationInformationField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.AVSData AVSData {
-            get {
-                return this.AVSDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AVSDataField, value) != true)) {
-                    this.AVSDataField = value;
-                    this.RaisePropertyChanged("AVSData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.CVDataProvided CVDataProvided {
-            get {
-                return this.CVDataProvidedField;
-            }
-            set {
-                if ((this.CVDataProvidedField.Equals(value) != true)) {
-                    this.CVDataProvidedField = value;
-                    this.RaisePropertyChanged("CVDataProvided");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string CVData {
-            get {
-                return this.CVDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CVDataField, value) != true)) {
-                    this.CVDataField = value;
-                    this.RaisePropertyChanged("CVData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string KeySerialNumber {
-            get {
-                return this.KeySerialNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.KeySerialNumberField, value) != true)) {
-                    this.KeySerialNumberField = value;
-                    this.RaisePropertyChanged("KeySerialNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public string PIN {
-            get {
-                return this.PINField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PINField, value) != true)) {
-                    this.PINField = value;
-                    this.RaisePropertyChanged("PIN");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-        public string IdentificationInformation {
-            get {
-                return this.IdentificationInformationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.IdentificationInformationField, value) != true)) {
-                    this.IdentificationInformationField = value;
-                    this.RaisePropertyChanged("IdentificationInformation");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EcommerceSecurityData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    [System.SerializableAttribute()]
-    public partial class EcommerceSecurityData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TokenDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.TokenIndicator TokenIndicatorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string XIDField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TokenData {
-            get {
-                return this.TokenDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TokenDataField, value) != true)) {
-                    this.TokenDataField = value;
-                    this.RaisePropertyChanged("TokenData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.TokenIndicator TokenIndicator {
-            get {
-                return this.TokenIndicatorField;
-            }
-            set {
-                if ((this.TokenIndicatorField.Equals(value) != true)) {
-                    this.TokenIndicatorField = value;
-                    this.RaisePropertyChanged("TokenIndicator");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string XID {
-            get {
-                return this.XIDField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.XIDField, value) != true)) {
-                    this.XIDField = value;
-                    this.RaisePropertyChanged("XID");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CardData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class CardData1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TrackDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AccountNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ExpireField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Track1DataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string Track2DataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TrackData {
-            get {
-                return this.TrackDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TrackDataField, value) != true)) {
-                    this.TrackDataField = value;
-                    this.RaisePropertyChanged("TrackData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public string AccountNumber {
-            get {
-                return this.AccountNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
-                    this.AccountNumberField = value;
-                    this.RaisePropertyChanged("AccountNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string Expire {
-            get {
-                return this.ExpireField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ExpireField, value) != true)) {
-                    this.ExpireField = value;
-                    this.RaisePropertyChanged("Expire");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string Track1Data {
-            get {
-                return this.Track1DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Track1DataField, value) != true)) {
-                    this.Track1DataField = value;
-                    this.RaisePropertyChanged("Track1Data");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public string Track2Data {
-            get {
-                return this.Track2DataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.Track2DataField, value) != true)) {
-                    this.Track2DataField = value;
-                    this.RaisePropertyChanged("Track2Data");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CardSecurityData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class CardSecurityData1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CVDataProvided CVDataProvidedField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CVDataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.CVDataProvided CVDataProvided {
-            get {
-                return this.CVDataProvidedField;
-            }
-            set {
-                if ((this.CVDataProvidedField.Equals(value) != true)) {
-                    this.CVDataProvidedField = value;
-                    this.RaisePropertyChanged("CVDataProvided");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public string CVData {
-            get {
-                return this.CVDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CVDataField, value) != true)) {
-                    this.CVDataField = value;
-                    this.RaisePropertyChanged("CVData");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ConsumerIdentification", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class ConsumerIdentification : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.IdType IdTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IdDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.IdEntryMode IdEntryModeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.IdType IdType {
-            get {
-                return this.IdTypeField;
-            }
-            set {
-                if ((this.IdTypeField.Equals(value) != true)) {
-                    this.IdTypeField = value;
-                    this.RaisePropertyChanged("IdType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public string IdData {
-            get {
-                return this.IdDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.IdDataField, value) != true)) {
-                    this.IdDataField = value;
-                    this.RaisePropertyChanged("IdData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public NabVelocity.Txn.IdEntryMode IdEntryMode {
-            get {
-                return this.IdEntryModeField;
-            }
-            set {
-                if ((this.IdEntryModeField.Equals(value) != true)) {
-                    this.IdEntryModeField = value;
-                    this.RaisePropertyChanged("IdEntryMode");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CVDataProvided", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
-    public enum CVDataProvided : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        DeliberatelyBypass = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Provided = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ValueIllegible = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CardholderStatesNotAvailable = 4,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="IdType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    public enum IdType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PIN = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PINEncrypted = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PINEncryptedKeySerialNumber = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PhoneNumber = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        DriversLicenseNumber = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        EmailAddress = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BiometricAlgorithm = 7,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BiometricMap = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        X509Certificate = 9,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Passphrase = 10,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Hash = 11,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PublicKey = 12,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RetinaAlg = 13,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RetinaMap = 14,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BarCode = 15,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="IdEntryMode", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    public enum IdEntryMode : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        TrackData = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Keyed = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Internet = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BlueTooth = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RFID = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Wireless = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Biometric = 7,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NFC = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Transponder = 9,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ContactlessDevice = 10,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ChipCapableDevice = 11,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ProviderIssued = 12,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BarCodeReader = 13,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="VirtualCardData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class VirtualCardData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int AccountNumberLengthField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string BINField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AccountNumberLength {
-            get {
-                return this.AccountNumberLengthField;
-            }
-            set {
-                if ((this.AccountNumberLengthField.Equals(value) != true)) {
-                    this.AccountNumberLengthField = value;
-                    this.RaisePropertyChanged("AccountNumberLength");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string BIN {
-            get {
-                return this.BINField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BINField, value) != true)) {
-                    this.BINField = value;
-                    this.RaisePropertyChanged("BIN");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CheckData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    [System.SerializableAttribute()]
-    public partial class CheckData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AccountNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CheckCountryCode CheckCountryCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CheckNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.OwnerType OwnerTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string RoutingNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.UseType UseTypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string AccountNumber {
-            get {
-                return this.AccountNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
-                    this.AccountNumberField = value;
-                    this.RaisePropertyChanged("AccountNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.CheckCountryCode CheckCountryCode {
-            get {
-                return this.CheckCountryCodeField;
-            }
-            set {
-                if ((this.CheckCountryCodeField.Equals(value) != true)) {
-                    this.CheckCountryCodeField = value;
-                    this.RaisePropertyChanged("CheckCountryCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CheckNumber {
-            get {
-                return this.CheckNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CheckNumberField, value) != true)) {
-                    this.CheckNumberField = value;
-                    this.RaisePropertyChanged("CheckNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.OwnerType OwnerType {
-            get {
-                return this.OwnerTypeField;
-            }
-            set {
-                if ((this.OwnerTypeField.Equals(value) != true)) {
-                    this.OwnerTypeField = value;
-                    this.RaisePropertyChanged("OwnerType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string RoutingNumber {
-            get {
-                return this.RoutingNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.RoutingNumberField, value) != true)) {
-                    this.RoutingNumberField = value;
-                    this.RaisePropertyChanged("RoutingNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.UseType UseType {
-            get {
-                return this.UseTypeField;
-            }
-            set {
-                if ((this.UseTypeField.Equals(value) != true)) {
-                    this.UseTypeField = value;
-                    this.RaisePropertyChanged("UseType");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CheckCountryCode", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    public enum CheckCountryCode : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        US = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MX = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CA = 3,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OwnerType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    public enum OwnerType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Personal = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Business = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Unknown = 3,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="UseType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    public enum UseType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Savings = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Checking = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Travelers = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Payroll = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Cash = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        TwoParty = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Government = 7,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TypeCardType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    public enum TypeCardType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PrivateLabel = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Visa = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MasterCard = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AmericanExpress = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        DinersCartBlanche = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Discover = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        JCB = 7,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CitibankFinancial = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RevolutionCard = 9,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        UnbrandedATM = 10,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Dankort = 11,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Solo = 12,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Maestro = 13,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        LaserCard = 14,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Electron = 15,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Finax = 16,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Kopkort = 17,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CarteAurore = 18,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CartesBancaires = 19,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        DinersClub = 20,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AVSData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    [System.SerializableAttribute()]
-    public partial class AVSData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CardholderNameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StreetField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CityField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string StateProvinceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PostalCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.TypeISOCountryCodeA3 CountryField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PhoneField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmailField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CardholderName {
-            get {
-                return this.CardholderNameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardholderNameField, value) != true)) {
-                    this.CardholderNameField = value;
-                    this.RaisePropertyChanged("CardholderName");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Street {
-            get {
-                return this.StreetField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StreetField, value) != true)) {
-                    this.StreetField = value;
-                    this.RaisePropertyChanged("Street");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string City {
-            get {
-                return this.CityField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CityField, value) != true)) {
-                    this.CityField = value;
-                    this.RaisePropertyChanged("City");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string StateProvince {
-            get {
-                return this.StateProvinceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.StateProvinceField, value) != true)) {
-                    this.StateProvinceField = value;
-                    this.RaisePropertyChanged("StateProvince");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public string PostalCode {
-            get {
-                return this.PostalCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PostalCodeField, value) != true)) {
-                    this.PostalCodeField = value;
-                    this.RaisePropertyChanged("PostalCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-        public NabVelocity.Txn.TypeISOCountryCodeA3 Country {
-            get {
-                return this.CountryField;
-            }
-            set {
-                if ((this.CountryField.Equals(value) != true)) {
-                    this.CountryField = value;
-                    this.RaisePropertyChanged("Country");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=6)]
-        public string Phone {
-            get {
-                return this.PhoneField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
-                    this.PhoneField = value;
-                    this.RaisePropertyChanged("Phone");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=7)]
-        public string Email {
-            get {
-                return this.EmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
-                    this.EmailField = value;
-                    this.RaisePropertyChanged("Email");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TokenIndicator", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
-    public enum TokenIndicator : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        VPAS = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        UCAFWithData = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        UCAFWithoutData = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AttemptedCardUnsupported = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        AttemptedServiceUnavailable = 5,
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TransactionData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
-    [System.SerializableAttribute()]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueTransactionData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingTransactionData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionData))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionDataPro))]
-    public partial class TransactionData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal AmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.TypeISOCurrencyCodeA3 CurrencyCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TransactionDateTimeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CampaignIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ReferenceField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.TypeISOCurrencyCodeA3 CurrencyCode {
-            get {
-                return this.CurrencyCodeField;
-            }
-            set {
-                if ((this.CurrencyCodeField.Equals(value) != true)) {
-                    this.CurrencyCodeField = value;
-                    this.RaisePropertyChanged("CurrencyCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TransactionDateTime {
-            get {
-                return this.TransactionDateTimeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TransactionDateTimeField, value) != true)) {
-                    this.TransactionDateTimeField = value;
-                    this.RaisePropertyChanged("TransactionDateTime");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public string CampaignId {
-            get {
-                return this.CampaignIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CampaignIdField, value) != true)) {
-                    this.CampaignIdField = value;
-                    this.RaisePropertyChanged("CampaignId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public string Reference {
-            get {
-                return this.ReferenceField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ReferenceField, value) != true)) {
-                    this.ReferenceField = value;
-                    this.RaisePropertyChanged("Reference");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueTransactionData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class StoredValueTransactionData : NabVelocity.Txn.TransactionData {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string EmployeeIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.IndustryType IndustryTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal TipAmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.TypeISOCurrencyCodeA3 TenderCurrencyCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CardRestrictionValueField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.EntryMode EntryModeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool UnloadField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CardStatus CardStatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.OperationType OperationTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string OrderNumberField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string EmployeeId {
-            get {
-                return this.EmployeeIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.EmployeeIdField, value) != true)) {
-                    this.EmployeeIdField = value;
-                    this.RaisePropertyChanged("EmployeeId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.IndustryType IndustryType {
-            get {
-                return this.IndustryTypeField;
-            }
-            set {
-                if ((this.IndustryTypeField.Equals(value) != true)) {
-                    this.IndustryTypeField = value;
-                    this.RaisePropertyChanged("IndustryType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal TipAmount {
-            get {
-                return this.TipAmountField;
-            }
-            set {
-                if ((this.TipAmountField.Equals(value) != true)) {
-                    this.TipAmountField = value;
-                    this.RaisePropertyChanged("TipAmount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public NabVelocity.Txn.TypeISOCurrencyCodeA3 TenderCurrencyCode {
-            get {
-                return this.TenderCurrencyCodeField;
-            }
-            set {
-                if ((this.TenderCurrencyCodeField.Equals(value) != true)) {
-                    this.TenderCurrencyCodeField = value;
-                    this.RaisePropertyChanged("TenderCurrencyCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public string CardRestrictionValue {
-            get {
-                return this.CardRestrictionValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardRestrictionValueField, value) != true)) {
-                    this.CardRestrictionValueField = value;
-                    this.RaisePropertyChanged("CardRestrictionValue");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-        public NabVelocity.Txn.EntryMode EntryMode {
-            get {
-                return this.EntryModeField;
-            }
-            set {
-                if ((this.EntryModeField.Equals(value) != true)) {
-                    this.EntryModeField = value;
-                    this.RaisePropertyChanged("EntryMode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=6)]
-        public bool Unload {
-            get {
-                return this.UnloadField;
-            }
-            set {
-                if ((this.UnloadField.Equals(value) != true)) {
-                    this.UnloadField = value;
-                    this.RaisePropertyChanged("Unload");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=7)]
-        public NabVelocity.Txn.CardStatus CardStatus {
-            get {
-                return this.CardStatusField;
-            }
-            set {
-                if ((this.CardStatusField.Equals(value) != true)) {
-                    this.CardStatusField = value;
-                    this.RaisePropertyChanged("CardStatus");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=8)]
-        public NabVelocity.Txn.OperationType OperationType {
-            get {
-                return this.OperationTypeField;
-            }
-            set {
-                if ((this.OperationTypeField.Equals(value) != true)) {
-                    this.OperationTypeField = value;
-                    this.RaisePropertyChanged("OperationType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=9)]
-        public string OrderNumber {
-            get {
-                return this.OrderNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OrderNumberField, value) != true)) {
-                    this.OrderNumberField = value;
-                    this.RaisePropertyChanged("OrderNumber");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingTransactionData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    [System.SerializableAttribute()]
-    public partial class ElectronicCheckingTransactionData : NabVelocity.Txn.TransactionData {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime EffectiveDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsRecurringField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PayeeEmailField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PayeeIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SECCode SECCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.ServiceType ServiceTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.TransactionType TransactionTypeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime EffectiveDate {
-            get {
-                return this.EffectiveDateField;
-            }
-            set {
-                if ((this.EffectiveDateField.Equals(value) != true)) {
-                    this.EffectiveDateField = value;
-                    this.RaisePropertyChanged("EffectiveDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsRecurring {
-            get {
-                return this.IsRecurringField;
-            }
-            set {
-                if ((this.IsRecurringField.Equals(value) != true)) {
-                    this.IsRecurringField = value;
-                    this.RaisePropertyChanged("IsRecurring");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PayeeEmail {
-            get {
-                return this.PayeeEmailField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PayeeEmailField, value) != true)) {
-                    this.PayeeEmailField = value;
-                    this.RaisePropertyChanged("PayeeEmail");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PayeeId {
-            get {
-                return this.PayeeIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PayeeIdField, value) != true)) {
-                    this.PayeeIdField = value;
-                    this.RaisePropertyChanged("PayeeId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SECCode SECCode {
-            get {
-                return this.SECCodeField;
-            }
-            set {
-                if ((this.SECCodeField.Equals(value) != true)) {
-                    this.SECCodeField = value;
-                    this.RaisePropertyChanged("SECCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.ServiceType ServiceType {
-            get {
-                return this.ServiceTypeField;
-            }
-            set {
-                if ((this.ServiceTypeField.Equals(value) != true)) {
-                    this.ServiceTypeField = value;
-                    this.RaisePropertyChanged("ServiceType");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.TransactionType TransactionType {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=22)]
+        public NabVelocity.Txn.TypeEBTType EBTType {
             get {
-                return this.TransactionTypeField;
+                return this.EBTTypeField;
             }
             set {
-                if ((this.TransactionTypeField.Equals(value) != true)) {
-                    this.TransactionTypeField = value;
-                    this.RaisePropertyChanged("TransactionType");
+                if ((this.EBTTypeField.Equals(value) != true)) {
+                    this.EBTTypeField = value;
+                    this.RaisePropertyChanged("EBTType");
                 }
             }
         }
@@ -5374,9 +5611,266 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AlternativeMerchantData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AlternativeMerchantData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
     [System.SerializableAttribute()]
     public partial class AlternativeMerchantData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SECCode", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum SECCode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BOC = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CCD = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PPD = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TEL = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        WEB = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        POP = 6,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum ServiceType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ACH = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ECK = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RDC = 3,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TransactionType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum TransactionType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Credit = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Debit = 1,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TxnCodeType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum TxnCodeType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Conversion = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Override = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Verification = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RecurringBilling = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Payroll = 5,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="IndustryType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    public enum IndustryType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MOTO = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ecommerce = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Restaurant = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Retail = 4,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EntryMode", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    public enum EntryMode : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Keyed = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        KeyedBadMagRead = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TrackDataFromMSR = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ChipReliable = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ChipUnreliable = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ContactlessMChipOrSmartCard = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ContactlessStripe = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TerminalNotUsed = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BarCode = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OCRReader = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        VSCCapable = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ChipTrackDataFromRFID = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MSRTrackDataFromRFID = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NFCCapable = 14,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Track2DataFromMSR = 15,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ContactlessPayPal = 16,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CardStatus", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    public enum CardStatus : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Lost = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Stolen = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Suspended = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RemoveStatus = 4,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="OperationType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    public enum OperationType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Activate = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BalanceTransfer = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Deactivate = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Reload = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UpdateStatus = 5,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AlternativeMerchantData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    [System.SerializableAttribute()]
+    public partial class AlternativeMerchantData1 : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -5586,6 +6080,9 @@ namespace NabVelocity.Txn {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         CheckingAccount = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        EBTAccount = 3,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -5633,59 +6130,6 @@ namespace NabVelocity.Txn {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="EntryMode", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
-    public enum EntryMode : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Keyed = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        KeyedBadMagRead = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        TrackDataFromMSR = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ChipReliable = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ChipUnreliable = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ContactlessMChipOrSmartCard = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ContactlessStripe = 7,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        TerminalNotUsed = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BarCode = 9,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        OCRReader = 10,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        VSCCapable = 11,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ChipTrackDataFromRFID = 12,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MSRTrackDataFromRFID = 13,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NFCCapable = 14,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Track2DataFromMSR = 15,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="GoodsType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
     public enum GoodsType : int {
         
@@ -5697,26 +6141,6 @@ namespace NabVelocity.Txn {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         PhysicalGoods = 2,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="IndustryType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
-    public enum IndustryType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        MOTO = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Ecommerce = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Restaurant = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Retail = 4,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -5734,97 +6158,17 @@ namespace NabVelocity.Txn {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CardStatus", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    public enum CardStatus : int {
+    [System.Runtime.Serialization.DataContractAttribute(Name="TypeEBTType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    public enum TypeEBTType : int {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
+        NotEBT = 0,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Lost = 1,
+        Cash = 1,
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
-        Stolen = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Suspended = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RemoveStatus = 4,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="OperationType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    public enum OperationType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Activate = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BalanceTransfer = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Deactivate = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Reload = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        UpdateStatus = 5,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SECCode", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    public enum SECCode : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        BOC = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        CCD = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        PPD = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        TEL = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        WEB = 5,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ServiceType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    public enum ServiceType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ACH = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ECK = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        RDC = 3,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TransactionType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    public enum TransactionType : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Credit = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Debit = 1,
+        FNS = 2,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -7951,6 +8295,276 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BankcardApplicationConfigurationData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    [System.SerializableAttribute()]
+    public partial class BankcardApplicationConfigurationData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ApplicationAttendedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ApplicationLocation ApplicationLocationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.HardwareType HardwareTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.PINCapability PINCapabilityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ReadCapability ReadCapabilityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ApplicationAttended {
+            get {
+                return this.ApplicationAttendedField;
+            }
+            set {
+                if ((this.ApplicationAttendedField.Equals(value) != true)) {
+                    this.ApplicationAttendedField = value;
+                    this.RaisePropertyChanged("ApplicationAttended");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ApplicationLocation ApplicationLocation {
+            get {
+                return this.ApplicationLocationField;
+            }
+            set {
+                if ((this.ApplicationLocationField.Equals(value) != true)) {
+                    this.ApplicationLocationField = value;
+                    this.RaisePropertyChanged("ApplicationLocation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.HardwareType HardwareType {
+            get {
+                return this.HardwareTypeField;
+            }
+            set {
+                if ((this.HardwareTypeField.Equals(value) != true)) {
+                    this.HardwareTypeField = value;
+                    this.RaisePropertyChanged("HardwareType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.PINCapability PINCapability {
+            get {
+                return this.PINCapabilityField;
+            }
+            set {
+                if ((this.PINCapabilityField.Equals(value) != true)) {
+                    this.PINCapabilityField = value;
+                    this.RaisePropertyChanged("PINCapability");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ReadCapability ReadCapability {
+            get {
+                return this.ReadCapabilityField;
+            }
+            set {
+                if ((this.ReadCapabilityField.Equals(value) != true)) {
+                    this.ReadCapabilityField = value;
+                    this.RaisePropertyChanged("ReadCapability");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ApplicationLocation", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    public enum ApplicationLocation : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OnPremises = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OffPremises = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        HomeInternet = 4,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="HardwareType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    public enum HardwareType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PC = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        DialTerminal = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ElectronicCashRegister = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InStoreController = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Mainframe = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ThirdPartyDeveloper = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        POSPort = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        POSPartner = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        TicketMachine = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ATM = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ScripDevice = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Telephone = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        InitiatedCAT = 14,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        VirtualTerminal = 15,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MobileBanking = 16,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PINCapability", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    public enum PINCapability : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PINSupported = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PINNotSupported = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PINVerifiedByDevice = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PINPadInoperative = 5,
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReadCapability", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    public enum ReadCapability : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        HasMSR = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoMSR = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        KeyOnly = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Chip = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ContactlessChip = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ContactlessMSR = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ECR = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        VSCCapable = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        RFIDCapable = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        EmvICC = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MSREMVICC = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Unknown = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OCRReader = 13,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        BarCodeReader = 14,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSpecified = 15,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ARUIVR = 16,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoTerminal = 17,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NFCCapable = 18,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BankcardInterchangeData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard/Pro")]
     [System.SerializableAttribute()]
     public partial class BankcardInterchangeData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -8179,14 +8793,14 @@ namespace NabVelocity.Txn {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Response", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingTransactionResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingCaptureResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueTransactionResponse))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueCaptureResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionResponsePro))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardCaptureResponse))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardCaptureResponsePro))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueTransactionResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueCaptureResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingCaptureResponse))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingTransactionResponse))]
     public partial class Response : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -8483,6 +9097,482 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingTransactionResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class ElectronicCheckingTransactionResponse : NabVelocity.Txn.Response {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool ACHCapableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal AmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ApprovalCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ModifiedAccountNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ModifiedRoutingNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PaymentAccountDataTokenField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.ReturnInformation ReturnInformationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RspTxnCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime SubmitDateField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool ACHCapable {
+            get {
+                return this.ACHCapableField;
+            }
+            set {
+                if ((this.ACHCapableField.Equals(value) != true)) {
+                    this.ACHCapableField = value;
+                    this.RaisePropertyChanged("ACHCapable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ApprovalCode {
+            get {
+                return this.ApprovalCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ApprovalCodeField, value) != true)) {
+                    this.ApprovalCodeField = value;
+                    this.RaisePropertyChanged("ApprovalCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedAccountNumber {
+            get {
+                return this.ModifiedAccountNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModifiedAccountNumberField, value) != true)) {
+                    this.ModifiedAccountNumberField = value;
+                    this.RaisePropertyChanged("ModifiedAccountNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ModifiedRoutingNumber {
+            get {
+                return this.ModifiedRoutingNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ModifiedRoutingNumberField, value) != true)) {
+                    this.ModifiedRoutingNumberField = value;
+                    this.RaisePropertyChanged("ModifiedRoutingNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PaymentAccountDataToken {
+            get {
+                return this.PaymentAccountDataTokenField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PaymentAccountDataTokenField, value) != true)) {
+                    this.PaymentAccountDataTokenField = value;
+                    this.RaisePropertyChanged("PaymentAccountDataToken");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.ReturnInformation ReturnInformation {
+            get {
+                return this.ReturnInformationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReturnInformationField, value) != true)) {
+                    this.ReturnInformationField = value;
+                    this.RaisePropertyChanged("ReturnInformation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string RspTxnCode {
+            get {
+                return this.RspTxnCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RspTxnCodeField, value) != true)) {
+                    this.RspTxnCodeField = value;
+                    this.RaisePropertyChanged("RspTxnCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime SubmitDate {
+            get {
+                return this.SubmitDateField;
+            }
+            set {
+                if ((this.SubmitDateField.Equals(value) != true)) {
+                    this.SubmitDateField = value;
+                    this.RaisePropertyChanged("SubmitDate");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingCaptureResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class ElectronicCheckingCaptureResponse : NabVelocity.Txn.Response {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryData SummaryDataField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryData SummaryData {
+            get {
+                return this.SummaryDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SummaryDataField, value) != true)) {
+                    this.SummaryDataField = value;
+                    this.RaisePropertyChanged("SummaryData");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueTransactionResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class StoredValueTransactionResponse : NabVelocity.Txn.Response {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal AmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal FeeAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ApprovalCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CVResult CVResultField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal CashBackAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal LockAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal NewBalanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal PreviousBalanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CardStatus CardStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AccountNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CVDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardRestrictionValueField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PaymentAccountDataTokenField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MaskedPANField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OrderIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ExpireField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal FeeAmount {
+            get {
+                return this.FeeAmountField;
+            }
+            set {
+                if ((this.FeeAmountField.Equals(value) != true)) {
+                    this.FeeAmountField = value;
+                    this.RaisePropertyChanged("FeeAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public string ApprovalCode {
+            get {
+                return this.ApprovalCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ApprovalCodeField, value) != true)) {
+                    this.ApprovalCodeField = value;
+                    this.RaisePropertyChanged("ApprovalCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
+        public NabVelocity.Txn.CVResult CVResult {
+            get {
+                return this.CVResultField;
+            }
+            set {
+                if ((this.CVResultField.Equals(value) != true)) {
+                    this.CVResultField = value;
+                    this.RaisePropertyChanged("CVResult");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
+        public decimal CashBackAmount {
+            get {
+                return this.CashBackAmountField;
+            }
+            set {
+                if ((this.CashBackAmountField.Equals(value) != true)) {
+                    this.CashBackAmountField = value;
+                    this.RaisePropertyChanged("CashBackAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
+        public decimal LockAmount {
+            get {
+                return this.LockAmountField;
+            }
+            set {
+                if ((this.LockAmountField.Equals(value) != true)) {
+                    this.LockAmountField = value;
+                    this.RaisePropertyChanged("LockAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=6)]
+        public decimal NewBalance {
+            get {
+                return this.NewBalanceField;
+            }
+            set {
+                if ((this.NewBalanceField.Equals(value) != true)) {
+                    this.NewBalanceField = value;
+                    this.RaisePropertyChanged("NewBalance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=7)]
+        public decimal PreviousBalance {
+            get {
+                return this.PreviousBalanceField;
+            }
+            set {
+                if ((this.PreviousBalanceField.Equals(value) != true)) {
+                    this.PreviousBalanceField = value;
+                    this.RaisePropertyChanged("PreviousBalance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=8)]
+        public NabVelocity.Txn.CardStatus CardStatus {
+            get {
+                return this.CardStatusField;
+            }
+            set {
+                if ((this.CardStatusField.Equals(value) != true)) {
+                    this.CardStatusField = value;
+                    this.RaisePropertyChanged("CardStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=9)]
+        public string AccountNumber {
+            get {
+                return this.AccountNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
+                    this.AccountNumberField = value;
+                    this.RaisePropertyChanged("AccountNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=10)]
+        public string CVData {
+            get {
+                return this.CVDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CVDataField, value) != true)) {
+                    this.CVDataField = value;
+                    this.RaisePropertyChanged("CVData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=11)]
+        public string CardRestrictionValue {
+            get {
+                return this.CardRestrictionValueField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardRestrictionValueField, value) != true)) {
+                    this.CardRestrictionValueField = value;
+                    this.RaisePropertyChanged("CardRestrictionValue");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=12)]
+        public string PaymentAccountDataToken {
+            get {
+                return this.PaymentAccountDataTokenField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PaymentAccountDataTokenField, value) != true)) {
+                    this.PaymentAccountDataTokenField = value;
+                    this.RaisePropertyChanged("PaymentAccountDataToken");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=13)]
+        public string MaskedPAN {
+            get {
+                return this.MaskedPANField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MaskedPANField, value) != true)) {
+                    this.MaskedPANField = value;
+                    this.RaisePropertyChanged("MaskedPAN");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=14)]
+        public string OrderId {
+            get {
+                return this.OrderIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrderIdField, value) != true)) {
+                    this.OrderIdField = value;
+                    this.RaisePropertyChanged("OrderId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=15)]
+        public string Expire {
+            get {
+                return this.ExpireField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ExpireField, value) != true)) {
+                    this.ExpireField = value;
+                    this.RaisePropertyChanged("Expire");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueCaptureResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class StoredValueCaptureResponse : NabVelocity.Txn.Response {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BatchIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryData SummaryDataField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string BatchId {
+            get {
+                return this.BatchIdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BatchIdField, value) != true)) {
+                    this.BatchIdField = value;
+                    this.RaisePropertyChanged("BatchId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryData SummaryData {
+            get {
+                return this.SummaryDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SummaryDataField, value) != true)) {
+                    this.SummaryDataField = value;
+                    this.RaisePropertyChanged("SummaryData");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BankcardTransactionResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardTransactionResponsePro))]
@@ -8541,6 +9631,15 @@ namespace NabVelocity.Txn {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private NabVelocity.Txn.PrepaidCard PrepaidCardField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> EBTCashBalanceAvailableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Nullable<decimal> EBTFnsBalanceAvailableField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EMVDataField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal Amount {
@@ -8775,6 +9874,45 @@ namespace NabVelocity.Txn {
                 }
             }
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=18)]
+        public System.Nullable<decimal> EBTCashBalanceAvailable {
+            get {
+                return this.EBTCashBalanceAvailableField;
+            }
+            set {
+                if ((this.EBTCashBalanceAvailableField.Equals(value) != true)) {
+                    this.EBTCashBalanceAvailableField = value;
+                    this.RaisePropertyChanged("EBTCashBalanceAvailable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=19)]
+        public System.Nullable<decimal> EBTFnsBalanceAvailable {
+            get {
+                return this.EBTFnsBalanceAvailableField;
+            }
+            set {
+                if ((this.EBTFnsBalanceAvailableField.Equals(value) != true)) {
+                    this.EBTFnsBalanceAvailableField = value;
+                    this.RaisePropertyChanged("EBTFnsBalanceAvailable");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=20)]
+        public string EMVData {
+            get {
+                return this.EMVDataField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EMVDataField, value) != true)) {
+                    this.EMVDataField = value;
+                    this.RaisePropertyChanged("EMVData");
+                }
+            }
+        }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -8911,450 +10049,6 @@ namespace NabVelocity.Txn {
     public partial class BankcardCaptureResponsePro : NabVelocity.Txn.BankcardCaptureResponse {
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueTransactionResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class StoredValueTransactionResponse : NabVelocity.Txn.Response {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal AmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal FeeAmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ApprovalCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CVResult CVResultField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal CashBackAmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal LockAmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal NewBalanceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal PreviousBalanceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CardStatus CardStatusField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AccountNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CVDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CardRestrictionValueField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PaymentAccountDataTokenField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MaskedPANField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string OrderIdField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal FeeAmount {
-            get {
-                return this.FeeAmountField;
-            }
-            set {
-                if ((this.FeeAmountField.Equals(value) != true)) {
-                    this.FeeAmountField = value;
-                    this.RaisePropertyChanged("FeeAmount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
-        public string ApprovalCode {
-            get {
-                return this.ApprovalCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ApprovalCodeField, value) != true)) {
-                    this.ApprovalCodeField = value;
-                    this.RaisePropertyChanged("ApprovalCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=3)]
-        public NabVelocity.Txn.CVResult CVResult {
-            get {
-                return this.CVResultField;
-            }
-            set {
-                if ((this.CVResultField.Equals(value) != true)) {
-                    this.CVResultField = value;
-                    this.RaisePropertyChanged("CVResult");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
-        public decimal CashBackAmount {
-            get {
-                return this.CashBackAmountField;
-            }
-            set {
-                if ((this.CashBackAmountField.Equals(value) != true)) {
-                    this.CashBackAmountField = value;
-                    this.RaisePropertyChanged("CashBackAmount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=5)]
-        public decimal LockAmount {
-            get {
-                return this.LockAmountField;
-            }
-            set {
-                if ((this.LockAmountField.Equals(value) != true)) {
-                    this.LockAmountField = value;
-                    this.RaisePropertyChanged("LockAmount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=6)]
-        public decimal NewBalance {
-            get {
-                return this.NewBalanceField;
-            }
-            set {
-                if ((this.NewBalanceField.Equals(value) != true)) {
-                    this.NewBalanceField = value;
-                    this.RaisePropertyChanged("NewBalance");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=7)]
-        public decimal PreviousBalance {
-            get {
-                return this.PreviousBalanceField;
-            }
-            set {
-                if ((this.PreviousBalanceField.Equals(value) != true)) {
-                    this.PreviousBalanceField = value;
-                    this.RaisePropertyChanged("PreviousBalance");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=8)]
-        public NabVelocity.Txn.CardStatus CardStatus {
-            get {
-                return this.CardStatusField;
-            }
-            set {
-                if ((this.CardStatusField.Equals(value) != true)) {
-                    this.CardStatusField = value;
-                    this.RaisePropertyChanged("CardStatus");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=9)]
-        public string AccountNumber {
-            get {
-                return this.AccountNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AccountNumberField, value) != true)) {
-                    this.AccountNumberField = value;
-                    this.RaisePropertyChanged("AccountNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=10)]
-        public string CVData {
-            get {
-                return this.CVDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CVDataField, value) != true)) {
-                    this.CVDataField = value;
-                    this.RaisePropertyChanged("CVData");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=11)]
-        public string CardRestrictionValue {
-            get {
-                return this.CardRestrictionValueField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardRestrictionValueField, value) != true)) {
-                    this.CardRestrictionValueField = value;
-                    this.RaisePropertyChanged("CardRestrictionValue");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=12)]
-        public string PaymentAccountDataToken {
-            get {
-                return this.PaymentAccountDataTokenField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PaymentAccountDataTokenField, value) != true)) {
-                    this.PaymentAccountDataTokenField = value;
-                    this.RaisePropertyChanged("PaymentAccountDataToken");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=13)]
-        public string MaskedPAN {
-            get {
-                return this.MaskedPANField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MaskedPANField, value) != true)) {
-                    this.MaskedPANField = value;
-                    this.RaisePropertyChanged("MaskedPAN");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=14)]
-        public string OrderId {
-            get {
-                return this.OrderIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OrderIdField, value) != true)) {
-                    this.OrderIdField = value;
-                    this.RaisePropertyChanged("OrderId");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueCaptureResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class StoredValueCaptureResponse : NabVelocity.Txn.Response {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string BatchIdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryData SummaryDataField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string BatchId {
-            get {
-                return this.BatchIdField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.BatchIdField, value) != true)) {
-                    this.BatchIdField = value;
-                    this.RaisePropertyChanged("BatchId");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryData SummaryData {
-            get {
-                return this.SummaryDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SummaryDataField, value) != true)) {
-                    this.SummaryDataField = value;
-                    this.RaisePropertyChanged("SummaryData");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingCaptureResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    [System.SerializableAttribute()]
-    public partial class ElectronicCheckingCaptureResponse : NabVelocity.Txn.Response {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryData SummaryDataField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryData SummaryData {
-            get {
-                return this.SummaryDataField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SummaryDataField, value) != true)) {
-                    this.SummaryDataField = value;
-                    this.RaisePropertyChanged("SummaryData");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingTransactionResponse", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    [System.SerializableAttribute()]
-    public partial class ElectronicCheckingTransactionResponse : NabVelocity.Txn.Response {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool ACHCapableField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal AmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ApprovalCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ModifiedAccountNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ModifiedRoutingNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string PaymentAccountDataTokenField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.ReturnInformation ReturnInformationField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime SubmitDateField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool ACHCapable {
-            get {
-                return this.ACHCapableField;
-            }
-            set {
-                if ((this.ACHCapableField.Equals(value) != true)) {
-                    this.ACHCapableField = value;
-                    this.RaisePropertyChanged("ACHCapable");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ApprovalCode {
-            get {
-                return this.ApprovalCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ApprovalCodeField, value) != true)) {
-                    this.ApprovalCodeField = value;
-                    this.RaisePropertyChanged("ApprovalCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedAccountNumber {
-            get {
-                return this.ModifiedAccountNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModifiedAccountNumberField, value) != true)) {
-                    this.ModifiedAccountNumberField = value;
-                    this.RaisePropertyChanged("ModifiedAccountNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ModifiedRoutingNumber {
-            get {
-                return this.ModifiedRoutingNumberField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ModifiedRoutingNumberField, value) != true)) {
-                    this.ModifiedRoutingNumberField = value;
-                    this.RaisePropertyChanged("ModifiedRoutingNumber");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PaymentAccountDataToken {
-            get {
-                return this.PaymentAccountDataTokenField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.PaymentAccountDataTokenField, value) != true)) {
-                    this.PaymentAccountDataTokenField = value;
-                    this.RaisePropertyChanged("PaymentAccountDataToken");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.ReturnInformation ReturnInformation {
-            get {
-                return this.ReturnInformationField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ReturnInformationField, value) != true)) {
-                    this.ReturnInformationField = value;
-                    this.RaisePropertyChanged("ReturnInformation");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime SubmitDate {
-            get {
-                return this.SubmitDateField;
-            }
-            set {
-                if ((this.SubmitDateField.Equals(value) != true)) {
-                    this.SubmitDateField = value;
-                    this.RaisePropertyChanged("SubmitDate");
-                }
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Status", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
     public enum Status : int {
@@ -9476,6 +10170,320 @@ namespace NabVelocity.Txn {
         
         [System.Runtime.Serialization.EnumMemberAttribute()]
         FundsTransferred = 19,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ReturnInformation", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class ReturnInformation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReturnCodeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime ReturnDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ReturnReasonField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReturnCode {
+            get {
+                return this.ReturnCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReturnCodeField, value) != true)) {
+                    this.ReturnCodeField = value;
+                    this.RaisePropertyChanged("ReturnCode");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ReturnDate {
+            get {
+                return this.ReturnDateField;
+            }
+            set {
+                if ((this.ReturnDateField.Equals(value) != true)) {
+                    this.ReturnDateField = value;
+                    this.RaisePropertyChanged("ReturnDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ReturnReason {
+            get {
+                return this.ReturnReasonField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ReturnReasonField, value) != true)) {
+                    this.ReturnReasonField = value;
+                    this.RaisePropertyChanged("ReturnReason");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SummaryData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    [System.SerializableAttribute()]
+    public partial class SummaryData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryTotals CashBackTotalsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryTotals CreditReturnTotalsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryTotals CreditTotalsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryTotals DebitReturnTotalsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryTotals DebitTotalsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryTotals NetTotalsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.SummaryTotals VoidTotalsField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryTotals CashBackTotals {
+            get {
+                return this.CashBackTotalsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CashBackTotalsField, value) != true)) {
+                    this.CashBackTotalsField = value;
+                    this.RaisePropertyChanged("CashBackTotals");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryTotals CreditReturnTotals {
+            get {
+                return this.CreditReturnTotalsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CreditReturnTotalsField, value) != true)) {
+                    this.CreditReturnTotalsField = value;
+                    this.RaisePropertyChanged("CreditReturnTotals");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryTotals CreditTotals {
+            get {
+                return this.CreditTotalsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CreditTotalsField, value) != true)) {
+                    this.CreditTotalsField = value;
+                    this.RaisePropertyChanged("CreditTotals");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryTotals DebitReturnTotals {
+            get {
+                return this.DebitReturnTotalsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DebitReturnTotalsField, value) != true)) {
+                    this.DebitReturnTotalsField = value;
+                    this.RaisePropertyChanged("DebitReturnTotals");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryTotals DebitTotals {
+            get {
+                return this.DebitTotalsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DebitTotalsField, value) != true)) {
+                    this.DebitTotalsField = value;
+                    this.RaisePropertyChanged("DebitTotals");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryTotals NetTotals {
+            get {
+                return this.NetTotalsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NetTotalsField, value) != true)) {
+                    this.NetTotalsField = value;
+                    this.RaisePropertyChanged("NetTotals");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.SummaryTotals VoidTotals {
+            get {
+                return this.VoidTotalsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VoidTotalsField, value) != true)) {
+                    this.VoidTotalsField = value;
+                    this.RaisePropertyChanged("VoidTotals");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SummaryTotals", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    [System.SerializableAttribute()]
+    public partial class SummaryTotals : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal NetAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int CountField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal NetAmount {
+            get {
+                return this.NetAmountField;
+            }
+            set {
+                if ((this.NetAmountField.Equals(value) != true)) {
+                    this.NetAmountField = value;
+                    this.RaisePropertyChanged("NetAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int Count {
+            get {
+                return this.CountField;
+            }
+            set {
+                if ((this.CountField.Equals(value) != true)) {
+                    this.CountField = value;
+                    this.RaisePropertyChanged("Count");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CVResult", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
+    public enum CVResult : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Match = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoMatch = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotProcessed = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoCodePresent = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ShouldHaveBeenPresent = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        IssuerNotCertified = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Invalid = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoResponse = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotApplicable = 9,
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -9633,41 +10641,6 @@ namespace NabVelocity.Txn {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CVResult", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
-    public enum CVResult : int {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotSet = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Match = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NoMatch = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotProcessed = 3,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NoCodePresent = 4,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        ShouldHaveBeenPresent = 5,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        IssuerNotCertified = 6,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Invalid = 7,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NoResponse = 8,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        NotApplicable = 9,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -10181,290 +11154,11 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SummaryData", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
-    [System.SerializableAttribute()]
-    public partial class SummaryData : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryTotals CashBackTotalsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryTotals CreditReturnTotalsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryTotals CreditTotalsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryTotals DebitReturnTotalsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryTotals DebitTotalsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryTotals NetTotalsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.SummaryTotals VoidTotalsField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryTotals CashBackTotals {
-            get {
-                return this.CashBackTotalsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CashBackTotalsField, value) != true)) {
-                    this.CashBackTotalsField = value;
-                    this.RaisePropertyChanged("CashBackTotals");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryTotals CreditReturnTotals {
-            get {
-                return this.CreditReturnTotalsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CreditReturnTotalsField, value) != true)) {
-                    this.CreditReturnTotalsField = value;
-                    this.RaisePropertyChanged("CreditReturnTotals");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryTotals CreditTotals {
-            get {
-                return this.CreditTotalsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CreditTotalsField, value) != true)) {
-                    this.CreditTotalsField = value;
-                    this.RaisePropertyChanged("CreditTotals");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryTotals DebitReturnTotals {
-            get {
-                return this.DebitReturnTotalsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DebitReturnTotalsField, value) != true)) {
-                    this.DebitReturnTotalsField = value;
-                    this.RaisePropertyChanged("DebitReturnTotals");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryTotals DebitTotals {
-            get {
-                return this.DebitTotalsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DebitTotalsField, value) != true)) {
-                    this.DebitTotalsField = value;
-                    this.RaisePropertyChanged("DebitTotals");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryTotals NetTotals {
-            get {
-                return this.NetTotalsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.NetTotalsField, value) != true)) {
-                    this.NetTotalsField = value;
-                    this.RaisePropertyChanged("NetTotals");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.SummaryTotals VoidTotals {
-            get {
-                return this.VoidTotalsField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.VoidTotalsField, value) != true)) {
-                    this.VoidTotalsField = value;
-                    this.RaisePropertyChanged("VoidTotals");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="SummaryTotals", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
-    [System.SerializableAttribute()]
-    public partial class SummaryTotals : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal NetAmountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int CountField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal NetAmount {
-            get {
-                return this.NetAmountField;
-            }
-            set {
-                if ((this.NetAmountField.Equals(value) != true)) {
-                    this.NetAmountField = value;
-                    this.RaisePropertyChanged("NetAmount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
-        public int Count {
-            get {
-                return this.CountField;
-            }
-            set {
-                if ((this.CountField.Equals(value) != true)) {
-                    this.CountField = value;
-                    this.RaisePropertyChanged("Count");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ReturnInformation", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
-    [System.SerializableAttribute()]
-    public partial class ReturnInformation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ReturnCodeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime ReturnDateField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ReturnReasonField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ReturnCode {
-            get {
-                return this.ReturnCodeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ReturnCodeField, value) != true)) {
-                    this.ReturnCodeField = value;
-                    this.RaisePropertyChanged("ReturnCode");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime ReturnDate {
-            get {
-                return this.ReturnDateField;
-            }
-            set {
-                if ((this.ReturnDateField.Equals(value) != true)) {
-                    this.ReturnDateField = value;
-                    this.RaisePropertyChanged("ReturnDate");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ReturnReason {
-            get {
-                return this.ReturnReasonField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.ReturnReasonField, value) != true)) {
-                    this.ReturnReasonField = value;
-                    this.RaisePropertyChanged("ReturnReason");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BaseFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.InvalidTokenFault))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.AuthenticationFault))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault))]
     public partial class BaseFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -10556,6 +11250,13 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+    [System.SerializableAttribute()]
+    public partial class ExpiredTokenFault : NabVelocity.Txn.BaseFault {
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
     [System.SerializableAttribute()]
     public partial class InvalidTokenFault : NabVelocity.Txn.BaseFault {
@@ -10566,13 +11267,6 @@ namespace NabVelocity.Txn {
     [System.Runtime.Serialization.DataContractAttribute(Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
     [System.SerializableAttribute()]
     public partial class AuthenticationFault : NabVelocity.Txn.BaseFault {
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-    [System.SerializableAttribute()]
-    public partial class ExpiredTokenFault : NabVelocity.Txn.BaseFault {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -11048,9 +11742,9 @@ namespace NabVelocity.Txn {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Return", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueReturn))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardReturn))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardReturnPro))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueReturn))]
     public partial class Return : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -11126,6 +11820,29 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueReturn", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class StoredValueReturn : NabVelocity.Txn.Return {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal AmountField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BankcardReturn", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
     [System.SerializableAttribute()]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardReturnPro))]
@@ -11136,6 +11853,9 @@ namespace NabVelocity.Txn {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private NabVelocity.Txn.BankcardTenderData TenderDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal FeeAmountField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public decimal Amount {
@@ -11159,6 +11879,19 @@ namespace NabVelocity.Txn {
                 if ((object.ReferenceEquals(this.TenderDataField, value) != true)) {
                     this.TenderDataField = value;
                     this.RaisePropertyChanged("TenderData");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=2)]
+        public decimal FeeAmount {
+            get {
+                return this.FeeAmountField;
+            }
+            set {
+                if ((this.FeeAmountField.Equals(value) != true)) {
+                    this.FeeAmountField = value;
+                    this.RaisePropertyChanged("FeeAmount");
                 }
             }
         }
@@ -11189,31 +11922,9 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueReturn", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class StoredValueReturn : NabVelocity.Txn.Return {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal AmountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Undo", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.ElectronicCheckingUndo))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardUndo))]
     public partial class Undo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
@@ -11274,6 +11985,29 @@ namespace NabVelocity.Txn {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ElectronicCheckingUndo", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    [System.SerializableAttribute()]
+    public partial class ElectronicCheckingUndo : NabVelocity.Txn.Undo {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.UndoType UndoTypeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public NabVelocity.Txn.UndoType UndoType {
+            get {
+                return this.UndoTypeField;
+            }
+            set {
+                if ((this.UndoTypeField.Equals(value) != true)) {
+                    this.UndoTypeField = value;
+                    this.RaisePropertyChanged("UndoType");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BankcardUndo", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
     [System.SerializableAttribute()]
     public partial class BankcardUndo : NabVelocity.Txn.Undo {
@@ -11286,6 +12020,9 @@ namespace NabVelocity.Txn {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool ForceVoidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private NabVelocity.Txn.CreditUndoReason CreditReasonField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public NabVelocity.Txn.PINDebitUndoReason PINDebitReason {
@@ -11325,6 +12062,30 @@ namespace NabVelocity.Txn {
                 }
             }
         }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public NabVelocity.Txn.CreditUndoReason CreditReason {
+            get {
+                return this.CreditReasonField;
+            }
+            set {
+                if ((this.CreditReasonField.Equals(value) != true)) {
+                    this.CreditReasonField = value;
+                    this.RaisePropertyChanged("CreditReason");
+                }
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="UndoType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking")]
+    public enum UndoType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Void = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Reversal = 1,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
@@ -11371,13 +12132,57 @@ namespace NabVelocity.Txn {
         ResponseTimeout = 12,
     }
     
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CreditUndoReason", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
+    public enum CreditUndoReason : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotSet = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NotApplicable = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        NoResponse = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        LateResponse = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UnableToDeliverToPOS = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CustomerCancellation = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        SuspectMalfunction = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        PartiallyCompleted = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        OriginalAmountIncorrect = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ResponseIncomplete = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        CADFailure = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        UnableToDeliverResponse = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ResponseTimeout = 12,
+    }
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Capture", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueCapture))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardCapture))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.BankcardCapturePro))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(NabVelocity.Txn.StoredValueCapture))]
     public partial class Capture : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -11431,6 +12236,29 @@ namespace NabVelocity.Txn {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueCapture", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
+    [System.SerializableAttribute()]
+    public partial class StoredValueCapture : NabVelocity.Txn.Capture {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal AmountField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal Amount {
+            get {
+                return this.AmountField;
+            }
+            set {
+                if ((this.AmountField.Equals(value) != true)) {
+                    this.AmountField = value;
+                    this.RaisePropertyChanged("Amount");
+                }
             }
         }
     }
@@ -11578,29 +12406,6 @@ namespace NabVelocity.Txn {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoredValueCapture", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue")]
-    [System.SerializableAttribute()]
-    public partial class StoredValueCapture : NabVelocity.Txn.Capture {
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal AmountField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Amount {
-            get {
-                return this.AmountField;
-            }
-            set {
-                if ((this.AmountField.Equals(value) != true)) {
-                    this.AmountField = value;
-                    this.RaisePropertyChanged("Amount");
-                }
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="ChargeType", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard")]
     public enum ChargeType : int {
@@ -11708,7 +12513,7 @@ namespace NabVelocity.Txn {
         private decimal AmountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private NabVelocity.Txn.CardData1 SourceCardDataField;
+        private NabVelocity.Txn.CardData SourceCardDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private NabVelocity.Txn.CardStatus CardStatusField;
@@ -11733,7 +12538,7 @@ namespace NabVelocity.Txn {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public NabVelocity.Txn.CardData1 SourceCardData {
+        public NabVelocity.Txn.CardData SourceCardData {
             get {
                 return this.SourceCardDataField;
             }
@@ -11798,8 +12603,8 @@ namespace NabVelocity.Txn {
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/QueryAccount", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/QueryAccountResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/QueryAccountExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/QueryAccountAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/QueryAccountCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -11824,19 +12629,21 @@ namespace NabVelocity.Txn {
             "ssing/QueryAccountCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/QueryAccountCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/QueryAccountExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/QueryAccountInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/QueryAccountAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         NabVelocity.Txn.Response QueryAccount(string sessionToken, NabVelocity.Txn.Transaction transaction, string applicationProfileId, string merchantProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/Verify", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/VerifyCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/VerifyCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/VerifyCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/VerifyInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/VerifyAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -11845,31 +12652,47 @@ namespace NabVelocity.Txn {
             "ssing/VerifyCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/VerifyCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/VerifyCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/VerifyCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/VerifyExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/VerifyInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/VerifyAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         NabVelocity.Txn.Response Verify(string sessionToken, NabVelocity.Txn.Transaction transaction, string applicationProfileId, string merchantProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/Authorize", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AuthorizeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AuthorizeCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AuthorizeCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -11880,41 +12703,15 @@ namespace NabVelocity.Txn {
             "ssing/AuthorizeInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AuthorizeAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response Authorize(string sessionToken, NabVelocity.Txn.Transaction transaction, string applicationProfileId, string merchantProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/Adjust", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AdjustResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AdjustCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AdjustCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AdjustCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AdjustCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AdjustCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AdjustCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AdjustCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AdjustCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -11923,37 +12720,29 @@ namespace NabVelocity.Txn {
             "ssing/AdjustInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AdjustAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AdjustCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AdjustCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AdjustCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AdjustCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AdjustCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AdjustCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AdjustCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AdjustCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AdjustCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AdjustCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response Adjust(string sessionToken, NabVelocity.Txn.Adjust differenceData, string applicationProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AuthorizeAndCapture", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AuthorizeAndCaptureResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeAndCaptureCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeAndCaptureCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeAndCaptureCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeAndCaptureCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeAndCaptureCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeAndCaptureCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeAndCaptureCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/AuthorizeAndCaptureCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AuthorizeAndCaptureCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -11968,13 +12757,39 @@ namespace NabVelocity.Txn {
             "ssing/AuthorizeAndCaptureAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/AuthorizeAndCaptureCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeAndCaptureCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeAndCaptureCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeAndCaptureCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeAndCaptureCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeAndCaptureCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeAndCaptureCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeAndCaptureCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/AuthorizeAndCaptureCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response AuthorizeAndCapture(string sessionToken, NabVelocity.Txn.Transaction transaction, string applicationProfileId, string merchantProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnUnlinked", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnUnlinkedResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnUnlinkedCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnUnlinkedCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnUnlinkedCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnUnlinkedExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnUnlinkedInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnUnlinkedAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnUnlinkedCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -11993,33 +12808,13 @@ namespace NabVelocity.Txn {
             "ssing/ReturnUnlinkedCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnUnlinkedCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnUnlinkedCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnUnlinkedExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnUnlinkedInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnUnlinkedAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnUnlinkedCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response ReturnUnlinked(string sessionToken, NabVelocity.Txn.Transaction transaction, string applicationProfileId, string merchantProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnById", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnByIdResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnByIdCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnByIdExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnByIdInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnByIdAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnByIdCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ReturnByIdCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnByIdCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12034,29 +12829,29 @@ namespace NabVelocity.Txn {
             "ssing/ReturnByIdCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnByIdCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnByIdCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnByIdCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ReturnByIdCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnByIdExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnByIdInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnByIdCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ReturnByIdCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response ReturnById(string sessionToken, NabVelocity.Txn.Return differenceData, string applicationProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/Undo", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/UndoResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/UndoCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/UndoCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/UndoExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/UndoInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/UndoAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/UndoCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/UndoCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/UndoCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12073,23 +12868,21 @@ namespace NabVelocity.Txn {
             "ssing/UndoCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/UndoCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/UndoCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/UndoCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/UndoCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/UndoExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/UndoInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         NabVelocity.Txn.Response Undo(string sessionToken, NabVelocity.Txn.Undo differenceData, string applicationProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/Capture", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12108,15 +12901,29 @@ namespace NabVelocity.Txn {
             "ssing/CaptureCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response Capture(string sessionToken, NabVelocity.Txn.Capture differenceData, string applicationProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAll", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureAllCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureAllCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureAllCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12125,8 +12932,6 @@ namespace NabVelocity.Txn {
             "ssing/CaptureAllCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureAllCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12148,14 +12953,12 @@ namespace NabVelocity.Txn {
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsync", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsyncResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureAllAsyncCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureAllAsyncCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureAllAsyncCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureAllAsyncCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsyncCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureAllAsyncCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsyncCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12164,12 +12967,12 @@ namespace NabVelocity.Txn {
             "ssing/CaptureAllAsyncCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsyncCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureAllAsyncCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsyncCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsyncCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureAllAsyncCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsyncCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12178,23 +12981,15 @@ namespace NabVelocity.Txn {
             "ssing/CaptureAllAsyncInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureAllAsyncAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureAllAsyncCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response CaptureAllAsync(string sessionToken, NabVelocity.Txn.Capture[] differenceData, string[] batchIds, string applicationProfileId, string merchantProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelective", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12213,19 +13008,31 @@ namespace NabVelocity.Txn {
             "ssing/CaptureSelectiveCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response[] CaptureSelective(string sessionToken, string[] transactionIds, NabVelocity.Txn.Capture[] differenceData, string applicationProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsync", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsyncResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveAsyncCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveAsyncCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveAsyncCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveAsyncCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsyncCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsyncCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveAsyncCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidMessageFormatFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsyncCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12234,10 +13041,10 @@ namespace NabVelocity.Txn {
             "ssing/CaptureSelectiveAsyncCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsyncCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveAsyncCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsyncCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/CaptureSelectiveAsyncCWSExtendedDataNotSupportedFaultFault", Name="CWSExtendedDataNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsyncCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12246,8 +13053,6 @@ namespace NabVelocity.Txn {
             "ssing/CaptureSelectiveAsyncInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/CaptureSelectiveAsyncAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/CaptureSelectiveAsyncCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response CaptureSelectiveAsync(string sessionToken, string[] transactionIds, NabVelocity.Txn.Capture[] differenceData, string applicationProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12288,20 +13093,12 @@ namespace NabVelocity.Txn {
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/RequestTransaction", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/RequestTransactionResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/RequestTransactionCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/RequestTransactionCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/RequestTransactionExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/RequestTransactionCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/RequestTransactionCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/RequestTransactionInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/RequestTransactionAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/RequestTransactionCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/RequestTransactionCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12318,17 +13115,23 @@ namespace NabVelocity.Txn {
             "ssing/RequestTransactionCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/RequestTransactionCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/RequestTransactionCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/RequestTransactionCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/RequestTransactionCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/RequestTransactionExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         NabVelocity.Txn.Response[] RequestTransaction(string sessionToken, string merchantProfileId, NabVelocity.Txn.TransactionTenderData tenderData);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccount", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12349,35 +13152,29 @@ namespace NabVelocity.Txn {
             "ssing/ManageAccountCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         NabVelocity.Txn.Response ManageAccount(string sessionToken, NabVelocity.Txn.Transaction transaction, string applicationProfileId, string merchantProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountById", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountByIdResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountByIdCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountByIdCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountByIdExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountByIdInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountByIdAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountByIdCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/ManageAccountByIdCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountByIdAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountByIdCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountByIdCWSTransactionAlreadySettledFaultFault", Name="CWSTransactionAlreadySettledFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSValidationResultFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountByIdCWSValidationResultFaultFault", Name="CWSValidationResultFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountByIdCWSFaultFault", Name="CWSFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionFailedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountByIdCWSTransactionFailedFaultFault", Name="CWSTransactionFailedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSExtendedDataNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12388,25 +13185,23 @@ namespace NabVelocity.Txn {
             "ssing/ManageAccountByIdCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/ManageAccountByIdCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountByIdCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountByIdCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountByIdExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/ManageAccountByIdInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         NabVelocity.Txn.Response ManageAccountById(string sessionToken, NabVelocity.Txn.Manage differenceData, string applicationProfileId, string workflowId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/Disburse", ReplyAction="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/DisburseResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/DisburseCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/DisburseCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/DisburseExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/DisburseCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/DisburseInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.AuthenticationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/DisburseAuthenticationFaultFault", Name="AuthenticationFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
-        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
-            "ssing/DisburseCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSConnectionFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/DisburseCWSConnectionFaultFault", Name="CWSConnectionFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionServiceUnavailableFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/DisburseCWSTransactionServiceUnavailableFaultFault", Name="CWSTransactionServiceUnavailableFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSTransactionAlreadySettledFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
@@ -12423,6 +13218,16 @@ namespace NabVelocity.Txn {
             "ssing/DisburseCWSInvalidMessageFormatFaultFault", Name="CWSInvalidMessageFormatFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
         [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSOperationNotSupportedFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
             "ssing/DisburseCWSOperationNotSupportedFaultFault", Name="CWSOperationNotSupportedFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidOperationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/DisburseCWSInvalidOperationFaultFault", Name="CWSInvalidOperationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSDeserializationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/DisburseCWSDeserializationFaultFault", Name="CWSDeserializationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.CWSInvalidServiceInformationFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/DisburseCWSInvalidServiceInformationFaultFault", Name="CWSInvalidServiceInformationFault", Namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Faults")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.ExpiredTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/DisburseExpiredTokenFaultFault", Name="ExpiredTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
+        [System.ServiceModel.FaultContractAttribute(typeof(NabVelocity.Txn.InvalidTokenFault), Action="http://schemas.ipcommerce.com/CWS/v2.0/TransactionProcessing/ICwsTransactionProce" +
+            "ssing/DisburseInvalidTokenFaultFault", Name="InvalidTokenFault", Namespace="http://schemas.ipcommerce.com/Identity/1.0/")]
         NabVelocity.Txn.Response Disburse(string sessionToken, NabVelocity.Txn.Transaction transaction, string applicationProfileId, string merchantProfileId, string workflowId);
     }
     

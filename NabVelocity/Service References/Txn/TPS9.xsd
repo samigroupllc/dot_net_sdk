@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue" elementFormDefault="qualified" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/StoredValue" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
   <xs:complexType name="StoredValueTransaction">
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q1="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q1:Transaction">
@@ -36,6 +36,14 @@
     <xs:complexContent mixed="false">
       <xs:extension xmlns:q2="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q2:TransactionTenderData">
         <xs:sequence>
+          <xs:element minOccurs="0" name="AcctType" type="tns:AcctType">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Set SVA account type
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
           <xs:element minOccurs="0" name="CardData" nillable="true" type="tns:CardData">
             <xs:annotation>
               <xs:appinfo />
@@ -73,6 +81,38 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="StoredValueTenderData" nillable="true" type="tns:StoredValueTenderData" />
+  <xs:simpleType name="AcctType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the type of SVA account type. Optional.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Gift">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Gift
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Loyalty">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Loyalty
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AcctType" nillable="true" type="tns:AcctType" />
   <xs:complexType name="CardData">
     <xs:annotation>
       <xs:appinfo />
@@ -581,31 +621,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="OperationType" nillable="true" type="tns:OperationType" />
-  <xs:complexType name="StoredValueBalanceTransferTenderData">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:StoredValueTenderData">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="SourceCardData" nillable="true" type="tns:CardData">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Card data for the source account. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="ConsumerIdentification" nillable="true" type="tns:ConsumerIdentification">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Consumer Identification data for the source account. Conditional, required if CardData not supplied.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="StoredValueBalanceTransferTenderData" nillable="true" type="tns:StoredValueBalanceTransferTenderData" />
   <xs:complexType name="StoredValueActivateTenderData">
     <xs:complexContent mixed="false">
       <xs:extension base="tns:StoredValueTenderData">
@@ -650,53 +665,23 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="VirtualCardData" nillable="true" type="tns:VirtualCardData" />
-  <xs:complexType name="StoredValueManage">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Stored Value udpdate data for building Deactivate, Status, Reload and BalanceTransfer from Activate.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
+  <xs:complexType name="StoredValueBalanceTransferTenderData">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q5="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q5:Manage">
+      <xs:extension base="tns:StoredValueTenderData">
         <xs:sequence>
-          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            The amount to be reloaded on the card.  Conditional required if processing Reload.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
           <xs:element minOccurs="0" name="SourceCardData" nillable="true" type="tns:CardData">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
-            Card data for the source account. Conditional, required if processing Balance Transfer.
+            Card data for the source account. Optional.
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="CardStatus" type="tns:CardStatus">
+          <xs:element minOccurs="0" name="ConsumerIdentification" nillable="true" type="tns:ConsumerIdentification">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
-            Specifies card status for status update. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="IsCashOut" type="xs:boolean">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Specifies cash out deactivation. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="OperationType" type="tns:OperationType">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Indicates the opertion type for ManageAccount.  Conditional, required if processing ManageAccount.
+            Consumer Identification data for the source account. Conditional, required if CardData not supplied.
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -704,41 +689,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="StoredValueManage" nillable="true" type="tns:StoredValueManage" />
-  <xs:complexType name="StoredValueReturn">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q6="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q6:Return">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Amount to return if different from the authorized amount. Conditional, required when returning a different amount than authorized.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="StoredValueReturn" nillable="true" type="tns:StoredValueReturn" />
-  <xs:complexType name="StoredValueCapture">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q7:Capture">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Amount to capture if different from the authorized amount. Conditional, required when capturing a different amount than authorized.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="StoredValueCapture" nillable="true" type="tns:StoredValueCapture" />
+  <xs:element name="StoredValueBalanceTransferTenderData" nillable="true" type="tns:StoredValueBalanceTransferTenderData" />
   <xs:complexType name="StoredValueTransactionResponse">
     <xs:annotation>
       <xs:appinfo />
@@ -747,7 +698,7 @@
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q8="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q8:Response">
+      <xs:extension xmlns:q5="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q5:Response">
         <xs:sequence>
           <xs:element minOccurs="0" name="Amount" type="xs:decimal">
             <xs:annotation>
@@ -773,7 +724,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="CVResult" type="q8:CVResult">
+          <xs:element minOccurs="0" name="CVResult" type="q5:CVResult">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -869,6 +820,14 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element minOccurs="0" name="Expire" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Card expiration. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
@@ -882,7 +841,7 @@
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q9="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q9:Response">
+      <xs:extension xmlns:q6="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q6:Response">
         <xs:sequence>
           <xs:element minOccurs="0" name="BatchId" nillable="true" type="xs:string">
             <xs:annotation>
@@ -892,7 +851,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="SummaryData" nillable="true" type="q9:SummaryData">
+          <xs:element minOccurs="0" name="SummaryData" nillable="true" type="q6:SummaryData">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -905,4 +864,93 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="StoredValueCaptureResponse" nillable="true" type="tns:StoredValueCaptureResponse" />
+  <xs:complexType name="StoredValueReturn">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q7:Return">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Amount to return if different from the authorized amount. Conditional, required when returning a different amount than authorized.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StoredValueReturn" nillable="true" type="tns:StoredValueReturn" />
+  <xs:complexType name="StoredValueCapture">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q8="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q8:Capture">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Amount to capture if different from the authorized amount. Conditional, required when capturing a different amount than authorized.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StoredValueCapture" nillable="true" type="tns:StoredValueCapture" />
+  <xs:complexType name="StoredValueManage">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Stored Value udpdate data for building Deactivate, Status, Reload and BalanceTransfer from Activate.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q9="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q9:Manage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            The amount to be reloaded on the card.  Conditional required if processing Reload.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="SourceCardData" nillable="true" type="tns:CardData">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Card data for the source account. Conditional, required if processing Balance Transfer.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="CardStatus" type="tns:CardStatus">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies card status for status update. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="IsCashOut" type="xs:boolean">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies cash out deactivation. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="OperationType" type="tns:OperationType">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates the opertion type for ManageAccount.  Conditional, required if processing ManageAccount.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="StoredValueManage" nillable="true" type="tns:StoredValueManage" />
 </xs:schema>

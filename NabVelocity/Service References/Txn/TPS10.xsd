@@ -1,6 +1,1266 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" elementFormDefault="qualified" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
+  <xs:complexType name="BankcardTransactionResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q1:Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies the authorization amount of the transaction. This is the actual amount authorized and used when settling a subsequent authorization completion instead of the request amount. Expected.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="CardType" type="tns:TypeCardType">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Type of card used in the transaction. Optional for Credit transactions. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="FeeAmount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Fee amount charged for the transaction. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ApprovalCode" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            A value returned when a transaction is approved. This value should be printed on the receipt, and also recorded for every offline transaction, such as a voice authorization. Expected.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="AVSResult" nillable="true" type="tns:AVSResult">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Collection of AVS response data. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="BatchId" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Batch Identifier. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="CVResult" type="q1:CVResult">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID). Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="CardLevel" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Code returned by the card association that indicates the type of card used by the customer. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="DowngradeCode" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Downgrade reason. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="MaskedPAN" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Masked PAN for storage. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="PaymentAccountDataToken" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Token specified by a tokenization (offsite payment account data storage) Service Provider, used to retrieve securely stored payment account data. Conditional, required if any one of the following must be provided: CardDataToken, SecureCardData, or tender-specific payment account data.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="RetrievalReferenceNumber" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Retrieval reference number generated by the processor used for settlement and reversals. If present in the response, this same data element and value must be provided during settlement of any subsequent authorization linked to this transaction. Optional
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Resubmit" type="tns:Resubmit">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies whether resubmission is supported for PIN Debit transactions. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="SettlementDate" type="xs:dateTime">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Settlement date. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="FinalBalance" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            The account balance after the transaction. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            The order id generated by CWS. This value is often used by Service Providers for transaction correlation. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="CashBackAmount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            The approved cash back amount. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="PrepaidCard" type="tns:PrepaidCard">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="EBTCashBalanceAvailable" nillable="true" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+              <xs:documentation>&lt;summary&gt;
+            The available cash balance on the EBT card.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="EBTFnsBalanceAvailable" nillable="true" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+              <xs:documentation>&lt;summary&gt;
+            The available food balance on the EBT card.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="EMVData" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+              <xs:documentation>&lt;summary&gt;
+            Response EMV Data from the processsor.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankcardTransactionResponse" nillable="true" type="tns:BankcardTransactionResponse" />
+  <xs:complexType name="BankcardCaptureResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q2:Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BatchId" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Batch Identifier. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="IndustryType" type="q2:IndustryType">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            The industry type of the transaction(s). Expected.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="TransactionSummaryData" nillable="true" type="tns:TransactionSummaryData">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Summary of transaction data. Conditional, expected for CaptureAll and CaptureSelective.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="PrepaidCard" type="tns:PrepaidCard">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankcardCaptureResponse" nillable="true" type="tns:BankcardCaptureResponse" />
+  <xs:complexType name="TransactionSummaryData">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Summary information (item count and total amount) when transactions are captured. Required.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashBackTotals" nillable="true" type="tns:Totals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The sum of all PIN Debit transaction cash back amounts included in the batch. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="NetTotals" nillable="true" type="tns:Totals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Total count and net amount of transactions for the entire batch independent of transaction class. Expected.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ReturnTotals" nillable="true" type="tns:Totals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Total count and amount of returns for the entire batch independent of transaction class. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="SaleTotals" nillable="true" type="tns:Totals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Total count and amount of sales for the entire batch independent of transaction class. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="VoidTotals" nillable="true" type="tns:Totals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Total count and amount of voids for the entire batch independent of transaction class. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PINDebitReturnTotals" nillable="true" type="tns:Totals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Total count and amount of PIN Debit returns. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PINDebitSaleTotals" nillable="true" type="tns:Totals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Total count and amount of PIN Debit sales. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransactionSummaryData" nillable="true" type="tns:TransactionSummaryData" />
+  <xs:complexType name="Totals">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains net amount and total count. Required.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NetAmount" type="xs:decimal">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Net amount. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Count" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Total item count. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Totals" nillable="true" type="tns:Totals" />
+  <xs:simpleType name="PrepaidCard">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Yes">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Card is a prepaid card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="No">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Card is not a prepaid card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PrepaidCard" nillable="true" type="tns:PrepaidCard" />
+  <xs:simpleType name="TypeCardType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Type of card used in the transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PrivateLabel">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Private Label.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Visa">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Visa.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MasterCard">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            MasterCard.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="AmericanExpress">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            American Express.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DinersCartBlanche">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Diners/Cart Blanche. DEPRECATED: Use MasterCard instead.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Discover">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Discover.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JCB">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            JCB.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CitibankFinancial">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Citibank Financial.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RevolutionCard">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            RevolutionCard.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnbrandedATM">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            UnbrandedATM.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Dankort">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Dankort
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Solo">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Solo
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Maestro">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Maestro
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LaserCard">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            LaserCard
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Electron">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Electron
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Finax">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Finax
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Kopkort">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Köpkort
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CarteAurore">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Carte Aurore
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CartesBancaires">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Cartes Bancaires
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DinersClub">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Diners Club (International)
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TypeCardType" nillable="true" type="tns:TypeCardType" />
+  <xs:complexType name="AVSResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the result of an Address Verification System (AVS) lookup by the Service Provider. Optional.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActualResult" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies the actual result of AVS from the Service Provider. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="AddressResult" type="tns:AddressResult">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to address matching. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CountryResult" type="tns:CountryResult">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to country matching. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="StateResult" type="tns:StateResult">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to state matching. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PostalCodeResult" type="tns:PostalCodeResult">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to postal code matching. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="PhoneResult" type="tns:PhoneResult">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to phone matching. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CardholderNameResult" type="tns:CardholderNameResult">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to cardholder name matching. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CityResult" type="tns:CityResult">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to city matching. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AVSResult" nillable="true" type="tns:AVSResult" />
+  <xs:simpleType name="AddressResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to address matching.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotIncluded">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not included.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Match">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMatch">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IssuerNotCertified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Issuer is not certified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response from card association.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnknownResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The response code from the card association was not recognized.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotVerified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            AVS data was not verified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BadFormat">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Supplied AVS data was incorrectly formatted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AddressResult" nillable="true" type="tns:AddressResult" />
+  <xs:simpleType name="CountryResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to country matching.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotIncluded">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not included.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Match">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMatch">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IssuerNotCertified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Issuer is not certified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response from card association.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnknownResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The response code from the card association was not recognized.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotVerified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            AVS data was not verified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BadFormat">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Supplied AVS data was incorrectly formatted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CountryResult" nillable="true" type="tns:CountryResult" />
+  <xs:simpleType name="StateResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to state matching.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotIncluded">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not included.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Match">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMatch">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IssuerNotCertified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Issuer is not certified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response from card association.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnknownResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The response code from the card association was not recognized.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotVerified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            AVS data was not verified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BadFormat">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Supplied AVS data was incorrectly formatted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StateResult" nillable="true" type="tns:StateResult" />
+  <xs:simpleType name="PostalCodeResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to postal code matching.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotIncluded">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not included.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Match">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMatch">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IssuerNotCertified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Issuer is not certified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response from card association.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnknownResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The response code from the card association was not recognized.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotVerified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            AVS data was not verified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BadFormat">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Supplied AVS data was incorrectly formatted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PostalCodeResult" nillable="true" type="tns:PostalCodeResult" />
+  <xs:simpleType name="PhoneResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to phone matching.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotIncluded">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not included.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Match">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMatch">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IssuerNotCertified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Issuer is not certified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response from card association.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnknownResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The response code from the card association was not recognized.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotVerified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            AVS data was not verified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BadFormat">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Supplied AVS data was incorrectly formatted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PhoneResult" nillable="true" type="tns:PhoneResult" />
+  <xs:simpleType name="CardholderNameResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to cardholder name matching.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotIncluded">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not included.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Match">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMatch">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IssuerNotCertified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Issuer is not certified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response from card association.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnknownResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The response code from the card association was not recognized.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotVerified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            AVS data was not verified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BadFormat">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Supplied AVS data was incorrectly formatted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CardholderNameResult" nillable="true" type="tns:CardholderNameResult" />
+  <xs:simpleType name="CityResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the result of AVS as it pertains to city matching.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotIncluded">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not included.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Match">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMatch">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IssuerNotCertified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Issuer is not certified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response from card association.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnknownResponseFromCardAssociation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The response code from the card association was not recognized.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotVerified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            AVS data was not verified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BadFormat">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Supplied AVS data was incorrectly formatted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CityResult" nillable="true" type="tns:CityResult" />
+  <xs:simpleType name="Resubmit">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies whether resubmission is supported for PIN Debit transactions.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Unspecified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Unspecified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Permitted">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Permitted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotPermitted">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not permitted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Resubmit" nillable="true" type="tns:Resubmit" />
+  <xs:simpleType name="AdviceResponse">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the reason for issuer decline of recurring payment transactions.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Unsupported">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not supported.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NewAccountInfoAvailable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            New account info available.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TryAgainLater">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Try again later.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DoNotTryAgainLater">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Do not try again later.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DoNotHonor">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Service provider recommends the merchant not honor the card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AdviceResponse" nillable="true" type="tns:AdviceResponse" />
+  <xs:simpleType name="CommercialCardResponse">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the status of the card with respect to its ability to utilize purchase card data. When the card is a Business, Corporate, or Purchase card, providing purchase card data can result in improved interchange rates.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotImplemented">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not implemented.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PurchaseCard">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Purchase Card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CorporateCard">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Corporate Card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BusinessCard">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Business Card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NonCommercialCard">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not a commercial card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PurchaseCardDataUnsupported">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Commercial card does not support purchase card data.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Unknown">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Unknown.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CommercialCardResponse" nillable="true" type="tns:CommercialCardResponse" />
   <xs:complexType name="BankcardTransactionData">
     <xs:annotation>
       <xs:appinfo />
@@ -9,7 +1269,7 @@
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q1:TransactionData">
+      <xs:extension xmlns:q3="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q3:TransactionData">
         <xs:sequence>
           <xs:element minOccurs="0" name="AccountType" type="tns:AccountType">
             <xs:annotation>
@@ -19,7 +1279,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="AlternativeMerchantData" nillable="true" type="q1:AlternativeMerchantData">
+          <xs:element minOccurs="0" name="AlternativeMerchantData" nillable="true" type="q3:AlternativeMerchantData">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -59,7 +1319,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="EntryMode" type="q1:EntryMode">
+          <xs:element minOccurs="0" name="EntryMode" type="q3:EntryMode">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -75,7 +1335,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="IndustryType" type="q1:IndustryType">
+          <xs:element minOccurs="0" name="IndustryType" type="q3:IndustryType">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -187,14 +1447,285 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
+          <xs:element minOccurs="0" name="EBTType" type="tns:TypeEBTType">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+              <xs:documentation>&lt;summary&gt;
+            The type of EBT transaction or NotEBT if a PINDEBIT
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="BankcardTransactionData" nillable="true" type="tns:BankcardTransactionData" />
+  <xs:simpleType name="AccountType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the bank account type.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SavingsAccount">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Savings account.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CheckingAccount">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Checking account.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="EBTAccount">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            EBT account.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="AccountType" nillable="true" type="tns:AccountType" />
+  <xs:simpleType name="CustomerPresent">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Presence of cardholder relative to the transaction point of service.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Present">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Cardholder and card present.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Suspicious">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Suspicious.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BillPayment">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Bill payment transaction.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Transponder">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Transponder.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MOTO">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            MOTO.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VisaOpenNetworkTransaction">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Open network transaction (Visa only).
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VisaCardPresentStripeUnreadable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Card present, stripe can't be read (Visa only).
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MailFax">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Mail/fax.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Ecommerce">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Ecommerce.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TelARU">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Telephone ARU (Automated Response Unit).
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MOTOCC">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            MOTO call center.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VoiceResponse">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Voice response system.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CustomerPresent" nillable="true" type="tns:CustomerPresent" />
+  <xs:simpleType name="GoodsType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Type of goods purchased.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="DigitalGoods">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Digital Goods.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PhysicalGoods">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Physical Goods.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="GoodsType" nillable="true" type="tns:GoodsType" />
+  <xs:complexType name="InternetTransactionData">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains information about the internet connection. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IpAddress" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The IP Address of the client application. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="SessionId" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The Session Id of the application. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InternetTransactionData" nillable="true" type="tns:InternetTransactionData" />
+  <xs:simpleType name="PartialApprovalSupportType">
+    <xs:annotation>
+      <xs:appinfo />
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Capable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Merchant is capable of handling partial approval
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotCapable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Merchant is not capable of handling partial approval
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="PartialApprovalSupportType" nillable="true" type="tns:PartialApprovalSupportType" />
+  <xs:simpleType name="TypeEBTType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Type of EBT transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotEBT">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not EBT (PINDEBIT).
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cash">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Cash benefits.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FNS">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Food Stamp benefits.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TypeEBTType" nillable="true" type="tns:TypeEBTType" />
   <xs:complexType name="BankcardTransaction">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q2="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q2:Transaction">
+      <xs:extension xmlns:q4="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q4:Transaction">
         <xs:sequence>
           <xs:element minOccurs="0" name="ApplicationConfigurationData" nillable="true" type="tns:BankcardApplicationConfigurationData">
             <xs:annotation>
@@ -428,7 +1959,7 @@
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q3="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q3:TransactionTenderData">
+      <xs:extension xmlns:q5="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q5:TransactionTenderData">
         <xs:sequence>
           <xs:element minOccurs="0" name="CardData" nillable="true" type="tns:CardData">
             <xs:annotation>
@@ -451,6 +1982,24 @@
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
             Ecommerce security elements. Conditional, optional for Ecommerce transactions, otherwise not present.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="EBTVoucherApprovalCode" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+              <xs:documentation>&lt;summary&gt;
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="EBTVoucherNumber" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+              <xs:documentation>&lt;summary&gt;
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -518,164 +2067,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CardData" nillable="true" type="tns:CardData" />
-  <xs:simpleType name="TypeCardType">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Type of card used in the transaction.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="PrivateLabel">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Private Label.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Visa">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Visa.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="MasterCard">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            MasterCard.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="AmericanExpress">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            American Express.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="DinersCartBlanche">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Diners/Cart Blanche. DEPRECATED: Use MasterCard instead.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Discover">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Discover.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="JCB">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            JCB.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CitibankFinancial">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Citibank Financial.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="RevolutionCard">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            RevolutionCard.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UnbrandedATM">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            UnbrandedATM.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Dankort">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Dankort
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Solo">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Solo
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Maestro">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Maestro
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="LaserCard">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            LaserCard
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Electron">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Electron
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Finax">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Finax
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Kopkort">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Köpkort
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CarteAurore">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Carte Aurore
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CartesBancaires">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Cartes Bancaires
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="DinersClub">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Diners Club (International)
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="TypeCardType" nillable="true" type="tns:TypeCardType" />
   <xs:complexType name="CardSecurityData">
     <xs:annotation>
       <xs:appinfo />
@@ -692,7 +2083,7 @@
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element xmlns:q4="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="CVDataProvided" type="q4:CVDataProvided">
+      <xs:element xmlns:q6="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="CVDataProvided" type="q6:CVDataProvided">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
@@ -727,6 +2118,26 @@
       <xs:element minOccurs="0" name="IdentificationInformation" nillable="true" type="xs:string">
         <xs:annotation>
           <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies identifying information about the tender, such as a magnetic stripe fingerprint. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="EMVChipCondition" type="q7:EMVChipCondition">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Specifies identifying information about the tender, such as a magnetic stripe fingerprint. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="EMVData" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
           <xs:documentation>&lt;summary&gt;
             Specifies identifying information about the tender, such as a magnetic stripe fingerprint. Optional.
             &lt;/summary&gt;</xs:documentation>
@@ -783,7 +2194,7 @@
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element xmlns:q5="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="Country" type="q5:TypeISOCountryCodeA3">
+      <xs:element xmlns:q8="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="Country" type="q8:TypeISOCountryCodeA3">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
@@ -1316,228 +2727,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="ReadCapability" nillable="true" type="tns:ReadCapability" />
-  <xs:simpleType name="AccountType">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Indicates the bank account type.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="SavingsAccount">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Savings account.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CheckingAccount">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Checking account.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="AccountType" nillable="true" type="tns:AccountType" />
-  <xs:simpleType name="CustomerPresent">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Presence of cardholder relative to the transaction point of service.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Present">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Cardholder and card present.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Suspicious">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Suspicious.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BillPayment">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Bill payment transaction.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Transponder">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Transponder.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="MOTO">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            MOTO.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="VisaOpenNetworkTransaction">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Open network transaction (Visa only).
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="VisaCardPresentStripeUnreadable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Card present, stripe can't be read (Visa only).
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="MailFax">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Mail/fax.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Ecommerce">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Ecommerce.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="TelARU">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Telephone ARU (Automated Response Unit).
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="MOTOCC">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            MOTO call center.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="VoiceResponse">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Voice response system.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="CustomerPresent" nillable="true" type="tns:CustomerPresent" />
-  <xs:simpleType name="GoodsType">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Type of goods purchased.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="DigitalGoods">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Digital Goods.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="PhysicalGoods">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Physical Goods.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="GoodsType" nillable="true" type="tns:GoodsType" />
-  <xs:complexType name="InternetTransactionData">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Contains information about the internet connection. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="IpAddress" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            The IP Address of the client application. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="SessionId" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            The Session Id of the application. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="InternetTransactionData" nillable="true" type="tns:InternetTransactionData" />
-  <xs:simpleType name="PartialApprovalSupportType">
-    <xs:annotation>
-      <xs:appinfo />
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Capable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Merchant is capable of handling partial approval
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotCapable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Merchant is not capable of handling partial approval
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="PartialApprovalSupportType" nillable="true" type="tns:PartialApprovalSupportType" />
   <xs:complexType name="ManagedBilling">
     <xs:annotation>
       <xs:appinfo />
@@ -1702,7 +2891,7 @@
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element xmlns:q6="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="DestinationCountryCode" type="q6:TypeISOCountryCodeA3">
+      <xs:element xmlns:q9="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="DestinationCountryCode" type="q9:TypeISOCountryCodeA3">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
@@ -4055,1115 +5244,6 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="IIASDesignation" nillable="true" type="tns:IIASDesignation" />
-  <xs:complexType name="BankcardReturn">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Contains information for returning Bankcard transactions (Credit and PIN Debit). Required.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q7:Return">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Specifies the amount to return. Conditional, required when performing a partial return.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="TenderData" nillable="true" type="tns:BankcardTenderData">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Details about the card tender. Conditional, required by ReturnById for PIN Debit transactions.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="BankcardReturn" nillable="true" type="tns:BankcardReturn" />
-  <xs:complexType name="BankcardTransactionResponse">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Response to the Bankcard transaction (Credit and PIN Debit). Expected.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q8="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q8:Response">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Specifies the authorization amount of the transaction. This is the actual amount authorized and used when settling a subsequent authorization completion instead of the request amount. Expected.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="CardType" type="tns:TypeCardType">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Type of card used in the transaction. Optional for Credit transactions. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="FeeAmount" type="xs:decimal">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Fee amount charged for the transaction. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="ApprovalCode" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            A value returned when a transaction is approved. This value should be printed on the receipt, and also recorded for every offline transaction, such as a voice authorization. Expected.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="AVSResult" nillable="true" type="tns:AVSResult">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Collection of AVS response data. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="BatchId" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Batch Identifier. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="CVResult" type="q8:CVResult">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID). Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="CardLevel" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Code returned by the card association that indicates the type of card used by the customer. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="DowngradeCode" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Downgrade reason. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="MaskedPAN" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Masked PAN for storage. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="PaymentAccountDataToken" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Token specified by a tokenization (offsite payment account data storage) Service Provider, used to retrieve securely stored payment account data. Conditional, required if any one of the following must be provided: CardDataToken, SecureCardData, or tender-specific payment account data.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="RetrievalReferenceNumber" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Retrieval reference number generated by the processor used for settlement and reversals. If present in the response, this same data element and value must be provided during settlement of any subsequent authorization linked to this transaction. Optional
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="Resubmit" type="tns:Resubmit">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Specifies whether resubmission is supported for PIN Debit transactions. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="SettlementDate" type="xs:dateTime">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Settlement date. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="FinalBalance" type="xs:decimal">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            The account balance after the transaction. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="OrderId" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            The order id generated by CWS. This value is often used by Service Providers for transaction correlation. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="CashBackAmount" type="xs:decimal">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            The approved cash back amount. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="PrepaidCard" type="tns:PrepaidCard">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="BankcardTransactionResponse" nillable="true" type="tns:BankcardTransactionResponse" />
-  <xs:simpleType name="AdviceResponse">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the reason for issuer decline of recurring payment transactions.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Unsupported">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not supported.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NewAccountInfoAvailable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            New account info available.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="TryAgainLater">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Try again later.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="DoNotTryAgainLater">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Do not try again later.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="DoNotHonor">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Service provider recommends the merchant not honor the card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="AdviceResponse" nillable="true" type="tns:AdviceResponse" />
-  <xs:simpleType name="CommercialCardResponse">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Indicates the status of the card with respect to its ability to utilize purchase card data. When the card is a Business, Corporate, or Purchase card, providing purchase card data can result in improved interchange rates.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotImplemented">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not implemented.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="PurchaseCard">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Purchase Card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CorporateCard">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Corporate Card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BusinessCard">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Business Card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NonCommercialCard">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not a commercial card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="PurchaseCardDataUnsupported">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Commercial card does not support purchase card data.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Unknown">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Unknown.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="CommercialCardResponse" nillable="true" type="tns:CommercialCardResponse" />
-  <xs:complexType name="BankcardCaptureResponse">
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q9="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q9:Response">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="BatchId" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Batch Identifier. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="IndustryType" type="q9:IndustryType">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            The industry type of the transaction(s). Expected.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="TransactionSummaryData" nillable="true" type="tns:TransactionSummaryData">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Summary of transaction data. Conditional, expected for CaptureAll and CaptureSelective.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="PrepaidCard" type="tns:PrepaidCard">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="BankcardCaptureResponse" nillable="true" type="tns:BankcardCaptureResponse" />
-  <xs:complexType name="TransactionSummaryData">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Summary information (item count and total amount) when transactions are captured. Required.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CashBackTotals" nillable="true" type="tns:Totals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            The sum of all PIN Debit transaction cash back amounts included in the batch. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="NetTotals" nillable="true" type="tns:Totals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Total count and net amount of transactions for the entire batch independent of transaction class. Expected.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="ReturnTotals" nillable="true" type="tns:Totals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Total count and amount of returns for the entire batch independent of transaction class. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="SaleTotals" nillable="true" type="tns:Totals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Total count and amount of sales for the entire batch independent of transaction class. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="VoidTotals" nillable="true" type="tns:Totals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Total count and amount of voids for the entire batch independent of transaction class. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="PINDebitReturnTotals" nillable="true" type="tns:Totals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Total count and amount of PIN Debit returns. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="PINDebitSaleTotals" nillable="true" type="tns:Totals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Total count and amount of PIN Debit sales. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="TransactionSummaryData" nillable="true" type="tns:TransactionSummaryData" />
-  <xs:complexType name="Totals">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Contains net amount and total count. Required.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="NetAmount" type="xs:decimal">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Net amount. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Count" type="xs:int">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Total item count. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Totals" nillable="true" type="tns:Totals" />
-  <xs:simpleType name="PrepaidCard">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies whether or not the card is a prepaid card. The identification of prepaid cards is at the discretion of the payment brand or issuer. Optional.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Yes">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Card is a prepaid card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="No">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Card is not a prepaid card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="PrepaidCard" nillable="true" type="tns:PrepaidCard" />
-  <xs:complexType name="AVSResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the result of an Address Verification System (AVS) lookup by the Service Provider. Optional.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ActualResult" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the actual result of AVS from the Service Provider. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="AddressResult" type="tns:AddressResult">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to address matching. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="CountryResult" type="tns:CountryResult">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to country matching. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="StateResult" type="tns:StateResult">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to state matching. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="PostalCodeResult" type="tns:PostalCodeResult">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to postal code matching. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="PhoneResult" type="tns:PhoneResult">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to phone matching. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="CardholderNameResult" type="tns:CardholderNameResult">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to cardholder name matching. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="CityResult" type="tns:CityResult">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to city matching. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="AVSResult" nillable="true" type="tns:AVSResult" />
-  <xs:simpleType name="AddressResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to address matching.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotIncluded">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not included.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Match">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoMatch">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="IssuerNotCertified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Issuer is not certified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No response from card association.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UnknownResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The response code from the card association was not recognized.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotVerified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            AVS data was not verified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BadFormat">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Supplied AVS data was incorrectly formatted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="AddressResult" nillable="true" type="tns:AddressResult" />
-  <xs:simpleType name="CountryResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to country matching.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotIncluded">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not included.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Match">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoMatch">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="IssuerNotCertified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Issuer is not certified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No response from card association.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UnknownResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The response code from the card association was not recognized.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotVerified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            AVS data was not verified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BadFormat">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Supplied AVS data was incorrectly formatted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="CountryResult" nillable="true" type="tns:CountryResult" />
-  <xs:simpleType name="StateResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to state matching.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotIncluded">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not included.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Match">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoMatch">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="IssuerNotCertified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Issuer is not certified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No response from card association.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UnknownResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The response code from the card association was not recognized.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotVerified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            AVS data was not verified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BadFormat">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Supplied AVS data was incorrectly formatted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="StateResult" nillable="true" type="tns:StateResult" />
-  <xs:simpleType name="PostalCodeResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to postal code matching.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotIncluded">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not included.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Match">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoMatch">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="IssuerNotCertified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Issuer is not certified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No response from card association.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UnknownResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The response code from the card association was not recognized.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotVerified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            AVS data was not verified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BadFormat">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Supplied AVS data was incorrectly formatted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="PostalCodeResult" nillable="true" type="tns:PostalCodeResult" />
-  <xs:simpleType name="PhoneResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to phone matching.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotIncluded">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not included.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Match">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoMatch">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="IssuerNotCertified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Issuer is not certified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No response from card association.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UnknownResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The response code from the card association was not recognized.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotVerified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            AVS data was not verified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BadFormat">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Supplied AVS data was incorrectly formatted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="PhoneResult" nillable="true" type="tns:PhoneResult" />
-  <xs:simpleType name="CardholderNameResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to cardholder name matching.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotIncluded">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not included.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Match">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoMatch">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="IssuerNotCertified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Issuer is not certified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No response from card association.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UnknownResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The response code from the card association was not recognized.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotVerified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            AVS data was not verified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BadFormat">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Supplied AVS data was incorrectly formatted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="CardholderNameResult" nillable="true" type="tns:CardholderNameResult" />
-  <xs:simpleType name="CityResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies the result of AVS as it pertains to city matching.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotIncluded">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not included.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Match">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoMatch">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="IssuerNotCertified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Issuer is not certified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No response from card association.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="UnknownResponseFromCardAssociation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The response code from the card association was not recognized.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotVerified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            AVS data was not verified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BadFormat">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Supplied AVS data was incorrectly formatted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="CityResult" nillable="true" type="tns:CityResult" />
-  <xs:simpleType name="Resubmit">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies whether resubmission is supported for PIN Debit transactions.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Unspecified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Unspecified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Permitted">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Permitted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotPermitted">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not permitted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="Resubmit" nillable="true" type="tns:Resubmit" />
   <xs:complexType name="BankcardUndo">
     <xs:annotation>
       <xs:appinfo />
@@ -5195,6 +5275,16 @@
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
             Indicates that the authorized transaction should be removed from the batch regardless of whether the Undo() is approved or declined. Otherwise, authorized transactions will only be removed from the batch if the void is approved.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="CreditReason" type="tns:CreditUndoReason">
+            <xs:annotation>
+              <xs:appinfo>
+                <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+              </xs:appinfo>
+              <xs:documentation>&lt;summary&gt;
+            Specifies the reason for the void. Conditional, required for PIN Debit.
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
@@ -5305,6 +5395,147 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="PINDebitUndoReason" nillable="true" type="tns:PINDebitUndoReason" />
+  <xs:simpleType name="CreditUndoReason">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Specifies the reason for the undo. Required by some processors.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotApplicable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not applicable.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponse">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="LateResponse">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Late response.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnableToDeliverToPOS">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Unable to deliver to POS.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CustomerCancellation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Customer cancellation.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SuspectMalfunction">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Suspect malfunction.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PartiallyCompleted">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Partially completed.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OriginalAmountIncorrect">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Original amount incorrect.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ResponseIncomplete">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Response incomplete.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CADFailure">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            CAD failure.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="UnableToDeliverResponse">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Unable to deliver response.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ResponseTimeout">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Response timeout.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CreditUndoReason" nillable="true" type="tns:CreditUndoReason" />
+  <xs:complexType name="BankcardReturn">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains information for returning Bankcard transactions (Credit and PIN Debit). Required.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q11="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q11:Return">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies the amount to return. Conditional, required when performing a partial return.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="TenderData" nillable="true" type="tns:BankcardTenderData">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Details about the card tender. Conditional, required by ReturnById for PIN Debit transactions.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="FeeAmount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies a fee amount associated with the authorization, such as convenience fees. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankcardReturn" nillable="true" type="tns:BankcardReturn" />
   <xs:complexType name="BankcardCapture">
     <xs:annotation>
       <xs:appinfo />
@@ -5313,7 +5544,7 @@
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q11="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q11:Capture">
+      <xs:extension xmlns:q12="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q12:Capture">
         <xs:sequence>
           <xs:element minOccurs="0" name="Amount" type="xs:decimal">
             <xs:annotation>

@@ -191,40 +191,41 @@
     <None Include="Service References\Txn\NabVelocity.Txn.Response.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\Txn\Txn.xsd">
+    <None Include="Service References\Txn\TPS.wsdl" />
+    <None Include="Service References\Txn\TPS.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn1.xsd">
+    <None Include="Service References\Txn\TPS1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn10.xsd">
+    <None Include="Service References\Txn\TPS10.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn11.xsd">
+    <None Include="Service References\Txn\TPS11.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn2.xsd">
+    <None Include="Service References\Txn\TPS2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn3.xsd">
+    <None Include="Service References\Txn\TPS3.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn4.xsd">
+    <None Include="Service References\Txn\TPS4.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn5.xsd">
+    <None Include="Service References\Txn\TPS5.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn6.xsd">
+    <None Include="Service References\Txn\TPS6.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn7.xsd">
+    <None Include="Service References\Txn\TPS7.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn8.xsd">
+    <None Include="Service References\Txn\TPS8.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\Txn\Txn9.xsd">
+    <None Include="Service References\Txn\TPS9.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

@@ -21,19 +21,20 @@
     <MetadataSource Address="https://api.cert.nabcommerce.com/2.0.18/Txn?wsdl" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="Txn.xsd" MetadataType="Schema" ID="0da5bed8-0cc2-425a-ba73-62bb88bea03c" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd3" />
-    <MetadataFile FileName="Txn1.xsd" MetadataType="Schema" ID="a8ed71cb-885b-48e3-971f-805aa2717332" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd1" />
-    <MetadataFile FileName="Txn2.xsd" MetadataType="Schema" ID="2a068753-6666-499d-bb8e-85a344b65d51" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd7" />
-    <MetadataFile FileName="Txn3.xsd" MetadataType="Schema" ID="466593f4-3eb8-4d83-a548-8ccdd5fb968a" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd5" />
-    <MetadataFile FileName="Txn4.xsd" MetadataType="Schema" ID="fa8207fa-3087-4ca3-9f0e-f00f161d3a45" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd8" />
-    <MetadataFile FileName="Txn5.xsd" MetadataType="Schema" ID="71df3619-1b25-4a0e-9481-94a29e68f879" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd2" />
-    <MetadataFile FileName="Txn6.xsd" MetadataType="Schema" ID="f86bd698-e185-4660-9975-10c02be25cd4" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd0" />
     <MetadataFile FileName="CwsTransactionProcessing.wsdl" MetadataType="Wsdl" ID="2c46e21d-a7ad-4661-9060-64449194a24a" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?wsdl" />
-    <MetadataFile FileName="Txn7.xsd" MetadataType="Schema" ID="9c6c30f0-939c-4059-98e7-d31f13b867cb" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd6" />
-    <MetadataFile FileName="Txn8.xsd" MetadataType="Schema" ID="3b33ebc0-e8e3-49c8-9275-2d265bc876f3" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd11" />
-    <MetadataFile FileName="Txn9.xsd" MetadataType="Schema" ID="5871ebff-5092-4297-96d4-19ce40650188" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd4" />
-    <MetadataFile FileName="Txn10.xsd" MetadataType="Schema" ID="3ea36dbf-864f-454c-8eee-c2b3e081de1b" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd9" />
-    <MetadataFile FileName="Txn11.xsd" MetadataType="Schema" ID="8b50a6ec-08dd-4d84-8828-405c2000a78a" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd10" />
+    <MetadataFile FileName="TPS.xsd" MetadataType="Schema" ID="86014c5c-e63b-43f5-a866-adfd0608db3e" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd7" />
+    <MetadataFile FileName="TPS1.xsd" MetadataType="Schema" ID="554c9567-7d27-4cb0-b3b4-6e6fd308fa5f" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd3" />
+    <MetadataFile FileName="TPS2.xsd" MetadataType="Schema" ID="23a6c261-9731-4941-863a-6672b6d14e6b" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd8" />
+    <MetadataFile FileName="TPS3.xsd" MetadataType="Schema" ID="4436a721-f14b-41a3-9193-bf9ed87f80f7" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd4" />
+    <MetadataFile FileName="TPS4.xsd" MetadataType="Schema" ID="915d0492-8f88-41f0-89d2-57e0d59cb03e" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd0" />
+    <MetadataFile FileName="TPS5.xsd" MetadataType="Schema" ID="a947b23f-6f5b-48de-a6c3-ff92a30d9982" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd10" />
+    <MetadataFile FileName="TPS6.xsd" MetadataType="Schema" ID="44798f7c-c48c-4ecc-af9e-773560edbf24" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd9" />
+    <MetadataFile FileName="TPS7.xsd" MetadataType="Schema" ID="8aaec4ac-3656-4d5e-b597-59834554cca1" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd5" />
+    <MetadataFile FileName="TPS8.xsd" MetadataType="Schema" ID="fdf2a2e8-46fa-4229-8b80-94e465ce0143" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd1" />
+    <MetadataFile FileName="TPS.wsdl" MetadataType="Wsdl" ID="9a011a9d-f5c3-4d08-badf-6df12160b7b8" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="TPS9.xsd" MetadataType="Schema" ID="e080c177-d95e-47d7-a04f-fd251fa9b760" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd6" />
+    <MetadataFile FileName="TPS10.xsd" MetadataType="Schema" ID="9d0bac2e-81c8-4a03-ad3c-d59f9769da41" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd2" />
+    <MetadataFile FileName="TPS11.xsd" MetadataType="Schema" ID="77506afa-9f81-4ed3-8cb1-a7aeae3a4921" SourceId="1" SourceUrl="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd11" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="S44pcVw1yFq0YmzjNS7iPVvdPtU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="2zTkTZyl/MUNxLDp0w+J0Y/89uQ=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="basicHttpBinding" name="TransactionProcessing_ICwsTransactionProcessing">
+    <bindingConfiguration bindingType="basicHttpBinding" name="BasicHttpBinding_ICwsTransactionProcessing">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>TransactionProcessing_ICwsTransactionProcessing</serializedValue>
+          <serializedValue>BasicHttpBinding_ICwsTransactionProcessing</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -112,10 +112,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="TransactionProcessing_ICwsTransactionProcessing" contract="Txn.ICwsTransactionProcessing" bindingType="basicHttpBinding" address="https://api.cert.nabcommerce.com/2.0.18/Txn" bindingConfiguration="TransactionProcessing_ICwsTransactionProcessing">
+    <endpoint name="BasicHttpBinding_ICwsTransactionProcessing" contract="Txn.ICwsTransactionProcessing" bindingType="basicHttpBinding" address="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc" bindingConfiguration="BasicHttpBinding_ICwsTransactionProcessing">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://api.cert.nabcommerce.com/2.0.18/Txn</serializedValue>
+          <serializedValue>https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -124,7 +124,7 @@
           <serializedValue>basicHttpBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>TransactionProcessing_ICwsTransactionProcessing</serializedValue>
+          <serializedValue>BasicHttpBinding_ICwsTransactionProcessing</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>Txn.ICwsTransactionProcessing</serializedValue>
@@ -187,7 +187,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>TransactionProcessing_ICwsTransactionProcessing</serializedValue>
+          <serializedValue>BasicHttpBinding_ICwsTransactionProcessing</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

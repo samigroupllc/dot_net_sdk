@@ -1,18 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard/Pro" elementFormDefault="qualified" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard/Pro" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd2" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" />
-  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
-  <xs:complexType name="BankcardTransactionDataPro">
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd2" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" />
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
+  <xs:complexType name="BankcardTransactionResponsePro">
     <xs:annotation>
       <xs:appinfo />
       <xs:documentation>&lt;summary&gt;
-            Contains information about the Bankcard Pro transaction data. Conditional, required to support Level 2, Level 3, and Managed Billing transaction data.
+            Response to Bankcard Pro transactions. Expected.
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q1="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q1:BankcardTransactionData">
+      <xs:extension xmlns:q1="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q1:BankcardTransactionResponse">
         <xs:sequence>
-          <xs:element minOccurs="0" name="ManagedBilling" nillable="true" type="q1:ManagedBilling">
+          <xs:element minOccurs="0" name="AdviceResponse" type="q1:AdviceResponse">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies reason for issuer decline of recurring payment transactions. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="CommercialCardResponse" type="q1:CommercialCardResponse">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates the status of the card with respect to its ability to utilize purchase card data. When the card is a Business, Corporate, or Purchase card, providing purchase card data can result in improved interchange rates. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ReturnedACI" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Provides information concerning the status of a transaction's CPS qualification. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="BankcardTransactionResponsePro" nillable="true" type="tns:BankcardTransactionResponsePro" />
+  <xs:complexType name="BankcardTransactionDataPro">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q2:BankcardTransactionData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ManagedBilling" nillable="true" type="q2:ManagedBilling">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -20,7 +53,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="Level2Data" nillable="true" type="q1:Level2Data">
+          <xs:element minOccurs="0" name="Level2Data" nillable="true" type="q2:Level2Data">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -28,7 +61,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="LineItemDetails" nillable="true" type="q1:ArrayOfLineItemDetail">
+          <xs:element minOccurs="0" name="LineItemDetails" nillable="true" type="q2:ArrayOfLineItemDetail">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -36,7 +69,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element xmlns:q2="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="PINlessDebitData" nillable="true" type="q2:PINlessDebitData">
+          <xs:element xmlns:q3="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="PINlessDebitData" nillable="true" type="q3:PINlessDebitData">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -44,7 +77,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="IIASData" nillable="true" type="q1:IIASData">
+          <xs:element minOccurs="0" name="IIASData" nillable="true" type="q2:IIASData">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -59,7 +92,7 @@
   <xs:element name="BankcardTransactionDataPro" nillable="true" type="tns:BankcardTransactionDataPro" />
   <xs:complexType name="BankcardTransactionPro">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q3="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q3:BankcardTransaction">
+      <xs:extension xmlns:q4="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q4:BankcardTransaction">
         <xs:sequence>
           <xs:element minOccurs="0" name="InterchangeData" nillable="true" type="tns:BankcardInterchangeData">
             <xs:annotation>
@@ -82,7 +115,7 @@
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element xmlns:q4="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="BillPayment" type="q4:BillPayment">
+      <xs:element xmlns:q5="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="BillPayment" type="q5:BillPayment">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
@@ -90,7 +123,7 @@
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element xmlns:q5="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="RequestCommercialCard" type="q5:RequestCommercialCard">
+      <xs:element xmlns:q6="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="RequestCommercialCard" type="q6:RequestCommercialCard">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
@@ -98,7 +131,7 @@
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element xmlns:q6="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="ExistingDebt" type="q6:ExistingDebt">
+      <xs:element xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="ExistingDebt" type="q7:ExistingDebt">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
@@ -106,7 +139,7 @@
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="RequestACI" type="q7:RequestACI">
+      <xs:element xmlns:q8="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="RequestACI" type="q8:RequestACI">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
@@ -130,7 +163,7 @@
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element xmlns:q8="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="RequestAdvice" type="q8:RequestAdvice">
+      <xs:element xmlns:q9="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" minOccurs="0" name="RequestAdvice" type="q9:RequestAdvice">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
@@ -141,39 +174,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BankcardInterchangeData" nillable="true" type="tns:BankcardInterchangeData" />
-  <xs:complexType name="BankcardTransactionResponsePro">
+  <xs:complexType name="BankcardCaptureResponsePro">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Response to capturing Bankcard Pro transactions. Expected.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q9="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q9:BankcardTransactionResponse">
-        <xs:sequence>
-          <xs:element minOccurs="0" name="AdviceResponse" type="q9:AdviceResponse">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Specifies reason for issuer decline of recurring payment transactions. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="CommercialCardResponse" type="q9:CommercialCardResponse">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Indicates the status of the card with respect to its ability to utilize purchase card data. When the card is a Business, Corporate, or Purchase card, providing purchase card data can result in improved interchange rates. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-          <xs:element minOccurs="0" name="ReturnedACI" nillable="true" type="xs:string">
-            <xs:annotation>
-              <xs:appinfo />
-              <xs:documentation>&lt;summary&gt;
-            Provides information concerning the status of a transaction's CPS qualification. Optional.
-            &lt;/summary&gt;</xs:documentation>
-            </xs:annotation>
-          </xs:element>
-        </xs:sequence>
+      <xs:extension xmlns:q10="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q10:BankcardCaptureResponse">
+        <xs:sequence />
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:element name="BankcardTransactionResponsePro" nillable="true" type="tns:BankcardTransactionResponsePro" />
+  <xs:element name="BankcardCaptureResponsePro" nillable="true" type="tns:BankcardCaptureResponsePro" />
   <xs:complexType name="BankcardReturnPro">
     <xs:annotation>
       <xs:appinfo />
@@ -182,9 +196,9 @@
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q10="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q10:BankcardReturn">
+      <xs:extension xmlns:q11="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q11:BankcardReturn">
         <xs:sequence>
-          <xs:element minOccurs="0" name="LineItemDetails" nillable="true" type="q10:ArrayOfLineItemDetail">
+          <xs:element minOccurs="0" name="LineItemDetails" nillable="true" type="q11:ArrayOfLineItemDetail">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -199,7 +213,7 @@
   <xs:element name="BankcardReturnPro" nillable="true" type="tns:BankcardReturnPro" />
   <xs:complexType name="BankcardCapturePro">
     <xs:complexContent mixed="false">
-      <xs:extension xmlns:q11="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q11:BankcardCapture">
+      <xs:extension xmlns:q12="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q12:BankcardCapture">
         <xs:sequence>
           <xs:element minOccurs="0" name="MultiplePartialCapture" type="xs:boolean">
             <xs:annotation>
@@ -209,7 +223,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="Level2Data" nillable="true" type="q11:Level2Data">
+          <xs:element minOccurs="0" name="Level2Data" nillable="true" type="q12:Level2Data">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -217,7 +231,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element minOccurs="0" name="LineItemDetails" nillable="true" type="q11:ArrayOfLineItemDetail">
+          <xs:element minOccurs="0" name="LineItemDetails" nillable="true" type="q12:ArrayOfLineItemDetail">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -225,7 +239,7 @@
             &lt;/summary&gt;</xs:documentation>
             </xs:annotation>
           </xs:element>
-          <xs:element xmlns:q12="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="ShippingData" nillable="true" type="q12:CustomerInfo">
+          <xs:element xmlns:q13="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" minOccurs="0" name="ShippingData" nillable="true" type="q13:CustomerInfo">
             <xs:annotation>
               <xs:appinfo />
               <xs:documentation>&lt;summary&gt;
@@ -238,18 +252,4 @@
     </xs:complexContent>
   </xs:complexType>
   <xs:element name="BankcardCapturePro" nillable="true" type="tns:BankcardCapturePro" />
-  <xs:complexType name="BankcardCaptureResponsePro">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Response to capturing Bankcard Pro transactions. Expected.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:complexContent mixed="false">
-      <xs:extension xmlns:q13="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/Bankcard" base="q13:BankcardCaptureResponse">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:element name="BankcardCaptureResponsePro" nillable="true" type="tns:BankcardCaptureResponsePro" />
 </xs:schema>

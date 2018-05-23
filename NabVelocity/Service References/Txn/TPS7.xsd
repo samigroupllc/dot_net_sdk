@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking" elementFormDefault="qualified" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions/ElectronicChecking" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd3" namespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" />
+  <xs:complexType name="ElectronicCheckingTransactionResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q1:Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ACHCapable" type="xs:boolean">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates if the customer's account will accept ACH transactions. Returned only on QueryAccount transactions. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="Amount" type="xs:decimal">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates the amount of the transaction. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ApprovalCode" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            A code provided when a transaction is approved. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ModifiedAccountNumber" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates the corrected account number that should be used for electronic check processing. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ModifiedRoutingNumber" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates the corrected 9-digit Bank Routing number that should be used for electronic check processing. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="PaymentAccountDataToken" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Token specified by a tokenization (offsite payment account data storage) Service Provider, used to retrieve securely stored payment account data. Conditional, required if any one of the following must be provided: CardDataToken, SecureCardData, or tender-specific payment account data.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ReturnInformation" nillable="true" type="tns:ReturnInformation">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Contains information indicating why the transaction was returned. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="RspTxnCode" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            TxnCode returned from SP. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="SubmitDate" type="xs:dateTime">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            The date the transaction was submitted to the bank. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ElectronicCheckingTransactionResponse" nillable="true" type="tns:ElectronicCheckingTransactionResponse" />
+  <xs:complexType name="ReturnInformation">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains information about the reason the bank rejected the transaction. Optional.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ReturnCode" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Code that indicates why the transaction was returned. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ReturnDate" type="xs:dateTime">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The date the transaction was returned by the bank. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ReturnReason" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Reason that indicates why the transaction was returned. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ReturnInformation" nillable="true" type="tns:ReturnInformation" />
+  <xs:complexType name="ElectronicCheckingCaptureResponse">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q2="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q2:Response">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="SummaryData" nillable="true" type="q2:SummaryData">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Summary information (item count and total amount) for the captured transactions. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ElectronicCheckingCaptureResponse" nillable="true" type="tns:ElectronicCheckingCaptureResponse" />
+  <xs:complexType name="ElectronicCheckingTransactionData">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains information about the Electronic Checking transaction data. Required.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q3:TransactionData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AlternativeMerchantData" nillable="true" type="tns:AlternativeMerchantData">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Alternative merchant data to appear on accountholder statements. Subject to Issuer discretion. Conditional, optional if BankcardService.AlternativeMerchantData is true.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="EffectiveDate" type="xs:dateTime">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies the effective date of the transaction. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="IsRecurring" type="xs:boolean">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates whether the transaction is recurring. Conditional, required if SECCode = 'WEB'.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="PayeeEmail" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies the payees email address. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="PayeeId" nillable="true" type="xs:string">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies the reference number used by the payer to identify the payee. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="SECCode" type="tns:SECCode">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            The three letter code that indicates what NACHA regulations the transaction must adhere to. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="ServiceType" type="tns:ServiceType">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates the Electronic Checking service type: ACH, RDC or ECK. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="TransactionType" type="tns:TransactionType">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Indicates the transaction type. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="TxnCodeType" type="tns:TxnCodeType">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies the specific type of transaction.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ElectronicCheckingTransactionData" nillable="true" type="tns:ElectronicCheckingTransactionData" />
+  <xs:complexType name="ElectronicCheckingCustomerData">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q4="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q4:TransactionCustomerData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AdditionalBillingData" nillable="true" type="q4:PersonalInfo">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Additional billing information which may be required by the Service Provider to process the Electronic Checking transaction. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ElectronicCheckingCustomerData" nillable="true" type="tns:ElectronicCheckingCustomerData" />
+  <xs:complexType name="ElectronicCheckingTransaction">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q5:Transaction">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="TenderData" nillable="true" type="tns:ElectronicCheckingTenderData">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Details about the tender. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="TransactionData" nillable="true" type="tns:ElectronicCheckingTransactionData">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Details about the transaction data. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ElectronicCheckingTransaction" nillable="true" type="tns:ElectronicCheckingTransaction" />
+  <xs:complexType name="ElectronicCheckingTenderData">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains information about the Electronic Checking transaction tender data. Required.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q6="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q6:TransactionTenderData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="BackCheckImage" nillable="true" type="tns:CheckImage">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Back side image. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="CheckData" nillable="true" type="tns:CheckData">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Basic information about the check being processed. Required.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="FrontCheckImage" nillable="true" type="tns:CheckImage">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Front side image. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="SocketLocation" nillable="true" type="tns:SocketLocation">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Back side image. Optional.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ElectronicCheckingTenderData" nillable="true" type="tns:ElectronicCheckingTenderData" />
+  <xs:complexType name="CheckImage">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;remarks /&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CompressionType" type="tns:ImgCompressionType">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;Indicates the compression type used. 0 = Group4, 1 = JPEG, 2 = ABIC, 3-20 = reserved-agreement not required, 21 = PNG, 22 = JBIG, 23 = JPEG2000, 24-99 = reserved for future use - as defined in X9.37 specification. Required.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DocType" type="tns:DocType">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;Indicates the document type. Required.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="FormatType" type="tns:ImgFormatType">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;Indicates the format of the image. 0 = TIFF 6, 1 = IOCA FS 11, 2-19 = Reserved-agreement not required, 20 = PNG, 21 = JFIF, 22 = SPIFF, 23 = JBIG, 24 = JPEG 2000, 25-99 = Reserved for future use - as defined in X9.37 specification. Required.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ImgData" nillable="true" type="xs:base64Binary">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;Binary image data encoded as Base64 string. Required.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ImgSize" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;The length of the data included in the ImgData element. Required.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="UserField" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;Reference field to be passed along with image view in X9.37 file. Optional.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckImage" nillable="true" type="tns:CheckImage" />
+  <xs:simpleType name="ImgCompressionType">
+    <xs:annotation>
+      <xs:appinfo />
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;remarks /&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Group_4">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;Group 4&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JPEG_Baseline">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;JPEG Baseline&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ABIC">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;ABIC&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PNG">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;PNG&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JBIG">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;JBIG&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JPEG_2000">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;JPEG 2000&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ImgCompressionType" nillable="true" type="tns:ImgCompressionType" />
+  <xs:simpleType name="DocType">
+    <xs:annotation>
+      <xs:appinfo />
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Check">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;Check&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Other">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;Other (not a check).&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="DocType" nillable="true" type="tns:DocType" />
+  <xs:simpleType name="ImgFormatType">
+    <xs:annotation>
+      <xs:appinfo />
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;remarks /&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TIFF_6">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;TIFF 6&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IOCA_FS_11">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;IOCA FS 11&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PNG">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;PNG&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JFIF">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;JFIF&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="SPIFF">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;SPIFF&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JBIG">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;JBIG&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="JPEG_2000">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;JPEG 2000&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ImgFormatType" nillable="true" type="tns:ImgFormatType" />
+  <xs:complexType name="CheckData">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Basic information about the check being processed. Required.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountNumber" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Account number on the check. Required
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CheckCountryCode" type="tns:CheckCountryCode">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Bank account country of origin for receiver deposit. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CheckNumber" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The check number as printed on the check. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OwnerType" type="tns:OwnerType">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Indicates the type of entity which owns the account. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="RawMICRLine" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The rawMICRLine filed of MICRLines. MICRLines is Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="RoutingNumber" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            9-digit bank routing number of the receiver deposit account. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="UseType" type="tns:UseType">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Indicates the type of account. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CheckData" nillable="true" type="tns:CheckData" />
+  <xs:simpleType name="CheckCountryCode">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Bank account country of origin for receiver deposit.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="US">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            United States.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MX">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Mexico.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CA">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Canada.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CheckCountryCode" nillable="true" type="tns:CheckCountryCode" />
+  <xs:simpleType name="OwnerType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the type of entity which owns the account.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Personal">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Personal.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Business">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Business.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Unknown">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Unknown.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="OwnerType" nillable="true" type="tns:OwnerType" />
+  <xs:simpleType name="UseType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the type of account.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Savings">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Savings.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Checking">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Checking.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Travelers">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Travelers.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Payroll">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Payroll.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Cash">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Cash.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TwoParty">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Two Party.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Government">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Government.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UseType" nillable="true" type="tns:UseType" />
+  <xs:complexType name="SocketLocation">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;remarks /&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="SocketCity" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;Location city of the socket. Required.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="SocketState" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;Location state of the socket. Required.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SocketLocation" nillable="true" type="tns:SocketLocation" />
+  <xs:complexType name="AlternativeMerchantData">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;remarks /&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies a description of the product or service purchased that is recognizable to the accountholder. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies an alternative merchant name or DBA name. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AlternativeMerchantData" nillable="true" type="tns:AlternativeMerchantData" />
+  <xs:simpleType name="SECCode">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            The three letter code that indicates what NACHA regulations the transaction must adhere to.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BOC">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Back Office Conversion.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CCD">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Corporate Cash Disbursement.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PPD">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Prearranged Payment and Deposits.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TEL">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Telephone-initiated Entry.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="WEB">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Web-initiated Entry.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="POP">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Retail Entry, usually from a Scanner
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="SECCode" nillable="true" type="tns:SECCode" />
+  <xs:simpleType name="ServiceType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the Electronic Checking service type: ACH, RDC or ECK.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ACH">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Automated Clearing House.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ECK">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Electronic Checking.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RDC">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Remote Deposit.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ServiceType" nillable="true" type="tns:ServiceType" />
+  <xs:simpleType name="TransactionType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the transaction type.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Credit">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Credit.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Debit">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            PIN Debit.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TransactionType" nillable="true" type="tns:TransactionType" />
+  <xs:simpleType name="TxnCodeType">
+    <xs:annotation>
+      <xs:appinfo />
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;remarks /&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Conversion">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;This is used in schemas for POP, TEL, WEB, and Check 21 to indicate that an authorization is requested for the XML Data Packet being sent. Funds will be electronically debited from the consumers checking out and deposited to merchants account. It skips the trip to the bank, eliminates bank fees and paper check handling.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Override">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;This is used in schemas for POP, TEL, and Check 21 when the host system receives a manager needed message to void the previous transaction and input a new transaction in its place.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Verification">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;If the VERIFICATION_ONLY element is set to true, then the transaction will be processed as verification only. This means that an authorization will be run, but that the check will not undergo Electronic Check Conversion (ECC) and that the check will have to be taken to the bank for deposit. In addition, depending on the merchants program, the funds may or may not be guaranteed.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="RecurringBilling">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;This is used in schemas for PPD and CCD to indicate that an authorization is requested for a single or reoccurring transaction.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Payroll">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;Payroll.&lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TxnCodeType" nillable="true" type="tns:TxnCodeType" />
+  <xs:complexType name="ElectronicCheckingUndo">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q7="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" base="q7:Undo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="UndoType" type="tns:UndoType">
+            <xs:annotation>
+              <xs:appinfo />
+              <xs:documentation>&lt;summary&gt;
+            Specifies the undo type.
+            &lt;/summary&gt;</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ElectronicCheckingUndo" nillable="true" type="tns:ElectronicCheckingUndo" />
+  <xs:simpleType name="UndoType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the type of undo.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Void">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Default undo behavior.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Reversal">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Map undo to reversal.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="UndoType" nillable="true" type="tns:UndoType" />
+</xs:schema>

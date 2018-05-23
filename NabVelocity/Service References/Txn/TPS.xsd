@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common" elementFormDefault="qualified" targetNamespace="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd8" namespace="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/External" />
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd8" namespace="http://schemas.ipcommerce.com/Ipc.General.WCF.Contracts.Common/External" />
   <xs:element name="Ping">
     <xs:complexType>
       <xs:sequence />

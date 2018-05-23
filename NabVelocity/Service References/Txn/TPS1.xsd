@@ -1,7 +1,720 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" elementFormDefault="qualified" targetNamespace="http://schemas.ipcommerce.com/CWS/v2.0/Transactions" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd5" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
-  <xs:import schemaLocation="https://api.cert.nabcommerce.com/2.0.18/Txn?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="https://api.cert.nabcommerce.com/CWS/1.0/SOAP/TPS.svc?xsd=xsd0" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="Response">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Status" type="tns:Status">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Shows whether transaction was a success or failure. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="StatusCode" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Status code returned from the service. Expected.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="StatusMessage" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Verbose message describing the status of the transaction. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Transaction identifier that may be used for subsequent Commerce Web Services transactions. Expected.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="OriginatorTransactionId" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Transaction identifier assigned by Commerce Web Services before sending the transaction to the Service Provider. May be useful for identifying the transaction when contacting the service offline. This will always be returned to the client application. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ServiceTransactionId" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Transaction identifier assigned by the Service Provider. May be useful for identifying the transaction when contacting the Service Provider offline. Expected.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ServiceTransactionDateTime" nillable="true" type="tns:ServiceTransactionDateTime">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            The local date and time of the transaction as calculated by the service. Expected, although amount of detail varies between services.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Addendum" nillable="true" type="tns:Addendum">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Managed and unmanaged addendum. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CaptureState" type="tns:CaptureState">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Indicates the state of the transaction as it relates to capture. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TransactionState" type="tns:TransactionState">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Indicates the current state of a transaction. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="IsAcknowledged" type="xs:boolean">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Indicates if the transaction has been acknowledged by the client application.  Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Specifies user or customer reference data echoed from the request. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Response" nillable="true" type="tns:Response" />
+  <xs:simpleType name="Status">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the authorization status of the transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Successful">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The transaction was successfully approved.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Failure">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The transaction was declined or errored.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="Status" nillable="true" type="tns:Status" />
+  <xs:complexType name="ServiceTransactionDateTime">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            The local date and time of the transaction as calculated by the Service Provider. If present in the response, this same data element and value must be provided when settling a subsequent authorization completion. Optional.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Date. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Time" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Time. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="TimeZone" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Timezone. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ServiceTransactionDateTime" nillable="true" type="tns:ServiceTransactionDateTime" />
+  <xs:complexType name="Addendum">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Used to pass optional service-specific information. It is not necessary to pass this object unless specifically directed to do so by your Solutions Consultant. Optional.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Unmanaged" nillable="true" type="tns:Unmanaged">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Unmanaged addenda. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Addendum" nillable="true" type="tns:Addendum" />
+  <xs:complexType name="Unmanaged">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Can be used to pass service-specific information such as username/password or session token credentials. Optional.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Any" nillable="true" type="q1:ArrayOfstring">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            One or more xml strings. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Unmanaged" nillable="true" type="tns:Unmanaged" />
+  <xs:simpleType name="CaptureState">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Defines the state of the transaction as it relates to capture.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CannotCapture">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Transaction cannot be captured due to declined authorization or subsequent undoing of successful authorization.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReadyForCapture">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Successfully authorized but capture not requested.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CapturePending">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Successfully transmitted capture but it is not yet known whether the processor accepted it.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Captured">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Successfully captured.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CaptureDeclined">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Capture was successfully submitted but declined by the service.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InProcess">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            The capture is in process.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CapturedUndoPermitted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Indicates if an Undo is permitted for the Captured state.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CapturePendingUndoPermitted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Indicates if an Undo is permitted for the CapturePending state.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CaptureError">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Indicates an error state during capture.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CaptureUnknown">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">11</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Unknow capture state.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BatchSent">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">12</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Batch has been sent, response is out of band.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BatchSentUndoPermitted">
+        <xs:annotation>
+          <xs:appinfo>
+            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">13</EnumerationValue>
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Batch has been sent, an Undo operation is allowed.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CaptureState" nillable="true" type="tns:CaptureState" />
+  <xs:simpleType name="TransactionState">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates the current state of the transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Declined">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The original transaction was successfully transmitted but declined by the service.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Verified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            A verify transaction was successfully run. Check response for details.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Authorized">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The original transaction was successfully authorized. The transaction has not yet been captured.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Adjusted">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The original transaction was successfully authorized and the amount subsequently successfully adjusted.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Captured">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The transaction was successfully captured.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="CaptureDeclined">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            An attempt to capture the transaction was declined by the service provider.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PartiallyCaptured">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The transaction was captured for a partial amount with the expectation that another capture may be attempted for the additional authorized funds.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Undone">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            The transaction was completely voided or reversed.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReturnRequested">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Either the original transaction was a standalone return, or a successfully captured transaction was subsequently returned for the full amount. The return has not yet been captured.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PartialReturnRequested">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            A successfully captured transaction was returned for less than the captured amount. The return has not yet been captured.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ReturnUndone">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            A standalone return or a return of a successfully captured transaction was voided.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Returned">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Either the original transaction was a standalone return, or a successfully captured transaction was subsequently returned for the full amount. The return has been captured.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="PartiallyReturned">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            A successfully captured transaction was returned for less than the captured amount. The return has been captured.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="InProcess">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Transaction is in process.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ErrorValidation">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            There was a validation error on the transaction.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ErrorUnknown">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            An unknown error occured during the processing of this error.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ErrorConnecting">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            There was a connection error during the processing of this transaction.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FundsRequested">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Indicated funds have been requested for Disburse transaction.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="FundsTransferred">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Indicated funds have been transferred for Disburse transaction.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="TransactionState" nillable="true" type="tns:TransactionState" />
+  <xs:complexType name="SummaryData">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Summary information for credit and debit totals. Required.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashBackTotals" nillable="true" type="tns:SummaryTotals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Totals for cashback transactions. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CreditReturnTotals" nillable="true" type="tns:SummaryTotals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Totals for returned credit transactions. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CreditTotals" nillable="true" type="tns:SummaryTotals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Totals for credit transactions. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DebitReturnTotals" nillable="true" type="tns:SummaryTotals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Totals for returned debit transactions. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="DebitTotals" nillable="true" type="tns:SummaryTotals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Totals for debit transactions. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="NetTotals" nillable="true" type="tns:SummaryTotals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Net totals for the batch. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="VoidTotals" nillable="true" type="tns:SummaryTotals">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Totals for voided transactions. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SummaryData" nillable="true" type="tns:SummaryData" />
+  <xs:complexType name="SummaryTotals">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains net amount and total item count. Required.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="NetAmount" type="xs:decimal">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Net amount. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Count" type="xs:int">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Total item count. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SummaryTotals" nillable="true" type="tns:SummaryTotals" />
+  <xs:simpleType name="IndustryType">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            The industry type of the transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MOTO">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            MOTO (Mail Order/Telephone Order). Also referred to as Direct Marketing.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Ecommerce">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Electronic Commerce.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Restaurant">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Restaurant.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Retail">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Retail.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="IndustryType" nillable="true" type="tns:IndustryType" />
+  <xs:simpleType name="CVResult">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID).
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Match">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            CVV2/CVC2/CID match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoMatch">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            CVV2/CVC2/CID do not match.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotProcessed">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Not processed.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoCodePresent">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Merchant has indicated that code is not present on card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ShouldHaveBeenPresent">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            CVV2 should have been present.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="IssuerNotCertified">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Issuer is not certified.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Invalid">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            CVV2/CVC2/CID is invalid.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NoResponse">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            No response from card association.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NotApplicable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            CVV2/CVC2/CID is not applicable.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="CVResult" nillable="true" type="tns:CVResult" />
   <xs:complexType name="TransactionData">
     <xs:sequence>
       <xs:element minOccurs="0" name="Amount" type="xs:decimal">
@@ -41,6 +754,16 @@
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
             Specifies user or customer reference data that is used for tracking or reporting purposes that may be echoed back in the response. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="IgnoreDuplicateCheck" type="xs:boolean">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+          <xs:documentation>&lt;summary&gt;
+            Enable duplicate check
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1325,91 +2048,43 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="TypeISOCurrencyCodeA3" nillable="true" type="tns:TypeISOCurrencyCodeA3" />
-  <xs:complexType name="Transaction">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CustomerData" nillable="true" type="tns:TransactionCustomerData">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Details about the customer. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="ReportingData" nillable="true" type="tns:TransactionReportingData">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Additional data to be printed on reports. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Addendum" nillable="true" type="tns:Addendum">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Managed and unmanaged addendum. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Transaction" nillable="true" type="tns:Transaction" />
-  <xs:complexType name="TransactionCustomerData">
+  <xs:complexType name="AlternativeMerchantData">
     <xs:annotation>
       <xs:appinfo />
       <xs:documentation>&lt;summary&gt;
-            Contains information about the customer. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
+            Specifies alternative merchant data that appears on accountholder statements. Subject to Issuer discretion. Conditional, optional when supported by service.
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:sequence>
-      <xs:element minOccurs="0" name="BillingData" nillable="true" type="tns:CustomerInfo">
+      <xs:element minOccurs="0" name="CustomerServiceInternet" nillable="true" type="xs:string">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
-            Customer billing or home details. Optional.
+            Specifies an alternative customer service web URL or Email address. Conditional, required for Ecommerce transactions.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:string">
+      <xs:element minOccurs="0" name="CustomerServicePhone" nillable="true" type="xs:string">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
-            Identifier used by the merchant to identify the customer. Optional. 
+            Specifies an alternative customer service phone number. Conditional, required for MOTO transactions.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" name="CustomerTaxId" nillable="true" type="xs:string">
+      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
-            Customer's federal or VAT identification number. Optional.
+            Specifies a description of the product or service purchased that is recognizable to the accountholder. Optional.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" name="ShippingData" nillable="true" type="tns:CustomerInfo">
+      <xs:element minOccurs="0" name="SIC" nillable="true" type="xs:string">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
-            Customer shipping details. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="TransactionCustomerData" nillable="true" type="tns:TransactionCustomerData" />
-  <xs:complexType name="CustomerInfo">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Contains information about the customer. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Name" nillable="true" type="tns:NameInfo">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Parameterized full name. Optional.
+            Specifies the Standard Industry Code or Merchant Category Code that identifies the alternative merchant industry classification. Optional.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -1417,96 +2092,29 @@
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
-            Parameterized address. Optional.
+            Specifies alternative merchant address information. Optional.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" name="BusinessName" nillable="true" type="xs:string">
+      <xs:element minOccurs="0" name="MerchantId" nillable="true" type="xs:string">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
-            Company name. Optional.
+            Specifies an alternative merchant location ID or vendor code. Optional.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
-      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string">
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
-            Primary telephone number. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Primary fax number. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Email address. Optional.
+            Specifies an alternative merchant name or DBA name. Required.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="CustomerInfo" nillable="true" type="tns:CustomerInfo" />
-  <xs:complexType name="NameInfo">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Contains information about the customer name. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Title. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="First" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            First name. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Middle" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Middle name or initial. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Last" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Last name. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Suffix" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Suffix. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="NameInfo" nillable="true" type="tns:NameInfo" />
+  <xs:element name="AlternativeMerchantData" nillable="true" type="tns:AlternativeMerchantData" />
   <xs:complexType name="AddressInfo">
     <xs:annotation>
       <xs:appinfo />
@@ -3320,6 +3928,325 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="TypeISOCountryCodeA3" nillable="true" type="tns:TypeISOCountryCodeA3" />
+  <xs:simpleType name="EntryMode">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Indicates how the cardholder data was retrieved. When authorizing with stored card data, either locally or with CardDataToken, indicate that the card data was manually collected (keyed or one of its variants).
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NotSet">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Value has not been explicitly set.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Keyed">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Keyed.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="KeyedBadMagRead">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Keyed after bad magnetic stripe read.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TrackDataFromMSR">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Track data read from MSR.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ChipReliable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Chip, reliable.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ChipUnreliable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Chip, unreliable.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ContactlessMChipOrSmartCard">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Contactless M/Chip or smart card.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ContactlessStripe">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Contactless stripe.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="TerminalNotUsed">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Terminal not used.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="BarCode">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Bar code.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="OCRReader">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            OCR reader.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="VSCCapable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            VSC capable.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ChipTrackDataFromRFID">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Chip track data read from RFID.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="MSRTrackDataFromRFID">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            MSR track data read from RFID.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="NFCCapable">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            NFC capable.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="Track2DataFromMSR">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Track data read from MSR.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="ContactlessPayPal">
+        <xs:annotation>
+          <xs:documentation>&lt;summary&gt;
+            Contactless PayPal.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="EntryMode" nillable="true" type="tns:EntryMode" />
+  <xs:complexType name="Transaction">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RelayResponseUrl" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo>
+            <DefaultValue EmitDefaultValue="false" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CustomerData" nillable="true" type="tns:TransactionCustomerData">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Details about the customer. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ReportingData" nillable="true" type="tns:TransactionReportingData">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Additional data to be printed on reports. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Addendum" nillable="true" type="tns:Addendum">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Managed and unmanaged addendum. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Transaction" nillable="true" type="tns:Transaction" />
+  <xs:complexType name="TransactionCustomerData">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains information about the customer. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BillingData" nillable="true" type="tns:CustomerInfo">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Customer billing or home details. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CustomerId" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Identifier used by the merchant to identify the customer. Optional. 
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="CustomerTaxId" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Customer's federal or VAT identification number. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="ShippingData" nillable="true" type="tns:CustomerInfo">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Customer shipping details. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TransactionCustomerData" nillable="true" type="tns:TransactionCustomerData" />
+  <xs:complexType name="CustomerInfo">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains information about the customer. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Name" nillable="true" type="tns:NameInfo">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Parameterized full name. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="tns:AddressInfo">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Parameterized address. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="BusinessName" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Company name. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Primary telephone number. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Primary fax number. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Email address. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CustomerInfo" nillable="true" type="tns:CustomerInfo" />
+  <xs:complexType name="NameInfo">
+    <xs:annotation>
+      <xs:appinfo />
+      <xs:documentation>&lt;summary&gt;
+            Contains information about the customer name. Conditional, required by some Service Providers. If this value is set on the transaction and not required by the Service Provider, the data will not be present on the transaction.
+            &lt;/summary&gt;</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Title. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="First" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            First name. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Middle" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Middle name or initial. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Last" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Last name. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Suffix" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Suffix. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NameInfo" nillable="true" type="tns:NameInfo" />
   <xs:complexType name="PersonalInfo">
     <xs:annotation>
       <xs:appinfo />
@@ -4024,44 +4951,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="TransactionReportingData" nillable="true" type="tns:TransactionReportingData" />
-  <xs:complexType name="Addendum">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Used to pass optional service-specific information. It is not necessary to pass this object unless specifically directed to do so by your Solutions Consultant. Optional.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Unmanaged" nillable="true" type="tns:Unmanaged">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Unmanaged addenda. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Addendum" nillable="true" type="tns:Addendum" />
-  <xs:complexType name="Unmanaged">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Can be used to pass service-specific information such as username/password or session token credentials. Optional.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Any" nillable="true" type="q1:ArrayOfstring">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            One or more xml strings. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Unmanaged" nillable="true" type="tns:Unmanaged" />
   <xs:complexType name="TransactionTenderData">
     <xs:sequence>
       <xs:element minOccurs="0" name="PaymentAccountDataToken" nillable="true" type="xs:string">
@@ -4145,11 +5034,11 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="CVDataProvided" nillable="true" type="tns:CVDataProvided" />
-  <xs:simpleType name="IndustryType">
+  <xs:simpleType name="EMVChipCondition">
     <xs:annotation>
       <xs:appinfo />
       <xs:documentation>&lt;summary&gt;
-            The industry type of the transaction.
+            Indicates if previous EMV Chip transaction have failed.  Used only when processing a chipped card via MSR.
             &lt;/summary&gt;</xs:documentation>
     </xs:annotation>
     <xs:restriction base="xs:string">
@@ -4160,227 +5049,23 @@
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="MOTO">
+      <xs:enumeration value="FirstFailure">
         <xs:annotation>
           <xs:documentation>&lt;summary&gt;
-            MOTO (Mail Order/Telephone Order). Also referred to as Direct Marketing.
+            The previous EMV transaction succeeded.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
-      <xs:enumeration value="Ecommerce">
+      <xs:enumeration value="MultipleFailures">
         <xs:annotation>
           <xs:documentation>&lt;summary&gt;
-            Electronic Commerce.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Restaurant">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Restaurant.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Retail">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Retail.
+            The previous EMV transaction failed.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:enumeration>
     </xs:restriction>
   </xs:simpleType>
-  <xs:element name="IndustryType" nillable="true" type="tns:IndustryType" />
-  <xs:simpleType name="EntryMode">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Indicates how the cardholder data was retrieved. When authorizing with stored card data, either locally or with CardDataToken, indicate that the card data was manually collected (keyed or one of its variants).
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Keyed">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Keyed.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="KeyedBadMagRead">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Keyed after bad magnetic stripe read.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="TrackDataFromMSR">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Track data read from MSR.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ChipReliable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Chip, reliable.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ChipUnreliable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Chip, unreliable.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ContactlessMChipOrSmartCard">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Contactless M/Chip or smart card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ContactlessStripe">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Contactless stripe.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="TerminalNotUsed">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Terminal not used.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BarCode">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Bar code.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="OCRReader">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            OCR reader.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="VSCCapable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            VSC capable.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ChipTrackDataFromRFID">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Chip track data read from RFID.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="MSRTrackDataFromRFID">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            MSR track data read from RFID.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NFCCapable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            NFC capable.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Track2DataFromMSR">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Track data read from MSR.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="EntryMode" nillable="true" type="tns:EntryMode" />
-  <xs:complexType name="AlternativeMerchantData">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Specifies alternative merchant data that appears on accountholder statements. Subject to Issuer discretion. Conditional, optional when supported by service.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CustomerServiceInternet" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies an alternative customer service web URL or Email address. Conditional, required for Ecommerce transactions.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="CustomerServicePhone" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies an alternative customer service phone number. Conditional, required for MOTO transactions.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies a description of the product or service purchased that is recognizable to the accountholder. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="SIC" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies the Standard Industry Code or Merchant Category Code that identifies the alternative merchant industry classification. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Address" nillable="true" type="tns:AddressInfo">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies alternative merchant address information. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="MerchantId" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies an alternative merchant location ID or vendor code. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies an alternative merchant name or DBA name. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="AlternativeMerchantData" nillable="true" type="tns:AlternativeMerchantData" />
+  <xs:element name="EMVChipCondition" nillable="true" type="tns:EMVChipCondition" />
   <xs:complexType name="PINlessDebitData">
     <xs:annotation>
       <xs:appinfo />
@@ -4470,13 +5155,13 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PayeeData" nillable="true" type="tns:PayeeData" />
-  <xs:complexType name="Manage">
+  <xs:complexType name="Undo">
     <xs:sequence>
       <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string">
         <xs:annotation>
           <xs:appinfo />
           <xs:documentation>&lt;summary&gt;
-            Transaction Identifier corresponding to the transaction to update. Required.
+            Transaction ID of the transaction to void. Required.
             &lt;/summary&gt;</xs:documentation>
         </xs:annotation>
       </xs:element>
@@ -4490,7 +5175,7 @@
       </xs:element>
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Manage" nillable="true" type="tns:Manage" />
+  <xs:element name="Undo" nillable="true" type="tns:Undo" />
   <xs:complexType name="Return">
     <xs:sequence>
       <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string">
@@ -4520,656 +5205,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Return" nillable="true" type="tns:Return" />
-  <xs:complexType name="Response">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Status" type="tns:Status">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Shows whether transaction was a success or failure. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="StatusCode" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Status code returned from the service. Expected.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="StatusMessage" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Verbose message describing the status of the transaction. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Transaction identifier that may be used for subsequent Commerce Web Services transactions. Expected.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="OriginatorTransactionId" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Transaction identifier assigned by Commerce Web Services before sending the transaction to the Service Provider. May be useful for identifying the transaction when contacting the service offline. This will always be returned to the client application. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="ServiceTransactionId" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Transaction identifier assigned by the Service Provider. May be useful for identifying the transaction when contacting the Service Provider offline. Expected.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="ServiceTransactionDateTime" nillable="true" type="tns:ServiceTransactionDateTime">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            The local date and time of the transaction as calculated by the service. Expected, although amount of detail varies between services.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Addendum" nillable="true" type="tns:Addendum">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Managed and unmanaged addendum. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="CaptureState" type="tns:CaptureState">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Indicates the state of the transaction as it relates to capture. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="TransactionState" type="tns:TransactionState">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Indicates the current state of a transaction. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="IsAcknowledged" type="xs:boolean">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Indicates if the transaction has been acknowledged by the client application.  Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Reference" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Specifies user or customer reference data echoed from the request. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Response" nillable="true" type="tns:Response" />
-  <xs:simpleType name="Status">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Indicates the authorization status of the transaction.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Successful">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The transaction was successfully approved.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Failure">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The transaction was declined or errored.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="Status" nillable="true" type="tns:Status" />
-  <xs:complexType name="ServiceTransactionDateTime">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            The local date and time of the transaction as calculated by the Service Provider. If present in the response, this same data element and value must be provided when settling a subsequent authorization completion. Optional.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Date" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Date. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Time" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Time. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="TimeZone" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Timezone. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ServiceTransactionDateTime" nillable="true" type="tns:ServiceTransactionDateTime" />
-  <xs:simpleType name="CaptureState">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Defines the state of the transaction as it relates to capture.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CannotCapture">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Transaction cannot be captured due to declined authorization or subsequent undoing of successful authorization.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ReadyForCapture">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Successfully authorized but capture not requested.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CapturePending">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Successfully transmitted capture but it is not yet known whether the processor accepted it.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Captured">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Successfully captured.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CaptureDeclined">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Capture was successfully submitted but declined by the service.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="InProcess">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">7</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            The capture is in process.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CapturedUndoPermitted">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">8</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Indicates if an Undo is permitted for the Captured state.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CapturePendingUndoPermitted">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">9</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Indicates if an Undo is permitted for the CapturePending state.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CaptureError">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">10</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Indicates an error state during capture.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CaptureUnknown">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">11</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Unknow capture state.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BatchSent">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">12</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Batch has been sent, response is out of band.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="BatchSentUndoPermitted">
-        <xs:annotation>
-          <xs:appinfo>
-            <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">13</EnumerationValue>
-          </xs:appinfo>
-          <xs:documentation>&lt;summary&gt;
-            Batch has been sent, an Undo operation is allowed.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="CaptureState" nillable="true" type="tns:CaptureState" />
-  <xs:simpleType name="TransactionState">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Indicates the current state of the transaction.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Declined">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The original transaction was successfully transmitted but declined by the service.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Verified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            A verify transaction was successfully run. Check response for details.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Authorized">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The original transaction was successfully authorized. The transaction has not yet been captured.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Adjusted">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The original transaction was successfully authorized and the amount subsequently successfully adjusted.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Captured">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The transaction was successfully captured.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="CaptureDeclined">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            An attempt to capture the transaction was declined by the service provider.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="PartiallyCaptured">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The transaction was captured for a partial amount with the expectation that another capture may be attempted for the additional authorized funds.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Undone">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            The transaction was completely voided or reversed.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ReturnRequested">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Either the original transaction was a standalone return, or a successfully captured transaction was subsequently returned for the full amount. The return has not yet been captured.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="PartialReturnRequested">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            A successfully captured transaction was returned for less than the captured amount. The return has not yet been captured.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ReturnUndone">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            A standalone return or a return of a successfully captured transaction was voided.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Returned">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Either the original transaction was a standalone return, or a successfully captured transaction was subsequently returned for the full amount. The return has been captured.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="PartiallyReturned">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            A successfully captured transaction was returned for less than the captured amount. The return has been captured.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="InProcess">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Transaction is in process.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ErrorValidation">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            There was a validation error on the transaction.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ErrorUnknown">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            An unknown error occured during the processing of this error.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ErrorConnecting">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            There was a connection error during the processing of this transaction.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="FundsRequested">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Indicated funds have been requested for Disburse transaction.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="FundsTransferred">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Indicated funds have been transferred for Disburse transaction.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="TransactionState" nillable="true" type="tns:TransactionState" />
-  <xs:complexType name="SummaryData">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Summary information for credit and debit totals. Required.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="CashBackTotals" nillable="true" type="tns:SummaryTotals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Totals for cashback transactions. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="CreditReturnTotals" nillable="true" type="tns:SummaryTotals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Totals for returned credit transactions. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="CreditTotals" nillable="true" type="tns:SummaryTotals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Totals for credit transactions. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="DebitReturnTotals" nillable="true" type="tns:SummaryTotals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Totals for returned debit transactions. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="DebitTotals" nillable="true" type="tns:SummaryTotals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Totals for debit transactions. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="NetTotals" nillable="true" type="tns:SummaryTotals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Net totals for the batch. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="VoidTotals" nillable="true" type="tns:SummaryTotals">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Totals for voided transactions. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SummaryData" nillable="true" type="tns:SummaryData" />
-  <xs:complexType name="SummaryTotals">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Contains net amount and total item count. Required.
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:sequence>
-      <xs:element minOccurs="0" name="NetAmount" type="xs:decimal">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Net amount. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Count" type="xs:int">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Total item count. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="SummaryTotals" nillable="true" type="tns:SummaryTotals" />
-  <xs:simpleType name="CVResult">
-    <xs:annotation>
-      <xs:appinfo />
-      <xs:documentation>&lt;summary&gt;
-            Response code returned by the card issuer indicating the result of Card Verification (CVV2/CVC2/CID).
-            &lt;/summary&gt;</xs:documentation>
-    </xs:annotation>
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="NotSet">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Value has not been explicitly set.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Match">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            CVV2/CVC2/CID match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoMatch">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            CVV2/CVC2/CID do not match.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotProcessed">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Not processed.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoCodePresent">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Merchant has indicated that code is not present on card.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="ShouldHaveBeenPresent">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            CVV2 should have been present.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="IssuerNotCertified">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            Issuer is not certified.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="Invalid">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            CVV2/CVC2/CID is invalid.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NoResponse">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            No response from card association.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-      <xs:enumeration value="NotApplicable">
-        <xs:annotation>
-          <xs:documentation>&lt;summary&gt;
-            CVV2/CVC2/CID is not applicable.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:enumeration>
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="CVResult" nillable="true" type="tns:CVResult" />
-  <xs:complexType name="Undo">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Transaction ID of the transaction to void. Required.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-      <xs:element minOccurs="0" name="Addendum" nillable="true" type="tns:Addendum">
-        <xs:annotation>
-          <xs:appinfo />
-          <xs:documentation>&lt;summary&gt;
-            Managed and unmanaged addendum. Optional.
-            &lt;/summary&gt;</xs:documentation>
-        </xs:annotation>
-      </xs:element>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Undo" nillable="true" type="tns:Undo" />
   <xs:complexType name="Capture">
     <xs:sequence>
       <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string">
@@ -5191,6 +5226,27 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Capture" nillable="true" type="tns:Capture" />
+  <xs:complexType name="Manage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionId" nillable="true" type="xs:string">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Transaction Identifier corresponding to the transaction to update. Required.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element minOccurs="0" name="Addendum" nillable="true" type="tns:Addendum">
+        <xs:annotation>
+          <xs:appinfo />
+          <xs:documentation>&lt;summary&gt;
+            Managed and unmanaged addendum. Optional.
+            &lt;/summary&gt;</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Manage" nillable="true" type="tns:Manage" />
   <xs:complexType name="Adjust">
     <xs:annotation>
       <xs:appinfo />
