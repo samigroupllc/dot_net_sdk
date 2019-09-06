@@ -72,13 +72,13 @@ namespace SampleCodeCSharp
                     {
                         TenderData = new BankcardTenderData()
                         {
-                            CardData = new CardData()
+                            CardData = new CardData1()
                             {
                                 CardType = TypeCardType.Visa,
                                 PAN = "5100000000000016",
                                 Expire = "1224",
                             },
-                            CardSecurityData = new CardSecurityData()
+                            CardSecurityData = new CardSecurityData1()
                             {
                                 AVSData = new AVSData()
                                 {
@@ -117,13 +117,13 @@ namespace SampleCodeCSharp
                     {
                         TenderData = new BankcardTenderData()
                         {
-                            CardData = new CardData()
+                            CardData = new CardData1()
                             {
                                 CardType = TypeCardType.Visa,
                                 PAN = "5100000000000016",
                                 Expire = "1224",
                             },
-                            CardSecurityData = new CardSecurityData()
+                            CardSecurityData = new CardSecurityData1()
                             {
                                 AVSData = new AVSData()
                                 {
@@ -179,13 +179,13 @@ namespace SampleCodeCSharp
                     {
                         TenderData = new BankcardTenderData()
                         {
-                            CardData = new CardData()
+                            CardData = new CardData1()
                             {
                                 CardType = TypeCardType.Visa,
                                 PAN = "5100000000000016",
                                 Expire = "1224",
                             },
-                            CardSecurityData = new CardSecurityData()
+                            CardSecurityData = new CardSecurityData1()
                             {
                                 AVSData = new AVSData()
                                 {
@@ -242,7 +242,7 @@ namespace SampleCodeCSharp
                     {
                         TenderData = new BankcardTenderData()
                         {
-                            CardData = new CardData()
+                            CardData = new CardData1()
                             {
                                 CardType = TypeCardType.Visa,
                                 PAN = "5100000000000016",
@@ -353,13 +353,13 @@ namespace SampleCodeCSharp
                     {
                         TenderData = new BankcardTenderData()
                         {
-                            CardData = new CardData()
+                            CardData = new CardData1()
                             {
                                 CardType = TypeCardType.Visa,
                                 PAN = "4111111111111111",
                                 Expire = "1224",
                             },
-                            CardSecurityData = new CardSecurityData()
+                            CardSecurityData = new CardSecurityData1()
                             {
                                 AVSData = new AVSData()
                                 {
@@ -398,13 +398,13 @@ namespace SampleCodeCSharp
                     {
                         TenderData = new BankcardTenderData()
                         {
-                            CardData = new CardData()
+                            CardData = new CardData1()
                             {
                                 CardType = TypeCardType.Visa,
                                 PAN = "4111111111111111",
                                 Expire = "1224",
                             },
-                            CardSecurityData = new CardSecurityData()
+                            CardSecurityData = new CardSecurityData1()
                             {
                                 AVSData = new AVSData()
                                 {
@@ -496,7 +496,7 @@ namespace SampleCodeCSharp
                     {
                         TenderData = new BankcardTenderData()
                         {
-                            CardData = new CardData()
+                            CardData = new CardData1()
                             {
                                 CardType = TypeCardType.Visa,
                                 PAN = "4111111111111111",
